@@ -1,0 +1,544 @@
+﻿namespace MAD
+{
+    partial class AñadirHotel
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AñadirHotel));
+            groupBox1 = new GroupBox();
+            textNumero = new TextBox();
+            textCalle = new TextBox();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            comboCiudad = new ComboBox();
+            comboEstado = new ComboBox();
+            comboPais = new ComboBox();
+            label1 = new Label();
+            textNombreHotel = new TextBox();
+            groupBox2 = new GroupBox();
+            pictureBox1 = new PictureBox();
+            label12 = new Label();
+            dtpInicioOperacion = new DateTimePicker();
+            btnAgregarHotel = new Button();
+            cantPisos = new NumericUpDown();
+            label9 = new Label();
+            groupBox4 = new GroupBox();
+            gridServiciosHotel = new DataGridView();
+            NombreServicio = new DataGridViewTextBoxColumn();
+            PrecioServicio = new DataGridViewTextBoxColumn();
+            textPrecioServicio = new TextBox();
+            label11 = new Label();
+            btnAgregarServicio = new Button();
+            comboServicio = new ComboBox();
+            label10 = new Label();
+            groupBox3 = new GroupBox();
+            gridHabitaciones = new DataGridView();
+            TipoHab = new DataGridViewTextBoxColumn();
+            CantidadHab = new DataGridViewTextBoxColumn();
+            AmenidadHab = new DataGridViewTextBoxColumn();
+            btnAgregarHabitacion = new Button();
+            cantHab = new NumericUpDown();
+            label8 = new Label();
+            comboTipoHab = new ComboBox();
+            label7 = new Label();
+            label13 = new Label();
+            textBox1 = new TextBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cantPisos).BeginInit();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridServiciosHotel).BeginInit();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridHabitaciones).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cantHab).BeginInit();
+            SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(textNumero);
+            groupBox1.Controls.Add(textCalle);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(comboCiudad);
+            groupBox1.Controls.Add(comboEstado);
+            groupBox1.Controls.Add(comboPais);
+            groupBox1.Location = new Point(21, 110);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(495, 214);
+            groupBox1.TabIndex = 4;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Ubicación:";
+            groupBox1.Enter += groupBox1_Enter;
+            // 
+            // textNumero
+            // 
+            textNumero.Location = new Point(25, 154);
+            textNumero.Name = "textNumero";
+            textNumero.Size = new Size(114, 26);
+            textNumero.TabIndex = 6;
+            // 
+            // textCalle
+            // 
+            textCalle.Location = new Point(25, 85);
+            textCalle.Name = "textCalle";
+            textCalle.Size = new Size(276, 26);
+            textCalle.TabIndex = 5;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(25, 122);
+            label6.Name = "label6";
+            label6.Size = new Size(62, 19);
+            label6.TabIndex = 7;
+            label6.Text = "Número:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(25, 41);
+            label5.Name = "label5";
+            label5.Size = new Size(96, 19);
+            label5.TabIndex = 6;
+            label5.Text = "Calle/Avenida:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(352, 31);
+            label4.Name = "label4";
+            label4.Size = new Size(37, 19);
+            label4.TabIndex = 5;
+            label4.Text = "Pais:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(352, 92);
+            label3.Name = "label3";
+            label3.Size = new Size(54, 19);
+            label3.TabIndex = 4;
+            label3.Text = "Estado:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(352, 154);
+            label2.Name = "label2";
+            label2.Size = new Size(56, 19);
+            label2.TabIndex = 3;
+            label2.Text = "Ciudad:";
+            // 
+            // comboCiudad
+            // 
+            comboCiudad.FormattingEnabled = true;
+            comboCiudad.Location = new Point(352, 176);
+            comboCiudad.Name = "comboCiudad";
+            comboCiudad.Size = new Size(121, 27);
+            comboCiudad.TabIndex = 9;
+            // 
+            // comboEstado
+            // 
+            comboEstado.FormattingEnabled = true;
+            comboEstado.Location = new Point(352, 114);
+            comboEstado.Name = "comboEstado";
+            comboEstado.Size = new Size(121, 27);
+            comboEstado.TabIndex = 8;
+            // 
+            // comboPais
+            // 
+            comboPais.FormattingEnabled = true;
+            comboPais.Location = new Point(352, 53);
+            comboPais.Name = "comboPais";
+            comboPais.Size = new Size(121, 27);
+            comboPais.TabIndex = 7;
+            comboPais.SelectedIndexChanged += comboPais_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(21, 33);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 19);
+            label1.TabIndex = 1;
+            label1.Text = "Nombre:";
+            // 
+            // textNombreHotel
+            // 
+            textNombreHotel.Location = new Point(21, 64);
+            textNombreHotel.Name = "textNombreHotel";
+            textNombreHotel.Size = new Size(238, 26);
+            textNombreHotel.TabIndex = 1;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(label13);
+            groupBox2.Controls.Add(pictureBox1);
+            groupBox2.Controls.Add(label12);
+            groupBox2.Controls.Add(dtpInicioOperacion);
+            groupBox2.Controls.Add(btnAgregarHotel);
+            groupBox2.Controls.Add(cantPisos);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(groupBox4);
+            groupBox2.Controls.Add(groupBox3);
+            groupBox2.Controls.Add(textNombreHotel);
+            groupBox2.Controls.Add(groupBox1);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Location = new Point(27, 26);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(1066, 532);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Datos del hotel:";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.LOGO_HOTEL_removebg_preview;
+            pictureBox1.Location = new Point(916, 17);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(137, 93);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(675, 33);
+            label12.Name = "label12";
+            label12.Size = new Size(141, 19);
+            label12.TabIndex = 9;
+            label12.Text = "Inicio de operaciones:";
+            // 
+            // dtpInicioOperacion
+            // 
+            dtpInicioOperacion.Location = new Point(675, 64);
+            dtpInicioOperacion.Name = "dtpInicioOperacion";
+            dtpInicioOperacion.Size = new Size(200, 26);
+            dtpInicioOperacion.TabIndex = 3;
+            // 
+            // btnAgregarHotel
+            // 
+            btnAgregarHotel.Location = new Point(730, 484);
+            btnAgregarHotel.Name = "btnAgregarHotel";
+            btnAgregarHotel.Size = new Size(137, 42);
+            btnAgregarHotel.TabIndex = 18;
+            btnAgregarHotel.Text = "Agregar hotel";
+            btnAgregarHotel.UseVisualStyleBackColor = true;
+            btnAgregarHotel.Click += btnAgregarHotel_Click;
+            // 
+            // cantPisos
+            // 
+            cantPisos.Location = new Point(308, 64);
+            cantPisos.Name = "cantPisos";
+            cantPisos.Size = new Size(131, 26);
+            cantPisos.TabIndex = 2;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(308, 33);
+            label9.Name = "label9";
+            label9.Size = new Size(121, 19);
+            label9.TabIndex = 5;
+            label9.Text = "Cantidad de pisos:";
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(gridServiciosHotel);
+            groupBox4.Controls.Add(textPrecioServicio);
+            groupBox4.Controls.Add(label11);
+            groupBox4.Controls.Add(btnAgregarServicio);
+            groupBox4.Controls.Add(comboServicio);
+            groupBox4.Controls.Add(label10);
+            groupBox4.Location = new Point(21, 330);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(469, 196);
+            groupBox4.TabIndex = 14;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Servicios del hotel:";
+            // 
+            // gridServiciosHotel
+            // 
+            gridServiciosHotel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridServiciosHotel.Columns.AddRange(new DataGridViewColumn[] { NombreServicio, PrecioServicio });
+            gridServiciosHotel.Location = new Point(199, 40);
+            gridServiciosHotel.Name = "gridServiciosHotel";
+            gridServiciosHotel.Size = new Size(245, 150);
+            gridServiciosHotel.TabIndex = 19;
+            // 
+            // NombreServicio
+            // 
+            NombreServicio.Frozen = true;
+            NombreServicio.HeaderText = "Nombre";
+            NombreServicio.Name = "NombreServicio";
+            NombreServicio.ReadOnly = true;
+            // 
+            // PrecioServicio
+            // 
+            PrecioServicio.Frozen = true;
+            PrecioServicio.HeaderText = "Precio";
+            PrecioServicio.Name = "PrecioServicio";
+            PrecioServicio.ReadOnly = true;
+            // 
+            // textPrecioServicio
+            // 
+            textPrecioServicio.Location = new Point(25, 135);
+            textPrecioServicio.Name = "textPrecioServicio";
+            textPrecioServicio.Size = new Size(100, 26);
+            textPrecioServicio.TabIndex = 16;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(25, 102);
+            label11.Name = "label11";
+            label11.Size = new Size(51, 19);
+            label11.TabIndex = 3;
+            label11.Text = "Precio:";
+            // 
+            // btnAgregarServicio
+            // 
+            btnAgregarServicio.Location = new Point(25, 168);
+            btnAgregarServicio.Name = "btnAgregarServicio";
+            btnAgregarServicio.Size = new Size(124, 28);
+            btnAgregarServicio.TabIndex = 17;
+            btnAgregarServicio.Text = "Agregar servicio";
+            btnAgregarServicio.UseVisualStyleBackColor = true;
+            // 
+            // comboServicio
+            // 
+            comboServicio.FormattingEnabled = true;
+            comboServicio.Location = new Point(28, 72);
+            comboServicio.Name = "comboServicio";
+            comboServicio.Size = new Size(121, 27);
+            comboServicio.TabIndex = 15;
+            comboServicio.SelectedIndexChanged += comboServicio_SelectedIndexChanged;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(25, 40);
+            label10.Name = "label10";
+            label10.Size = new Size(135, 19);
+            label10.TabIndex = 0;
+            label10.Text = "Nombre del servicio:";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(gridHabitaciones);
+            groupBox3.Controls.Add(btnAgregarHabitacion);
+            groupBox3.Controls.Add(cantHab);
+            groupBox3.Controls.Add(label8);
+            groupBox3.Controls.Add(comboTipoHab);
+            groupBox3.Controls.Add(label7);
+            groupBox3.Location = new Point(541, 110);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(493, 355);
+            groupBox3.TabIndex = 10;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Tipos de habitación:";
+            // 
+            // gridHabitaciones
+            // 
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(255, 192, 255);
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F);
+            gridHabitaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            gridHabitaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridHabitaciones.Columns.AddRange(new DataGridViewColumn[] { TipoHab, CantidadHab, AmenidadHab });
+            gridHabitaciones.Location = new Point(30, 154);
+            gridHabitaciones.Name = "gridHabitaciones";
+            gridHabitaciones.Size = new Size(449, 187);
+            gridHabitaciones.TabIndex = 20;
+            // 
+            // TipoHab
+            // 
+            TipoHab.Frozen = true;
+            TipoHab.HeaderText = "Tipo";
+            TipoHab.Name = "TipoHab";
+            TipoHab.ReadOnly = true;
+            TipoHab.Resizable = DataGridViewTriState.False;
+            TipoHab.Width = 150;
+            // 
+            // CantidadHab
+            // 
+            CantidadHab.Frozen = true;
+            CantidadHab.HeaderText = "Cantidad";
+            CantidadHab.Name = "CantidadHab";
+            CantidadHab.ReadOnly = true;
+            CantidadHab.Resizable = DataGridViewTriState.False;
+            CantidadHab.Width = 80;
+            // 
+            // AmenidadHab
+            // 
+            AmenidadHab.Frozen = true;
+            AmenidadHab.HeaderText = "Amenidades";
+            AmenidadHab.Name = "AmenidadHab";
+            AmenidadHab.ReadOnly = true;
+            AmenidadHab.Width = 175;
+            // 
+            // btnAgregarHabitacion
+            // 
+            btnAgregarHabitacion.Location = new Point(334, 83);
+            btnAgregarHabitacion.Name = "btnAgregarHabitacion";
+            btnAgregarHabitacion.Size = new Size(133, 37);
+            btnAgregarHabitacion.TabIndex = 13;
+            btnAgregarHabitacion.Text = "Agregar habitación";
+            btnAgregarHabitacion.UseVisualStyleBackColor = true;
+            // 
+            // cantHab
+            // 
+            cantHab.Location = new Point(180, 93);
+            cantHab.Name = "cantHab";
+            cantHab.Size = new Size(120, 26);
+            cantHab.TabIndex = 12;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(180, 56);
+            label8.Name = "label8";
+            label8.Size = new Size(67, 19);
+            label8.TabIndex = 2;
+            label8.Text = "Cantidad:";
+            // 
+            // comboTipoHab
+            // 
+            comboTipoHab.FormattingEnabled = true;
+            comboTipoHab.Location = new Point(30, 92);
+            comboTipoHab.Name = "comboTipoHab";
+            comboTipoHab.Size = new Size(121, 27);
+            comboTipoHab.TabIndex = 11;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(30, 53);
+            label7.Name = "label7";
+            label7.Size = new Size(39, 19);
+            label7.TabIndex = 0;
+            label7.Text = "Tipo:";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(478, 33);
+            label13.Name = "label13";
+            label13.Size = new Size(42, 19);
+            label13.TabIndex = 1;
+            label13.Text = "RFC:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(478, 63);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(169, 26);
+            textBox1.TabIndex = 19;
+            // 
+            // AñadirHotel
+            // 
+            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.MintCream;
+            ClientSize = new Size(1116, 570);
+            Controls.Add(groupBox2);
+            Font = new Font("Times New Roman", 12F);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4);
+            Name = "AñadirHotel";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "CrownHotelManager";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cantPisos).EndInit();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridServiciosHotel).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridHabitaciones).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cantHab).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private GroupBox groupBox1;
+        private ComboBox comboCiudad;
+        private ComboBox comboEstado;
+        private ComboBox comboPais;
+        private Label label1;
+        private TextBox textNombreHotel;
+        private GroupBox groupBox2;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private TextBox textCalle;
+        private Label label6;
+        private Label label5;
+        private TextBox textNumero;
+        private GroupBox groupBox3;
+        private DataGridView gridHabitaciones;
+        private Button btnAgregarHabitacion;
+        private NumericUpDown cantHab;
+        private Label label8;
+        private ComboBox comboTipoHab;
+        private Label label7;
+        private GroupBox groupBox4;
+        private Label label9;
+        private NumericUpDown cantPisos;
+        private Button btnAgregarServicio;
+        private ComboBox comboServicio;
+        private Label label10;
+        private TextBox textPrecioServicio;
+        private Label label11;
+        private Button btnAgregarHotel;
+        private DataGridView gridServiciosHotel;
+        private DataGridViewTextBoxColumn NombreServicio;
+        private DataGridViewTextBoxColumn PrecioServicio;
+        private Label label12;
+        private DateTimePicker dtpInicioOperacion;
+        private PictureBox pictureBox1;
+        private DataGridViewTextBoxColumn TipoHab;
+        private DataGridViewTextBoxColumn CantidadHab;
+        private DataGridViewTextBoxColumn AmenidadHab;
+        private Label label13;
+        private TextBox textBox1;
+    }
+}
