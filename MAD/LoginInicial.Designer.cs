@@ -44,7 +44,7 @@
             textCorreo.Location = new Point(54, 257);
             textCorreo.Margin = new Padding(4);
             textCorreo.Name = "textCorreo";
-            textCorreo.Size = new Size(192, 26);
+            textCorreo.Size = new Size(192, 30);
             textCorreo.TabIndex = 0;
             // 
             // textContrasenia
@@ -52,7 +52,8 @@
             textContrasenia.Location = new Point(49, 390);
             textContrasenia.Margin = new Padding(4);
             textContrasenia.Name = "textContrasenia";
-            textContrasenia.Size = new Size(192, 26);
+            textContrasenia.PasswordChar = '*';
+            textContrasenia.Size = new Size(192, 30);
             textContrasenia.TabIndex = 1;
             // 
             // iniciarSesion
@@ -74,7 +75,7 @@
             labelCorreo.Location = new Point(54, 213);
             labelCorreo.Margin = new Padding(4, 0, 4, 0);
             labelCorreo.Name = "labelCorreo";
-            labelCorreo.Size = new Size(56, 19);
+            labelCorreo.Size = new Size(72, 22);
             labelCorreo.TabIndex = 3;
             labelCorreo.Text = "Correo:";
             // 
@@ -85,7 +86,7 @@
             labelContrasenia.Location = new Point(49, 342);
             labelContrasenia.Margin = new Padding(4, 0, 4, 0);
             labelContrasenia.Name = "labelContrasenia";
-            labelContrasenia.Size = new Size(81, 19);
+            labelContrasenia.Size = new Size(105, 22);
             labelContrasenia.TabIndex = 4;
             labelContrasenia.Text = "Contraseña:";
             // 
@@ -102,7 +103,7 @@
             // 
             // LoginInicial
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
             ClientSize = new Size(303, 535);
