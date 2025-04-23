@@ -7,14 +7,309 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MAD.DAO;
+using MAD.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MAD
 {
-    public partial class ModElimCliente: Form
+    public partial class ModElimCliente : Form
     {
         public ModElimCliente()
         {
             InitializeComponent();
+            inicializarComboRegimen();
+            inicializarComboEstadoCivil();
+            inicializarComboUbicacion();
+
+            //Iniciamos todo apagado hasta su busqueda
+            textNombre.Enabled = false;
+            textApellidoPaterno.Enabled = false;
+            textApellidoMaterno.Enabled = false;
+            textNumCasa.Enabled = false;
+            textNumCelular.Enabled = false;
+            textCorreo.Enabled = false;
+            dtpFechaNacimiento.Enabled = false;
+            comboEstadoCivil.Enabled = false;
+            textRFC.Enabled = false;
+            comboRegimenFiscal.Enabled = false;
+
+            comboBox1.Enabled = false; //Pais
+            comboBox2.Enabled = false; //Estado
+            comboBox3.Enabled = false; //Ciudad
+        }
+
+        private void inicializarComboUbicacion()
+        {
+            UbicacionDAO ubicacionDAO = new UbicacionDAO();
+
+            List<Ubicacion> paises = ubicacionDAO.getPaises();
+
+            foreach (Ubicacion ubicacion in paises)
+            {
+                comboBox1.Items.Add(ubicacion.Pais);
+            }
+
+        }
+        private void inicializarComboEstadoCivil()
+        {
+            comboEstadoCivil.Items.Add("Soltero");
+            comboEstadoCivil.Items.Add("Casado");
+            comboEstadoCivil.Items.Add("Divorciado");
+            comboEstadoCivil.Items.Add("Viudo");
+        }
+
+        private void inicializarComboRegimen()
+        {
+            comboRegimenFiscal.Items.Add("Asalariados");
+            comboRegimenFiscal.Items.Add("Honorarios");
+        }
+
+        private void limpiarVentana()
+        {
+            comboBox1.Items.Clear();
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+            textBuscarCliente.Clear();
+            textNombre.Clear();
+            textApellidoPaterno.Clear();
+            textApellidoMaterno.Clear();
+            textNumCasa.Clear();
+            textNumCelular.Clear();
+            textCorreo.Clear();
+            dtpFechaNacimiento.Value = DateTime.Now;
+            comboEstadoCivil.SelectedIndex = -1;
+            textRFC.Clear();
+            comboRegimenFiscal.SelectedIndex = -1;
+            comboBox1.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            comboBox3.SelectedIndex = -1;
+        }
+        private void btnElimCliente_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBuscarCliente.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un email.");
+                return;
+            }
+
+            ClienteDAO clienteDAO = new ClienteDAO();
+            if (clienteDAO.borrarCliente(textBuscarCliente.Text))
+            {
+                MessageBox.Show("Cliente eliminado");
+                ModElimCliente_Load(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar el cliente");
+            }
+        }
+
+        private void btnModCliente_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBuscarCliente.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un email.");
+                return;
+            }
+
+            ClienteDAO clienteDao = new ClienteDAO();
+
+            DatosPersona persona = new DatosPersona();
+            DatosFiscal fiscal = new DatosFiscal();
+            Cliente cliente = new Cliente();
+            Ubicacion ubicacion = new Ubicacion();
+
+            // Asignar valores a los objetos
+            long telefonoCasa;
+            long telefonoCelular;
+
+            persona.Nombres = textNombre.Text;
+            persona.Paterno = textApellidoPaterno.Text;
+            persona.Materno = textApellidoMaterno.Text;
+            persona.TelefonoCasa = long.TryParse(textNumCasa.Text, out telefonoCasa) ? telefonoCasa : -1;
+            persona.Celular = long.TryParse(textNumCelular.Text, out telefonoCelular) ? telefonoCelular : -1;
+            persona.Correo = textCorreo.Text;
+            persona.FechaNacimiento = DateOnly.FromDateTime(dtpFechaNacimiento.Value);
+
+            cliente.EstadoCivil = comboEstadoCivil.Text;
+            cliente.Rfc = textRFC.Text;
+
+            ubicacion.Pais = comboBox1.Text;
+            ubicacion.Estado = comboBox2.Text;
+            ubicacion.Ciudad = comboBox3.Text;
+
+            fiscal.RegimenFiscal = comboRegimenFiscal.Text;
+
+            // Traer el id de la ubicación
+            UbicacionDAO ubicacionDAO = new UbicacionDAO();
+            cliente.IdUbicacion = ubicacionDAO.getIdUbicacion(comboBox3.Text);
+
+            // Validaciones
+            if (string.IsNullOrEmpty(persona.Nombres) || string.IsNullOrEmpty(persona.Paterno) || string.IsNullOrEmpty(persona.Materno))
+            {
+                MessageBox.Show("Los nombres no pueden estar vacíos.");
+                return;
+            }
+            if (string.IsNullOrEmpty(persona.TelefonoCasa.ToString()) || string.IsNullOrEmpty(persona.Celular.ToString()))
+            {
+                MessageBox.Show("Los números de teléfono no pueden estar vacíos.");
+                return;
+            }
+            if (string.IsNullOrEmpty(persona.Correo))
+            {
+                MessageBox.Show("El correo no puede estar vacío.");
+                return;
+            }
+            if (string.IsNullOrEmpty(cliente.EstadoCivil))
+            {
+                MessageBox.Show("El estado civil no puede estar vacío.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(ubicacion.Pais) || string.IsNullOrEmpty(ubicacion.Estado) || string.IsNullOrEmpty(ubicacion.Ciudad))
+            {
+                MessageBox.Show("La ubicación no puede estar vacía.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(cliente.Rfc))
+            {
+                MessageBox.Show("El RFC no puede estar vacío.");
+                return;
+            }
+
+            // Validar que que se actualice el cliente
+
+            if (clienteDao.updateCliente(cliente, fiscal, persona))
+            {
+                MessageBox.Show("Cliente modificado");
+            }
+            else
+            {
+                MessageBox.Show("Error al modificar el cliente");
+            }
+
+        }
+
+        private void llenarEstados()
+        {
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+            UbicacionDAO ubicacionDAO = new UbicacionDAO();
+            List<Ubicacion> estados = ubicacionDAO.getEstados(comboBox1.Text);
+            foreach (Ubicacion ubicacion in estados)
+            {
+                comboBox2.Items.Add(ubicacion.Estado);
+            }
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            llenarEstados();
+            comboBox2.Enabled = true;
+        }
+
+        private void llenarCiudades()
+        {
+            comboBox3.Items.Clear();
+            UbicacionDAO ubicacionDAO = new UbicacionDAO();
+            List<Ubicacion> ciudades = ubicacionDAO.getCiudades(comboBox2.Text);
+            foreach (Ubicacion ubicacion in ciudades)
+            {
+                comboBox3.Items.Add(ubicacion.Ciudad);
+            }
+        }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox3.SelectedIndex = -1;
+            llenarCiudades();
+            comboBox3.Enabled = true;
+        }
+
+        private void llenarDatos(Cliente cliente, DatosPersona persona, DatosFiscal fiscal, Ubicacion ubicacion)
+        {
+            textNombre.Text = persona.Nombres;
+            textApellidoPaterno.Text = persona.Paterno;
+            textApellidoMaterno.Text = persona.Materno;
+            textNumCasa.Text = persona.TelefonoCasa.ToString();
+            textNumCelular.Text = persona.Celular.ToString();
+            textCorreo.Text = persona.Correo;
+            dtpFechaNacimiento.Value = DateTime.Parse(persona.FechaNacimiento.ToString());
+
+
+            comboEstadoCivil.Text = cliente.EstadoCivil;
+            textRFC.Text = cliente.Rfc;
+
+
+            comboRegimenFiscal.Text = fiscal.RegimenFiscal;
+
+
+            comboBox1.Text = ubicacion.Pais;
+            comboBox2.Text = ubicacion.Estado;
+            comboBox3.Text = ubicacion.Ciudad;
+        }
+
+        private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBuscarCliente.Text))
+            {
+                MessageBox.Show("Porfavor ingrese un email.");
+                return;
+            }
+
+            DatosFiscalDAO fiscalDAO = new DatosFiscalDAO();
+            DatosPersonaDAO personaDAO = new DatosPersonaDAO();
+            ClienteDAO clienteDAO = new ClienteDAO();
+            UbicacionDAO ubicacionDAO = new UbicacionDAO();
+
+            Cliente cliente = new Cliente();
+            DatosPersona persona = new DatosPersona();
+            DatosFiscal fiscal = new DatosFiscal();
+            Ubicacion ubicacion = new Ubicacion();
+
+            fiscal = fiscalDAO.getDatosFiscal(textBuscarCliente.Text);
+            persona = personaDAO.getDatosPersona(textBuscarCliente.Text);
+            cliente = clienteDAO.getCliente(textBuscarCliente.Text);
+
+            if(cliente == null)
+            {
+                MessageBox.Show("Cliente no encontrado");
+                return;
+            }
+
+            if (cliente.Estado == false)
+            {
+                MessageBox.Show("Cliente dado de baja");
+                return;
+            }
+
+            ubicacion = ubicacionDAO.getUbicacion(cliente.IdUbicacion);
+            llenarDatos(cliente, persona, fiscal, ubicacion);
+
+            textNombre.Enabled = true;
+            textApellidoPaterno.Enabled = true;
+            textApellidoMaterno.Enabled = true;
+            textNumCasa.Enabled = true;
+            textNumCelular.Enabled = true;
+            textCorreo.Enabled = false;
+            dtpFechaNacimiento.Enabled = true;
+            comboEstadoCivil.Enabled = true;
+            textRFC.Enabled = true;
+            comboRegimenFiscal.Enabled = true;
+
+            comboBox1.Enabled = true; //Pais
+            comboBox2.Enabled = false; //Estado
+            comboBox3.Enabled = false; //Ciudad
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ModElimCliente_Load(object sender, EventArgs e)
+        {
+            limpiarVentana();
         }
     }
 }

@@ -13,6 +13,8 @@ public partial class Cliente
 
     public Guid? IdUbicacion { get; set; }
 
+    public bool? Estado { get; set; }
+
     public virtual DatosPersona IdClienteNavigation { get; set; } = null!;
 
     public virtual Ubicacion? IdUbicacionNavigation { get; set; }

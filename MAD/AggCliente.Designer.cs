@@ -87,6 +87,7 @@
             btnAggCliente.TabIndex = 33;
             btnAggCliente.Text = "Agregar cliente";
             btnAggCliente.UseVisualStyleBackColor = true;
+            btnAggCliente.Click += btnAggCliente_Click;
             // 
             // groupBox3
             // 
@@ -112,6 +113,7 @@
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(121, 30);
             comboBox3.TabIndex = 30;
+            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             // 
             // comboBox2
             // 
@@ -120,6 +122,7 @@
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(121, 30);
             comboBox2.TabIndex = 29;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // comboBox1
             // 
@@ -128,6 +131,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 30);
             comboBox1.TabIndex = 28;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label12
             // 
