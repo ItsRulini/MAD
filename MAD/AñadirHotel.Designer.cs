@@ -107,14 +107,14 @@
             // 
             textNumero.Location = new Point(25, 154);
             textNumero.Name = "textNumero";
-            textNumero.Size = new Size(114, 30);
+            textNumero.Size = new Size(114, 26);
             textNumero.TabIndex = 6;
             // 
             // textCalle
             // 
             textCalle.Location = new Point(25, 85);
             textCalle.Name = "textCalle";
-            textCalle.Size = new Size(276, 30);
+            textCalle.Size = new Size(276, 26);
             textCalle.TabIndex = 5;
             // 
             // label6
@@ -122,7 +122,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(25, 122);
             label6.Name = "label6";
-            label6.Size = new Size(80, 22);
+            label6.Size = new Size(62, 19);
             label6.TabIndex = 7;
             label6.Text = "Número:";
             // 
@@ -131,7 +131,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(25, 41);
             label5.Name = "label5";
-            label5.Size = new Size(131, 22);
+            label5.Size = new Size(96, 19);
             label5.TabIndex = 6;
             label5.Text = "Calle/Avenida:";
             // 
@@ -140,7 +140,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(352, 31);
             label4.Name = "label4";
-            label4.Size = new Size(50, 22);
+            label4.Size = new Size(37, 19);
             label4.TabIndex = 5;
             label4.Text = "Pais:";
             // 
@@ -149,7 +149,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(352, 92);
             label3.Name = "label3";
-            label3.Size = new Size(70, 22);
+            label3.Size = new Size(54, 19);
             label3.TabIndex = 4;
             label3.Text = "Estado:";
             // 
@@ -158,7 +158,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(352, 154);
             label2.Name = "label2";
-            label2.Size = new Size(73, 22);
+            label2.Size = new Size(56, 19);
             label2.TabIndex = 3;
             label2.Text = "Ciudad:";
             // 
@@ -167,7 +167,7 @@
             comboCiudad.FormattingEnabled = true;
             comboCiudad.Location = new Point(352, 176);
             comboCiudad.Name = "comboCiudad";
-            comboCiudad.Size = new Size(121, 30);
+            comboCiudad.Size = new Size(121, 27);
             comboCiudad.TabIndex = 9;
             // 
             // comboEstado
@@ -175,7 +175,7 @@
             comboEstado.FormattingEnabled = true;
             comboEstado.Location = new Point(352, 114);
             comboEstado.Name = "comboEstado";
-            comboEstado.Size = new Size(121, 30);
+            comboEstado.Size = new Size(121, 27);
             comboEstado.TabIndex = 8;
             comboEstado.SelectedIndexChanged += comboEstado_SelectedIndexChanged;
             // 
@@ -184,7 +184,7 @@
             comboPais.FormattingEnabled = true;
             comboPais.Location = new Point(352, 53);
             comboPais.Name = "comboPais";
-            comboPais.Size = new Size(121, 30);
+            comboPais.Size = new Size(121, 27);
             comboPais.TabIndex = 7;
             comboPais.SelectedIndexChanged += comboPais_SelectedIndexChanged;
             // 
@@ -193,7 +193,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(21, 33);
             label1.Name = "label1";
-            label1.Size = new Size(80, 22);
+            label1.Size = new Size(63, 19);
             label1.TabIndex = 1;
             label1.Text = "Nombre:";
             // 
@@ -201,7 +201,7 @@
             // 
             textNombreHotel.Location = new Point(21, 64);
             textNombreHotel.Name = "textNombreHotel";
-            textNombreHotel.Size = new Size(238, 30);
+            textNombreHotel.Size = new Size(238, 26);
             textNombreHotel.TabIndex = 1;
             // 
             // groupBox2
@@ -230,7 +230,7 @@
             // 
             textBox1.Location = new Point(478, 63);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(169, 30);
+            textBox1.Size = new Size(169, 26);
             textBox1.TabIndex = 19;
             // 
             // label13
@@ -238,7 +238,7 @@
             label13.AutoSize = true;
             label13.Location = new Point(478, 33);
             label13.Name = "label13";
-            label13.Size = new Size(53, 22);
+            label13.Size = new Size(42, 19);
             label13.TabIndex = 1;
             label13.Text = "RFC:";
             // 
@@ -257,7 +257,7 @@
             label12.AutoSize = true;
             label12.Location = new Point(675, 33);
             label12.Name = "label12";
-            label12.Size = new Size(187, 22);
+            label12.Size = new Size(141, 19);
             label12.TabIndex = 9;
             label12.Text = "Inicio de operaciones:";
             // 
@@ -265,7 +265,7 @@
             // 
             dtpInicioOperacion.Location = new Point(675, 64);
             dtpInicioOperacion.Name = "dtpInicioOperacion";
-            dtpInicioOperacion.Size = new Size(200, 30);
+            dtpInicioOperacion.Size = new Size(200, 26);
             dtpInicioOperacion.TabIndex = 3;
             // 
             // btnAgregarHotel
@@ -283,7 +283,7 @@
             cantPisos.Location = new Point(308, 64);
             cantPisos.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             cantPisos.Name = "cantPisos";
-            cantPisos.Size = new Size(131, 30);
+            cantPisos.Size = new Size(131, 26);
             cantPisos.TabIndex = 2;
             cantPisos.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -292,7 +292,7 @@
             label9.AutoSize = true;
             label9.Location = new Point(308, 33);
             label9.Name = "label9";
-            label9.Size = new Size(158, 22);
+            label9.Size = new Size(121, 19);
             label9.TabIndex = 5;
             label9.Text = "Cantidad de pisos:";
             // 
@@ -346,7 +346,7 @@
             // 
             textPrecioServicio.Location = new Point(25, 135);
             textPrecioServicio.Name = "textPrecioServicio";
-            textPrecioServicio.Size = new Size(100, 30);
+            textPrecioServicio.Size = new Size(100, 26);
             textPrecioServicio.TabIndex = 16;
             // 
             // label11
@@ -354,7 +354,7 @@
             label11.AutoSize = true;
             label11.Location = new Point(25, 102);
             label11.Name = "label11";
-            label11.Size = new Size(68, 22);
+            label11.Size = new Size(51, 19);
             label11.TabIndex = 3;
             label11.Text = "Precio:";
             // 
@@ -373,7 +373,7 @@
             comboServicio.FormattingEnabled = true;
             comboServicio.Location = new Point(28, 72);
             comboServicio.Name = "comboServicio";
-            comboServicio.Size = new Size(121, 30);
+            comboServicio.Size = new Size(121, 27);
             comboServicio.TabIndex = 15;
             comboServicio.SelectedIndexChanged += comboServicio_SelectedIndexChanged;
             // 
@@ -382,7 +382,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(25, 40);
             label10.Name = "label10";
-            label10.Size = new Size(180, 22);
+            label10.Size = new Size(135, 19);
             label10.TabIndex = 0;
             label10.Text = "Nombre del servicio:";
             // 
@@ -470,7 +470,7 @@
             cantHab.Location = new Point(180, 93);
             cantHab.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             cantHab.Name = "cantHab";
-            cantHab.Size = new Size(120, 30);
+            cantHab.Size = new Size(120, 26);
             cantHab.TabIndex = 12;
             cantHab.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -479,7 +479,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(180, 56);
             label8.Name = "label8";
-            label8.Size = new Size(87, 22);
+            label8.Size = new Size(67, 19);
             label8.TabIndex = 2;
             label8.Text = "Cantidad:";
             // 
@@ -488,7 +488,7 @@
             comboTipoHab.FormattingEnabled = true;
             comboTipoHab.Location = new Point(30, 92);
             comboTipoHab.Name = "comboTipoHab";
-            comboTipoHab.Size = new Size(121, 30);
+            comboTipoHab.Size = new Size(121, 27);
             comboTipoHab.TabIndex = 11;
             // 
             // label7
@@ -496,13 +496,13 @@
             label7.AutoSize = true;
             label7.Location = new Point(30, 53);
             label7.Name = "label7";
-            label7.Size = new Size(53, 22);
+            label7.Size = new Size(39, 19);
             label7.TabIndex = 0;
             label7.Text = "Tipo:";
             // 
             // AñadirHotel
             // 
-            AutoScaleDimensions = new SizeF(11F, 22F);
+            AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
             ClientSize = new Size(1116, 575);
@@ -513,6 +513,7 @@
             Name = "AñadirHotel";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CrownHotelManager";
+            Load += AñadirHotel_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

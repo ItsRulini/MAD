@@ -125,7 +125,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(24, 260);
             label1.Name = "label1";
-            label1.Size = new Size(174, 22);
+            label1.Size = new Size(129, 19);
             label1.TabIndex = 9;
             label1.Text = "Hoteles disponibles:";
             // 
@@ -134,7 +134,7 @@
             comboHabitacion.FormattingEnabled = true;
             comboHabitacion.Location = new Point(401, 282);
             comboHabitacion.Name = "comboHabitacion";
-            comboHabitacion.Size = new Size(170, 30);
+            comboHabitacion.Size = new Size(170, 27);
             comboHabitacion.TabIndex = 10;
             comboHabitacion.SelectedIndexChanged += comboHabitacion_SelectedIndexChanged;
             // 
@@ -143,7 +143,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(401, 260);
             label2.Name = "label2";
-            label2.Size = new Size(190, 22);
+            label2.Size = new Size(142, 19);
             label2.TabIndex = 11;
             label2.Text = "Seleccione habitación:";
             // 
@@ -152,7 +152,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(401, 326);
             label3.Name = "label3";
-            label3.Size = new Size(179, 22);
+            label3.Size = new Size(139, 19);
             label3.TabIndex = 12;
             label3.Text = "Número de personas:";
             // 
@@ -188,7 +188,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(652, 260);
             label4.Name = "label4";
-            label4.Size = new Size(73, 22);
+            label4.Size = new Size(55, 19);
             label4.TabIndex = 15;
             label4.Text = "Carrito:";
             // 
@@ -205,7 +205,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(372, 397);
             label5.Name = "label5";
-            label5.Size = new Size(213, 22);
+            label5.Size = new Size(158, 19);
             label5.TabIndex = 17;
             label5.Text = "Detalles de la habitación:";
             label5.Click += label5_Click;
@@ -234,7 +234,7 @@
             // 
             dtpDesde.Location = new Point(41, 78);
             dtpDesde.Name = "dtpDesde";
-            dtpDesde.Size = new Size(142, 30);
+            dtpDesde.Size = new Size(142, 26);
             dtpDesde.TabIndex = 20;
             // 
             // label6
@@ -242,7 +242,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(6, 23);
             label6.Name = "label6";
-            label6.Size = new Size(66, 22);
+            label6.Size = new Size(51, 19);
             label6.TabIndex = 21;
             label6.Text = "Desde:";
             // 
@@ -251,7 +251,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(170, 23);
             label7.Name = "label7";
-            label7.Size = new Size(61, 22);
+            label7.Size = new Size(47, 19);
             label7.TabIndex = 22;
             label7.Text = "Hasta:";
             // 
@@ -259,7 +259,7 @@
             // 
             dtpHasta.Location = new Point(205, 78);
             dtpHasta.Name = "dtpHasta";
-            dtpHasta.Size = new Size(142, 30);
+            dtpHasta.Size = new Size(142, 26);
             dtpHasta.TabIndex = 23;
             // 
             // btnBuscarFechas
@@ -277,7 +277,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(652, 122);
             label8.Name = "label8";
-            label8.Size = new Size(144, 22);
+            label8.Size = new Size(114, 19);
             label8.TabIndex = 25;
             label8.Text = "Método de pago:";
             // 
@@ -286,7 +286,7 @@
             label9.AutoSize = true;
             label9.Location = new Point(815, 122);
             label9.Name = "label9";
-            label9.Size = new Size(85, 22);
+            label9.Size = new Size(63, 19);
             label9.TabIndex = 26;
             label9.Text = "Anticipo:";
             // 
@@ -294,7 +294,7 @@
             // 
             textAnticipo.Location = new Point(815, 144);
             textAnticipo.Name = "textAnticipo";
-            textAnticipo.Size = new Size(139, 30);
+            textAnticipo.Size = new Size(139, 26);
             textAnticipo.TabIndex = 28;
             // 
             // comboMetodoPago
@@ -302,7 +302,7 @@
             comboMetodoPago.FormattingEnabled = true;
             comboMetodoPago.Location = new Point(652, 144);
             comboMetodoPago.Name = "comboMetodoPago";
-            comboMetodoPago.Size = new Size(139, 30);
+            comboMetodoPago.Size = new Size(139, 27);
             comboMetodoPago.TabIndex = 29;
             // 
             // groupBox1
@@ -344,7 +344,7 @@
             label12.AutoSize = true;
             label12.Location = new Point(41, 123);
             label12.Name = "label12";
-            label12.Size = new Size(67, 22);
+            label12.Size = new Size(53, 19);
             label12.TabIndex = 35;
             label12.Text = "Ciudad";
             // 
@@ -353,7 +353,7 @@
             label11.AutoSize = true;
             label11.Location = new Point(395, 54);
             label11.Name = "label11";
-            label11.Size = new Size(150, 22);
+            label11.Size = new Size(112, 19);
             label11.TabIndex = 34;
             label11.Text = "Datos del cliente:";
             // 
@@ -361,7 +361,7 @@
             // 
             textBuscarCliente.Location = new Point(395, 81);
             textBuscarCliente.Name = "textBuscarCliente";
-            textBuscarCliente.Size = new Size(155, 30);
+            textBuscarCliente.Size = new Size(155, 26);
             textBuscarCliente.TabIndex = 33;
             // 
             // numeroPersonas
@@ -369,7 +369,7 @@
             numeroPersonas.Location = new Point(401, 355);
             numeroPersonas.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numeroPersonas.Name = "numeroPersonas";
-            numeroPersonas.Size = new Size(179, 30);
+            numeroPersonas.Size = new Size(179, 26);
             numeroPersonas.TabIndex = 32;
             numeroPersonas.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -378,7 +378,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(652, 50);
             label10.Name = "label10";
-            label10.Size = new Size(73, 22);
+            label10.Size = new Size(54, 19);
             label10.TabIndex = 31;
             label10.Text = "Cliente:";
             // 
@@ -387,7 +387,7 @@
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(652, 74);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(183, 30);
+            comboBox1.Size = new Size(183, 27);
             comboBox1.TabIndex = 30;
             // 
             // groupBox2
@@ -408,7 +408,7 @@
             comboCiudad.FormattingEnabled = true;
             comboCiudad.Location = new Point(6, 124);
             comboCiudad.Name = "comboCiudad";
-            comboCiudad.Size = new Size(151, 30);
+            comboCiudad.Size = new Size(151, 27);
             comboCiudad.TabIndex = 25;
             // 
             // groupBox3
@@ -428,35 +428,35 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { reservarToolStripMenuItem, venderToolStripMenuItem, checkInCheckOutToolStripMenuItem, facturarToolStripMenuItem, agregarClienteToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1176, 30);
+            menuStrip1.Size = new Size(1176, 27);
             menuStrip1.TabIndex = 31;
             menuStrip1.Text = "menuStrip1";
             // 
             // reservarToolStripMenuItem
             // 
             reservarToolStripMenuItem.Name = "reservarToolStripMenuItem";
-            reservarToolStripMenuItem.Size = new Size(96, 26);
+            reservarToolStripMenuItem.Size = new Size(75, 23);
             reservarToolStripMenuItem.Text = "Reservar";
             reservarToolStripMenuItem.Click += reservarToolStripMenuItem_Click;
             // 
             // venderToolStripMenuItem
             // 
             venderToolStripMenuItem.Name = "venderToolStripMenuItem";
-            venderToolStripMenuItem.Size = new Size(149, 26);
+            venderToolStripMenuItem.Size = new Size(114, 23);
             venderToolStripMenuItem.Text = "Vender servicio";
             venderToolStripMenuItem.Click += venderToolStripMenuItem_Click;
             // 
             // checkInCheckOutToolStripMenuItem
             // 
             checkInCheckOutToolStripMenuItem.Name = "checkInCheckOutToolStripMenuItem";
-            checkInCheckOutToolStripMenuItem.Size = new Size(181, 26);
+            checkInCheckOutToolStripMenuItem.Size = new Size(148, 23);
             checkInCheckOutToolStripMenuItem.Text = "Check In/Check Out";
             checkInCheckOutToolStripMenuItem.Click += checkInCheckOutToolStripMenuItem_Click;
             // 
             // facturarToolStripMenuItem
             // 
             facturarToolStripMenuItem.Name = "facturarToolStripMenuItem";
-            facturarToolStripMenuItem.Size = new Size(90, 26);
+            facturarToolStripMenuItem.Size = new Size(72, 23);
             facturarToolStripMenuItem.Text = "Facturar";
             facturarToolStripMenuItem.Click += facturarToolStripMenuItem_Click;
             // 
@@ -464,27 +464,27 @@
             // 
             agregarClienteToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { agregarToolStripMenuItem, modificarEliminarToolStripMenuItem });
             agregarClienteToolStripMenuItem.Name = "agregarClienteToolStripMenuItem";
-            agregarClienteToolStripMenuItem.Size = new Size(81, 26);
+            agregarClienteToolStripMenuItem.Size = new Size(63, 23);
             agregarClienteToolStripMenuItem.Text = "Cliente";
             agregarClienteToolStripMenuItem.Click += agregarClienteToolStripMenuItem_Click;
             // 
             // agregarToolStripMenuItem
             // 
             agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            agregarToolStripMenuItem.Size = new Size(249, 26);
+            agregarToolStripMenuItem.Size = new Size(189, 24);
             agregarToolStripMenuItem.Text = "Agregar";
             agregarToolStripMenuItem.Click += agregarToolStripMenuItem_Click;
             // 
             // modificarEliminarToolStripMenuItem
             // 
             modificarEliminarToolStripMenuItem.Name = "modificarEliminarToolStripMenuItem";
-            modificarEliminarToolStripMenuItem.Size = new Size(249, 26);
+            modificarEliminarToolStripMenuItem.Size = new Size(189, 24);
             modificarEliminarToolStripMenuItem.Text = "Modificar/Eliminar";
             modificarEliminarToolStripMenuItem.Click += modificarEliminarToolStripMenuItem_Click;
             // 
             // Reservar
             // 
-            AutoScaleDimensions = new SizeF(11F, 22F);
+            AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
             ClientSize = new Size(1176, 710);

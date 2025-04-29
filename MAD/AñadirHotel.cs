@@ -43,7 +43,7 @@ namespace MAD
                 comboServicio.Items.Add(servicio.Nombre);
             }
         }
-        
+
         private void inicializarComboTipoHabitacion()
         {
             TipoHabitacionDAO tipoHabitacionDAO = new TipoHabitacionDAO();
@@ -118,7 +118,7 @@ namespace MAD
                 return;
             }
 
-            if (string.IsNullOrEmpty(textNombreHotel.Text) || string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textCalle.Text) 
+            if (string.IsNullOrEmpty(textNombreHotel.Text) || string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textCalle.Text)
                 || string.IsNullOrEmpty(cantPisos.Value.ToString()) || string.IsNullOrEmpty(textNumero.Text))
             {
                 MessageBox.Show("Los campos no pueden estar vacíos.");
@@ -270,7 +270,12 @@ namespace MAD
             }
 
             gridHabitaciones.Rows.Add(comboTipoHab.Text, cantHab.Value, amenidadesSeleccionadas.ToString());
-            
+
+        }
+
+        private void AñadirHotel_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
