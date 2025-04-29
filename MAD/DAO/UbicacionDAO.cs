@@ -91,6 +91,31 @@ namespace MAD.DAO
             return ubicaciones;
         }
 
+        public List<Ubicacion> getCiudadesHotel()
+        {
+            List<Ubicacion> ubicaciones = new List<Ubicacion>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetCiudadesHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Ubicacion ubicacion = new Ubicacion();
+                                ubicacion.Ciudad = reader["ciudad"].ToString();
+                                ubicaciones.Add(ubicacion);
+                            }
+                        }
+                    }
+                }
+            }
+            return ubicaciones;
+        }
+
         public Guid getIdUbicacion(string ciudad)
         {
             Guid idUbicacion = Guid.Empty;

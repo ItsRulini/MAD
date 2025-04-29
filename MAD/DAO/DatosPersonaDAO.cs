@@ -14,14 +14,14 @@ namespace MAD.DAO
     {
         public DatosPersonaDAO() { }
 
-        public DatosPersona getDatosPersona (string correo)
+        public DatosPersona getDatosPersona (string info)
         {
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
                 using (var cmd = new SqlCommand("spGetDatosPersona", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@correo", correo);
+                    cmd.Parameters.AddWithValue("@info", info);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -45,5 +45,31 @@ namespace MAD.DAO
             }
             return null;
         }
+        public List<string> busquedaAvanzadaCliente (string DatosCliente) {
+            List<string> listaClientes = new List<string>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spBusquedaAvanzadaCliente", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@info", DatosCliente);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                //ver qué hacer aquí xd no le entiendo tilin ayuda, llevamos un vergo de veces y sigo sin entender, no me papies bro, al menos ya le avancé en esto xdxdxd
+                                string datosPersona = reader["Resultado"].ToString();
+                                listaClientes.Add(datosPersona);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return listaClientes;
+        }
+            
     }
 }

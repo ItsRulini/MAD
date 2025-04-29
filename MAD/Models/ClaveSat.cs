@@ -13,5 +13,7 @@ public partial class ClaveSat
 
     public virtual ICollection<Amenidad> Amenidads { get; set; } = new List<Amenidad>();
 
+    public virtual Unidad? ClaveUnidadNavigation { get; set; }
+
     public virtual ICollection<Servicio> Servicios { get; set; } = new List<Servicio>();
 }

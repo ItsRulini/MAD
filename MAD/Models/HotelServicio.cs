@@ -9,8 +9,6 @@ public partial class HotelServicio
 
     public Guid IdServicio { get; set; }
 
-    public int? Cantidad { get; set; }
-
     public decimal? Precio { get; set; }
 
     public virtual Hotel IdHotelNavigation { get; set; } = null!;

@@ -8,37 +8,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MAD.DAO
 {
-    internal class DatosFiscalDAO
+    internal class AmenidadDAO
     {
-        public DatosFiscalDAO() { }
+        public AmenidadDAO() { }
 
-        public DatosFiscal getDatosFiscal(string correo)
+        public List<Amenidad> getAmenidadesTipoHabitacion(string habitacion)
         {
+            List<Amenidad> amenidades = new List<Amenidad>();
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
-                using (var cmd = new SqlCommand("spGetDatosPersona", conn))
+                using (var cmd = new SqlCommand("spGetAmenidadPorTipoHabitacion", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@info", correo);
+                    cmd.Parameters.AddWithValue("@nivel", habitacion);
+
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
                             while (reader.Read())
                             {
-                                DatosFiscal datosFiscal = new DatosFiscal();
-                                datosFiscal.TipoContribuyente = reader["tipoContribuyente"].ToString();
-                                datosFiscal.RegimenFiscal = reader["regimenFiscal"].ToString();
-                                return datosFiscal;
+                                Amenidad amenidad = new Amenidad();
+                                amenidad.IdAmenidad = Guid.Parse(reader["idAmenidad"].ToString());
+                                amenidad.Amenidad1 = reader["amenidad"].ToString();
+                                amenidades.Add(amenidad);
                             }
                         }
                     }
                 }
             }
-            return null;
+            return amenidades;
         }
+
     }
 }

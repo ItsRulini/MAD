@@ -31,7 +31,7 @@ namespace MAD
 
             if (usuario.TipoUsuario == "Administrador")
             {
-                PantallaInicialAdmin FAdmin = new PantallaInicialAdmin();
+                PantallaInicialAdmin FAdmin = new PantallaInicialAdmin(usuario.IdUsuario);
                 this.Hide();
                 FAdmin.ShowDialog();
                 this.Show();

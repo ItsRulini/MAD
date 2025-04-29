@@ -14,10 +14,12 @@ namespace MAD
 {
     public partial class ModElimUsuario : Form
     {
-        private Guid idUsuario; // Almacena el ID del usuario a modificar o eliminar
-        public ModElimUsuario()
+        private Guid idUsuarioEncontrado; // Almacena el ID del usuario a modificar o eliminar
+        private Guid idAdministrador; // Almacena el ID del administrador
+        public ModElimUsuario(Guid idAdmin)
         {
             InitializeComponent();
+            idAdministrador = idAdmin;
         }
 
         private void btnBuscarEmpleado_Click(object sender, EventArgs e)
@@ -36,8 +38,21 @@ namespace MAD
             DatosPersona persona = new DatosPersona();
             Contraseña contraseña = new Contraseña();
 
+
+
             usuario = usuarioDAO.getInfoUsuario(textBuscarEmpleado.Text);
             persona = personaDAO.getDatosPersona(textBuscarEmpleado.Text);
+            
+            if (idAdministrador == persona.IdPersona)
+            {
+                MessageBox.Show("Un administrador no puede eliminarse a sí mismo");
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+            } else
+            {
+                radioButton1.Enabled = true;
+                radioButton2.Enabled = true;
+            }
 
             if (usuario == null || persona == null)
             {
@@ -47,7 +62,7 @@ namespace MAD
 
             contraseña = contraseñaDAO.getContraseña(persona.IdPersona);
 
-            idUsuario = persona.IdPersona;
+            idUsuarioEncontrado = persona.IdPersona;
             textNombre.Text = persona.Nombres;
             textApellidoPaterno.Text = persona.Paterno;
             textApellidoMaterno.Text = persona.Materno;
@@ -96,7 +111,7 @@ namespace MAD
 
             if (cambioContraseña.Checked)
             {
-                if (contraseñaDAO.updateContraseña(contraseña, idUsuario))
+                if (contraseñaDAO.updateContraseña(contraseña, idUsuarioEncontrado))
                 {
                     MessageBox.Show("Contraseña modificada correctamente.");
                 }

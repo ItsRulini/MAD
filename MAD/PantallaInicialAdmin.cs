@@ -12,14 +12,21 @@ namespace MAD
 {
     public partial class PantallaInicialAdmin : Form
     {
+        private Guid idAdmin; // Almacena el ID del administrador
         public PantallaInicialAdmin()
         {
             InitializeComponent();
         }
 
+        public PantallaInicialAdmin(Guid idAdmin)
+        {
+            InitializeComponent();
+            this.idAdmin = idAdmin;
+        }
+
         private void agregarHotelToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            AñadirHotel FAddHotel = new AñadirHotel();
+            AñadirHotel FAddHotel = new AñadirHotel(idAdmin);
             this.Hide();
             FAddHotel.ShowDialog();
             this.Show();
@@ -66,7 +73,7 @@ namespace MAD
 
         private void modificarUsuariioOperativoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ModElimUsuario FModElimUsuario = new ModElimUsuario();
+            ModElimUsuario FModElimUsuario = new ModElimUsuario(idAdmin);
             this.Hide();
             FModElimUsuario.ShowDialog();
             this.Show();

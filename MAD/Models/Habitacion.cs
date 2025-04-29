@@ -9,8 +9,6 @@ public partial class Habitacion
 
     public int NumeroHabitacion { get; set; }
 
-    public string Estatus { get; set; } = null!;
-
     public Guid? IdTipoHabitacion { get; set; }
 
     public Guid? IdHotel { get; set; }

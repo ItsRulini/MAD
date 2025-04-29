@@ -11,8 +11,6 @@ public partial class AmenidadTipoHabitacion
 
     public int? Cantidad { get; set; }
 
-    public decimal Precio { get; set; }
-
     public virtual Amenidad IdAmenidadNavigation { get; set; } = null!;
 
     public virtual TipoHabitacion IdTipoHabitacionNavigation { get; set; } = null!;

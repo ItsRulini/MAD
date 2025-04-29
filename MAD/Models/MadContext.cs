@@ -49,6 +49,8 @@ public partial class MadContext : DbContext
 
     public virtual DbSet<Ubicacion> Ubicacions { get; set; }
 
+    public virtual DbSet<Unidad> Unidads { get; set; }
+
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -86,9 +88,6 @@ public partial class MadContext : DbContext
             entity.Property(e => e.IdTipoHabitacion).HasColumnName("idTipoHabitacion");
             entity.Property(e => e.IdAmenidad).HasColumnName("idAmenidad");
             entity.Property(e => e.Cantidad).HasColumnName("cantidad");
-            entity.Property(e => e.Precio)
-                .HasColumnType("decimal(7, 2)")
-                .HasColumnName("precio");
 
             entity.HasOne(d => d.IdAmenidadNavigation).WithMany(p => p.AmenidadTipoHabitacions)
                 .HasForeignKey(d => d.IdAmenidad)
@@ -140,6 +139,10 @@ public partial class MadContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("claveUnidad");
+
+            entity.HasOne(d => d.ClaveUnidadNavigation).WithMany(p => p.ClaveSats)
+                .HasForeignKey(d => d.ClaveUnidad)
+                .HasConstraintName("FK__ClaveSAT__claveU__078C1F06");
         });
 
         modelBuilder.Entity<Cliente>(entity =>
@@ -305,10 +308,6 @@ public partial class MadContext : DbContext
             entity.Property(e => e.IdHabitacion)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("idHabitacion");
-            entity.Property(e => e.Estatus)
-                .HasMaxLength(30)
-                .IsUnicode(false)
-                .HasColumnName("estatus");
             entity.Property(e => e.IdHotel).HasColumnName("idHotel");
             entity.Property(e => e.IdTipoHabitacion).HasColumnName("idTipoHabitacion");
             entity.Property(e => e.NumeroHabitacion).HasColumnName("numeroHabitacion");
@@ -374,7 +373,6 @@ public partial class MadContext : DbContext
 
             entity.Property(e => e.IdHotel).HasColumnName("idHotel");
             entity.Property(e => e.IdServicio).HasColumnName("idServicio");
-            entity.Property(e => e.Cantidad).HasColumnName("cantidad");
             entity.Property(e => e.Precio)
                 .HasColumnType("decimal(7, 2)")
                 .HasColumnName("precio");
@@ -534,6 +532,22 @@ public partial class MadContext : DbContext
             entity.Property(e => e.ZonaTuristica)
                 .HasDefaultValue(false)
                 .HasColumnName("zonaTuristica");
+        });
+
+        modelBuilder.Entity<Unidad>(entity =>
+        {
+            entity.HasKey(e => e.ClaveUnidad).HasName("PK__Unidad__96CB4819C9CCC204");
+
+            entity.ToTable("Unidad");
+
+            entity.Property(e => e.ClaveUnidad)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("claveUnidad");
+            entity.Property(e => e.Unidad1)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("unidad");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
