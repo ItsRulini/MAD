@@ -38,8 +38,6 @@
             label2 = new Label();
             label3 = new Label();
             dgvCarritoReserva = new DataGridView();
-            Habitación = new DataGridViewTextBoxColumn();
-            NumPersonas = new DataGridViewTextBoxColumn();
             label4 = new Label();
             textDetallesHab = new TextBox();
             label5 = new Label();
@@ -49,20 +47,15 @@
             label6 = new Label();
             label7 = new Label();
             dtpHasta = new DateTimePicker();
-            btnBuscarFechas = new Button();
             label8 = new Label();
             label9 = new Label();
             textAnticipo = new TextBox();
             comboMetodoPago = new ComboBox();
             groupBox1 = new GroupBox();
-            label12 = new Label();
-            label11 = new Label();
-            textBuscarCliente = new TextBox();
             numeroPersonas = new NumericUpDown();
             label10 = new Label();
             comboBox1 = new ComboBox();
             groupBox2 = new GroupBox();
-            comboCiudad = new ComboBox();
             groupBox3 = new GroupBox();
             menuStrip1 = new MenuStrip();
             reservarToolStripMenuItem = new ToolStripMenuItem();
@@ -72,6 +65,9 @@
             agregarClienteToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
             modificarEliminarToolStripMenuItem = new ToolStripMenuItem();
+            Eliminar = new DataGridViewTextBoxColumn();
+            checkBox1 = new CheckBox();
+            label13 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvHoteles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarritoReserva).BeginInit();
@@ -169,20 +165,6 @@
             dgvCarritoReserva.TabIndex = 14;
             dgvCarritoReserva.CellContentClick += dgvCarritoReserva_CellContentClick;
             // 
-            // Habitación
-            // 
-            Habitación.HeaderText = "Habitacion";
-            Habitación.MinimumWidth = 6;
-            Habitación.Name = "Habitación";
-            Habitación.Width = 200;
-            // 
-            // NumPersonas
-            // 
-            NumPersonas.HeaderText = "Numero de personas";
-            NumPersonas.MinimumWidth = 6;
-            NumPersonas.Name = "NumPersonas";
-            NumPersonas.Width = 200;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -262,16 +244,6 @@
             dtpHasta.Size = new Size(142, 26);
             dtpHasta.TabIndex = 23;
             // 
-            // btnBuscarFechas
-            // 
-            btnBuscarFechas.Location = new Point(282, 121);
-            btnBuscarFechas.Name = "btnBuscarFechas";
-            btnBuscarFechas.Size = new Size(124, 33);
-            btnBuscarFechas.TabIndex = 24;
-            btnBuscarFechas.Text = "Buscar";
-            btnBuscarFechas.UseVisualStyleBackColor = true;
-            btnBuscarFechas.Click += btnBuscarFechas_Click;
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -307,9 +279,6 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label12);
-            groupBox1.Controls.Add(label11);
-            groupBox1.Controls.Add(textBuscarCliente);
             groupBox1.Controls.Add(numeroPersonas);
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(comboBox1);
@@ -322,10 +291,8 @@
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(comboHabitacion);
-            groupBox1.Controls.Add(dtpHasta);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(dtpDesde);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(textDetallesHab);
             groupBox1.Controls.Add(btnAggCarrito);
@@ -338,31 +305,6 @@
             groupBox1.TabIndex = 30;
             groupBox1.TabStop = false;
             groupBox1.Text = "Reservar";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(41, 123);
-            label12.Name = "label12";
-            label12.Size = new Size(53, 19);
-            label12.TabIndex = 35;
-            label12.Text = "Ciudad";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(395, 54);
-            label11.Name = "label11";
-            label11.Size = new Size(112, 19);
-            label11.TabIndex = 34;
-            label11.Text = "Datos del cliente:";
-            // 
-            // textBuscarCliente
-            // 
-            textBuscarCliente.Location = new Point(395, 81);
-            textBuscarCliente.Name = "textBuscarCliente";
-            textBuscarCliente.Size = new Size(155, 26);
-            textBuscarCliente.TabIndex = 33;
             // 
             // numeroPersonas
             // 
@@ -482,6 +424,143 @@
             modificarEliminarToolStripMenuItem.Text = "Modificar/Eliminar";
             modificarEliminarToolStripMenuItem.Click += modificarEliminarToolStripMenuItem_Click;
             // 
+            // textBuscarCliente
+            // 
+            textBuscarCliente.Location = new Point(0, 0);
+            textBuscarCliente.Name = "textBuscarCliente";
+            textBuscarCliente.Size = new Size(100, 23);
+            textBuscarCliente.TabIndex = 0;
+            // 
+            // btnBuscarFechas
+            // 
+            btnBuscarFechas.Location = new Point(282, 121);
+            btnBuscarFechas.Name = "btnBuscarFechas";
+            btnBuscarFechas.Size = new Size(124, 33);
+            btnBuscarFechas.TabIndex = 24;
+            btnBuscarFechas.Text = "Buscar";
+            btnBuscarFechas.UseVisualStyleBackColor = true;
+            btnBuscarFechas.Click += btnBuscarFechas_Click;
+            // 
+            // label11
+            // 
+            label11.Location = new Point(0, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(100, 23);
+            label11.TabIndex = 0;
+            // 
+            // comboCiudad
+            // 
+            comboCiudad.Location = new Point(0, 0);
+            comboCiudad.Name = "comboCiudad";
+            comboCiudad.Size = new Size(121, 23);
+            comboCiudad.TabIndex = 0;
+            // 
+            // label12
+            // 
+            label12.Location = new Point(0, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(100, 23);
+            label12.TabIndex = 0;
+            // 
+            // checkBox1
+            // 
+            checkBox1.Location = new Point(0, 0);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(104, 24);
+            checkBox1.TabIndex = 0;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(14, 23);
+            label13.Name = "label13";
+            label13.Size = new Size(51, 19);
+            label13.TabIndex = 38;
+            label13.Text = "Desde:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(200, 23);
+            label14.Name = "label14";
+            label14.Size = new Size(47, 19);
+            label14.TabIndex = 0;
+            label14.Text = "Hasta:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(14, 124);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(306, 26);
+            textBox1.TabIndex = 39;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(14, 92);
+            label15.Name = "label15";
+            label15.Size = new Size(151, 19);
+            label15.TabIndex = 40;
+            label15.Text = "RFC/Correo/Apellidos:";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(377, 22);
+            label16.Name = "label16";
+            label16.Size = new Size(56, 19);
+            label16.TabIndex = 41;
+            label16.Text = "Ciudad:";
+            label16.Click += this.label16_Click;
+            // 
+            // comboCiudadReserva
+            // 
+            comboCiudadReserva.FormattingEnabled = true;
+            comboCiudadReserva.Location = new Point(377, 44);
+            comboCiudadReserva.Name = "comboCiudadReserva";
+            comboCiudadReserva.Size = new Size(142, 27);
+            comboCiudadReserva.TabIndex = 42;
+            comboCiudadReserva.SelectedIndexChanged += comboCiudadReserva_SelectedIndexChanged;
+            // 
+            // btnBusqueda
+            // 
+            btnBusqueda.Location = new Point(14, 182);
+            btnBusqueda.Name = "btnBusqueda";
+            btnBusqueda.Size = new Size(89, 37);
+            btnBusqueda.TabIndex = 43;
+            btnBusqueda.Text = "Buscar";
+            btnBusqueda.UseVisualStyleBackColor = true;
+            // 
+            // checkBuscarPorApellido
+            // 
+            checkBuscarPorApellido.AutoSize = true;
+            checkBuscarPorApellido.Location = new Point(129, 190);
+            checkBuscarPorApellido.Name = "checkBuscarPorApellido";
+            checkBuscarPorApellido.Size = new Size(164, 23);
+            checkBuscarPorApellido.TabIndex = 44;
+            checkBuscarPorApellido.Text = "Busqueda por apellido";
+            checkBuscarPorApellido.UseVisualStyleBackColor = true;
+            // 
+            // Habitación
+            // 
+            Habitación.HeaderText = "Habitacion";
+            Habitación.MinimumWidth = 6;
+            Habitación.Name = "Habitación";
+            Habitación.Width = 200;
+            // 
+            // NumPersonas
+            // 
+            NumPersonas.HeaderText = "Numero de personas";
+            NumPersonas.MinimumWidth = 6;
+            NumPersonas.Name = "NumPersonas";
+            // 
+            // Eliminar
+            // 
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
             // Reservar
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
@@ -527,10 +606,7 @@
         private Button btnAggCarrito;
         private Button btnComprarReserva;
         private DateTimePicker dtpDesde;
-        private Label label6;
-        private Label label7;
         private DateTimePicker dtpHasta;
-        private Button btnBuscarFechas;
         private Label label8;
         private Label label9;
         private TextBox textAnticipo;

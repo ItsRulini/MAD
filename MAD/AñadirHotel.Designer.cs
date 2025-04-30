@@ -434,7 +434,6 @@
             TipoHab.Name = "TipoHab";
             TipoHab.ReadOnly = true;
             TipoHab.Resizable = DataGridViewTriState.False;
-            TipoHab.Width = 150;
             // 
             // CantidadHab
             // 
@@ -563,8 +562,6 @@
         private Label label11;
         private Button btnAgregarHotel;
         private DataGridView gridServiciosHotel;
-        private DataGridViewTextBoxColumn NombreServicio;
-        private DataGridViewTextBoxColumn PrecioServicio;
         private Label label12;
         private DateTimePicker dtpInicioOperacion;
         private PictureBox pictureBox1;
