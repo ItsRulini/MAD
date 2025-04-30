@@ -78,6 +78,32 @@ namespace MAD
             FModElimUsuario.ShowDialog();
             this.Show();
         }
+        private void modificarHotelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // esta es la de modificar hotel
+            ModHotel FModHotel = new ModHotel();
+            this.Hide();
+            FModHotel.ShowDialog();
+            this.Show();
+        }
+        private void agregarServicioToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            // agregar servicios al catálogo
+            AñadirServicio FAggServicio = new AñadirServicio();
+            this.Hide();
+            FAggServicio.ShowDialog();
+            this.Show();
+        }
+        private void agregarAmenidadToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            // agregar amenidaes al catalogo
+            AñadorAmenidad FAggAmenidad = new AñadorAmenidad();
+            this.Hide();
+            FAggAmenidad.ShowDialog();
+            this.Show();
+        }
+
+
         private void agregarHotelToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -109,5 +135,6 @@ namespace MAD
         private void agregarServicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
+
     }
 }

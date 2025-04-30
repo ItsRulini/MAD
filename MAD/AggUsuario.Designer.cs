@@ -49,8 +49,12 @@
             textApellidoMaterno = new TextBox();
             textApellidoPaterno = new TextBox();
             textNombre = new TextBox();
+            radioOperativo = new RadioButton();
+            radioAdmin = new RadioButton();
+            groupBox2 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
@@ -66,6 +70,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(btnAggUsuario);
             groupBox1.Controls.Add(textNumNomina);
             groupBox1.Controls.Add(label9);
@@ -95,9 +100,9 @@
             // 
             // btnAggUsuario
             // 
-            btnAggUsuario.Location = new Point(281, 300);
+            btnAggUsuario.Location = new Point(243, 311);
             btnAggUsuario.Name = "btnAggUsuario";
-            btnAggUsuario.Size = new Size(117, 47);
+            btnAggUsuario.Size = new Size(198, 47);
             btnAggUsuario.TabIndex = 8;
             btnAggUsuario.Text = "Agregar usuario";
             btnAggUsuario.UseVisualStyleBackColor = true;
@@ -250,6 +255,39 @@
             textNombre.Size = new Size(199, 30);
             textNombre.TabIndex = 0;
             // 
+            // radioOperativo
+            // 
+            radioOperativo.AutoSize = true;
+            radioOperativo.Location = new Point(7, 38);
+            radioOperativo.Name = "radioOperativo";
+            radioOperativo.Size = new Size(111, 26);
+            radioOperativo.TabIndex = 18;
+            radioOperativo.TabStop = true;
+            radioOperativo.Text = "Operativo";
+            radioOperativo.UseVisualStyleBackColor = true;
+            // 
+            // radioAdmin
+            // 
+            radioAdmin.AutoSize = true;
+            radioAdmin.Location = new Point(7, 70);
+            radioAdmin.Name = "radioAdmin";
+            radioAdmin.Size = new Size(146, 26);
+            radioAdmin.TabIndex = 19;
+            radioAdmin.TabStop = true;
+            radioAdmin.Text = "Administrador";
+            radioAdmin.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(radioAdmin);
+            groupBox2.Controls.Add(radioOperativo);
+            groupBox2.Location = new Point(448, 186);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(164, 125);
+            groupBox2.TabIndex = 20;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Tipo de usuario:";
+            // 
             // AggUsuario
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
@@ -265,6 +303,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -291,5 +331,8 @@
         private Label label8;
         private TextBox textNumNomina;
         private Label label9;
+        private GroupBox groupBox2;
+        private RadioButton radioAdmin;
+        private RadioButton radioOperativo;
     }
 }

@@ -109,8 +109,45 @@ namespace MAD
             usuario.Nomina = long.TryParse(textNomina.Text, out nomina) ? nomina : -1;
             usuario.Estado = radioButton1.Checked;
 
+
             if (cambioContraseña.Checked)
             {
+                if (string.IsNullOrEmpty(contraseña.Contraseña1))
+                {
+                    MessageBox.Show("Por favor, ingrese una contraseña.");
+                    return;
+                }
+
+                if (contraseña.Contraseña1.Length < 8)
+                {
+                    MessageBox.Show("La contraseña debe tener al menos 8 caracteres.");
+                    return;
+                }
+
+                bool tieneNumero = false;
+                bool tieneMinuscula = false;
+                bool tieneMayuscula = false;
+                bool tieneEspecial = false;
+
+                foreach (char c in contraseña.Contraseña1)
+                {
+                    if (char.IsDigit(c))
+                        tieneNumero = true;
+                    else if (char.IsLower(c))
+                        tieneMinuscula = true;
+                    else if (char.IsUpper(c))
+                        tieneMayuscula = true;
+                    else if (!char.IsLetterOrDigit(c))
+                        tieneEspecial = true;
+                }
+
+                if (!(tieneNumero && tieneMinuscula && tieneMayuscula && tieneEspecial))
+                {
+                    MessageBox.Show("La contraseña debe contener al menos un número, una mayúscula, una minúscula y un caracter especial.");
+                    return;
+                }
+
+                // Update a la contraseña
                 if (contraseñaDAO.updateContraseña(contraseña, idUsuarioEncontrado))
                 {
                     MessageBox.Show("Contraseña modificada correctamente.");
@@ -122,6 +159,14 @@ namespace MAD
                 return; // Únicamente actualiza la contraseña
             }
 
+            if (string.IsNullOrEmpty(persona.Nombres) || string.IsNullOrEmpty(persona.Paterno) || string.IsNullOrEmpty(persona.Materno)
+                || string.IsNullOrEmpty(textNumCasa.Text) || string.IsNullOrEmpty(textNumCelular.Text) || string.IsNullOrEmpty(persona.Correo))
+            {
+                MessageBox.Show("Por favor, complete todos los campos obligatorios.");
+                return;
+            }
+
+            // Update a la persona
             if (usuarioDAO.updateUsuarioOperativo(usuario, persona))
             {
                 MessageBox.Show("Usuario modificado correctamente.");

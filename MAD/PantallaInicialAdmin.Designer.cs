@@ -35,25 +35,29 @@
             reporteDeOcupaciónToolStripMenuItem = new ToolStripMenuItem();
             gestiónDeHotelesToolStripMenuItem = new ToolStripMenuItem();
             agregarHotelToolStripMenuItem = new ToolStripMenuItem();
+            modificarHotelToolStripMenuItem = new ToolStripMenuItem();
             historalDeClienteToolStripMenuItem = new ToolStripMenuItem();
             cancelacionesToolStripMenuItem = new ToolStripMenuItem();
             agregarUsuarioOperativoToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
             modificarUsuariioOperativoToolStripMenuItem = new ToolStripMenuItem();
+            serviciosAmenidadesToolStripMenuItem = new ToolStripMenuItem();
+            agregarServicioToolStripMenuItem = new ToolStripMenuItem();
+            agregarAmenidadToolStripMenuItem = new ToolStripMenuItem();
             pictureBox1 = new PictureBox();
             groupBox1 = new GroupBox();
-            groupBox2 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            comboPais = new ComboBox();
-            comboCiudad = new ComboBox();
-            comboHotel = new ComboBox();
-            dtpAño = new DateTimePicker();
             btnFiltrar = new Button();
-            dataGridView1 = new DataGridView();
+            dtpAño = new DateTimePicker();
+            comboHotel = new ComboBox();
+            comboCiudad = new ComboBox();
+            comboPais = new ComboBox();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
+            dataGridView1 = new DataGridView();
             Ciudad = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Año = new DataGridViewTextBoxColumn();
@@ -65,8 +69,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -74,12 +78,13 @@
             menuStrip1.BackColor = Color.White;
             menuStrip1.Font = new Font("Times New Roman", 12F);
             menuStrip1.GripMargin = new Padding(2, 5, 0, 5);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { reportesToolStripMenuItem, gestiónDeHotelesToolStripMenuItem, historalDeClienteToolStripMenuItem, cancelacionesToolStripMenuItem, agregarUsuarioOperativoToolStripMenuItem });
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { reportesToolStripMenuItem, gestiónDeHotelesToolStripMenuItem, historalDeClienteToolStripMenuItem, cancelacionesToolStripMenuItem, agregarUsuarioOperativoToolStripMenuItem, serviciosAmenidadesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(6, 0, 0, 2);
             menuStrip1.RenderMode = ToolStripRenderMode.System;
-            menuStrip1.Size = new Size(981, 45);
+            menuStrip1.Size = new Size(981, 48);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -88,44 +93,51 @@
             reportesToolStripMenuItem.BackColor = Color.White;
             reportesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { reporteDeVentasToolStripMenuItem, reporteDeOcupaciónToolStripMenuItem });
             reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            reportesToolStripMenuItem.Size = new Size(76, 43);
+            reportesToolStripMenuItem.Size = new Size(95, 46);
             reportesToolStripMenuItem.Text = "Reportes";
             reportesToolStripMenuItem.Click += reportesToolStripMenuItem_Click;
             // 
             // reporteDeVentasToolStripMenuItem
             // 
             reporteDeVentasToolStripMenuItem.Name = "reporteDeVentasToolStripMenuItem";
-            reporteDeVentasToolStripMenuItem.Size = new Size(212, 24);
+            reporteDeVentasToolStripMenuItem.Size = new Size(267, 26);
             reporteDeVentasToolStripMenuItem.Text = "Reporte de ventas";
             // 
             // reporteDeOcupaciónToolStripMenuItem
             // 
             reporteDeOcupaciónToolStripMenuItem.Name = "reporteDeOcupaciónToolStripMenuItem";
-            reporteDeOcupaciónToolStripMenuItem.Size = new Size(212, 24);
+            reporteDeOcupaciónToolStripMenuItem.Size = new Size(267, 26);
             reporteDeOcupaciónToolStripMenuItem.Text = "Reporte de ocupación";
             reporteDeOcupaciónToolStripMenuItem.Click += reporteDeOcupaciónToolStripMenuItem_Click;
             // 
             // gestiónDeHotelesToolStripMenuItem
             // 
-            gestiónDeHotelesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { agregarHotelToolStripMenuItem });
+            gestiónDeHotelesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { agregarHotelToolStripMenuItem, modificarHotelToolStripMenuItem });
             gestiónDeHotelesToolStripMenuItem.Margin = new Padding(0, 10, 0, 10);
             gestiónDeHotelesToolStripMenuItem.Name = "gestiónDeHotelesToolStripMenuItem";
-            gestiónDeHotelesToolStripMenuItem.Size = new Size(132, 23);
+            gestiónDeHotelesToolStripMenuItem.Size = new Size(170, 26);
             gestiónDeHotelesToolStripMenuItem.Text = "Gestión de hoteles";
             // 
             // agregarHotelToolStripMenuItem
             // 
             agregarHotelToolStripMenuItem.BackColor = Color.Transparent;
             agregarHotelToolStripMenuItem.Name = "agregarHotelToolStripMenuItem";
-            agregarHotelToolStripMenuItem.Size = new Size(160, 24);
+            agregarHotelToolStripMenuItem.Size = new Size(218, 26);
             agregarHotelToolStripMenuItem.Text = "Agregar hotel";
             agregarHotelToolStripMenuItem.Click += agregarHotelToolStripMenuItem_Click_1;
+            // 
+            // modificarHotelToolStripMenuItem
+            // 
+            modificarHotelToolStripMenuItem.Name = "modificarHotelToolStripMenuItem";
+            modificarHotelToolStripMenuItem.Size = new Size(218, 26);
+            modificarHotelToolStripMenuItem.Text = "Modificar hotel";
+            modificarHotelToolStripMenuItem.Click += modificarHotelToolStripMenuItem_Click;
             // 
             // historalDeClienteToolStripMenuItem
             // 
             historalDeClienteToolStripMenuItem.Margin = new Padding(0, 10, 0, 10);
             historalDeClienteToolStripMenuItem.Name = "historalDeClienteToolStripMenuItem";
-            historalDeClienteToolStripMenuItem.Size = new Size(129, 23);
+            historalDeClienteToolStripMenuItem.Size = new Size(171, 26);
             historalDeClienteToolStripMenuItem.Text = "Historal de cliente";
             historalDeClienteToolStripMenuItem.Click += historalDeClienteToolStripMenuItem_Click;
             // 
@@ -133,7 +145,7 @@
             // 
             cancelacionesToolStripMenuItem.Margin = new Padding(0, 10, 0, 10);
             cancelacionesToolStripMenuItem.Name = "cancelacionesToolStripMenuItem";
-            cancelacionesToolStripMenuItem.Size = new Size(108, 23);
+            cancelacionesToolStripMenuItem.Size = new Size(139, 26);
             cancelacionesToolStripMenuItem.Text = "Cancelaciones";
             cancelacionesToolStripMenuItem.Click += cancelacionesToolStripMenuItem_Click;
             // 
@@ -141,23 +153,44 @@
             // 
             agregarUsuarioOperativoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { agregarToolStripMenuItem, modificarUsuariioOperativoToolStripMenuItem });
             agregarUsuarioOperativoToolStripMenuItem.Name = "agregarUsuarioOperativoToolStripMenuItem";
-            agregarUsuarioOperativoToolStripMenuItem.Size = new Size(74, 43);
+            agregarUsuarioOperativoToolStripMenuItem.Size = new Size(94, 46);
             agregarUsuarioOperativoToolStripMenuItem.Text = "Usuarios";
             agregarUsuarioOperativoToolStripMenuItem.Click += agregarUsuarioOperativoToolStripMenuItem_Click;
             // 
             // agregarToolStripMenuItem
             // 
             agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            agregarToolStripMenuItem.Size = new Size(189, 24);
+            agregarToolStripMenuItem.Size = new Size(249, 26);
             agregarToolStripMenuItem.Text = "Agregar";
             agregarToolStripMenuItem.Click += agregarToolStripMenuItem_Click;
             // 
             // modificarUsuariioOperativoToolStripMenuItem
             // 
             modificarUsuariioOperativoToolStripMenuItem.Name = "modificarUsuariioOperativoToolStripMenuItem";
-            modificarUsuariioOperativoToolStripMenuItem.Size = new Size(189, 24);
+            modificarUsuariioOperativoToolStripMenuItem.Size = new Size(249, 26);
             modificarUsuariioOperativoToolStripMenuItem.Text = "Modificar/Eliminar";
             modificarUsuariioOperativoToolStripMenuItem.Click += modificarUsuariioOperativoToolStripMenuItem_Click;
+            // 
+            // serviciosAmenidadesToolStripMenuItem
+            // 
+            serviciosAmenidadesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { agregarServicioToolStripMenuItem, agregarAmenidadToolStripMenuItem });
+            serviciosAmenidadesToolStripMenuItem.Name = "serviciosAmenidadesToolStripMenuItem";
+            serviciosAmenidadesToolStripMenuItem.Size = new Size(204, 46);
+            serviciosAmenidadesToolStripMenuItem.Text = "Servicios/Amenidades";
+            // 
+            // agregarServicioToolStripMenuItem
+            // 
+            agregarServicioToolStripMenuItem.Name = "agregarServicioToolStripMenuItem";
+            agregarServicioToolStripMenuItem.Size = new Size(239, 26);
+            agregarServicioToolStripMenuItem.Text = "Agregar servicio";
+            agregarServicioToolStripMenuItem.Click += agregarServicioToolStripMenuItem_Click_1;
+            // 
+            // agregarAmenidadToolStripMenuItem
+            // 
+            agregarAmenidadToolStripMenuItem.Name = "agregarAmenidadToolStripMenuItem";
+            agregarAmenidadToolStripMenuItem.Size = new Size(239, 26);
+            agregarAmenidadToolStripMenuItem.Text = "Agregar amenidad";
+            agregarAmenidadToolStripMenuItem.Click += agregarAmenidadToolStripMenuItem_Click_1;
             // 
             // pictureBox1
             // 
@@ -187,6 +220,85 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros:";
             // 
+            // btnFiltrar
+            // 
+            btnFiltrar.Location = new Point(543, 55);
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Size = new Size(75, 27);
+            btnFiltrar.TabIndex = 9;
+            btnFiltrar.Text = "Filtrar";
+            btnFiltrar.UseVisualStyleBackColor = true;
+            // 
+            // dtpAño
+            // 
+            dtpAño.CustomFormat = "yyyy";
+            dtpAño.Format = DateTimePickerFormat.Custom;
+            dtpAño.Location = new Point(295, 56);
+            dtpAño.Name = "dtpAño";
+            dtpAño.Size = new Size(75, 30);
+            dtpAño.TabIndex = 8;
+            // 
+            // comboHotel
+            // 
+            comboHotel.FormattingEnabled = true;
+            comboHotel.Location = new Point(393, 55);
+            comboHotel.Name = "comboHotel";
+            comboHotel.Size = new Size(121, 30);
+            comboHotel.TabIndex = 7;
+            // 
+            // comboCiudad
+            // 
+            comboCiudad.FormattingEnabled = true;
+            comboCiudad.Location = new Point(154, 55);
+            comboCiudad.Name = "comboCiudad";
+            comboCiudad.Size = new Size(121, 30);
+            comboCiudad.TabIndex = 5;
+            // 
+            // comboPais
+            // 
+            comboPais.FormattingEnabled = true;
+            comboPais.Location = new Point(21, 55);
+            comboPais.Name = "comboPais";
+            comboPais.Size = new Size(121, 30);
+            comboPais.TabIndex = 4;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(393, 33);
+            label4.Name = "label4";
+            label4.Size = new Size(60, 22);
+            label4.TabIndex = 3;
+            label4.Text = "Hotel:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(295, 33);
+            label3.Name = "label3";
+            label3.Size = new Size(50, 22);
+            label3.TabIndex = 2;
+            label3.Text = "Año:";
+            label3.Click += label3_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(154, 33);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 22);
+            label2.TabIndex = 1;
+            label2.Text = "Ciudad:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(21, 33);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 22);
+            label1.TabIndex = 0;
+            label1.Text = "País:";
+            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(groupBox3);
@@ -199,94 +311,6 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Reporte de ventas:";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(21, 33);
-            label1.Name = "label1";
-            label1.Size = new Size(37, 19);
-            label1.TabIndex = 0;
-            label1.Text = "País:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(154, 33);
-            label2.Name = "label2";
-            label2.Size = new Size(56, 19);
-            label2.TabIndex = 1;
-            label2.Text = "Ciudad:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(295, 33);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 19);
-            label3.TabIndex = 2;
-            label3.Text = "Año:";
-            label3.Click += label3_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(393, 33);
-            label4.Name = "label4";
-            label4.Size = new Size(45, 19);
-            label4.TabIndex = 3;
-            label4.Text = "Hotel:";
-            // 
-            // comboPais
-            // 
-            comboPais.FormattingEnabled = true;
-            comboPais.Location = new Point(21, 55);
-            comboPais.Name = "comboPais";
-            comboPais.Size = new Size(121, 27);
-            comboPais.TabIndex = 4;
-            // 
-            // comboCiudad
-            // 
-            comboCiudad.FormattingEnabled = true;
-            comboCiudad.Location = new Point(154, 55);
-            comboCiudad.Name = "comboCiudad";
-            comboCiudad.Size = new Size(121, 27);
-            comboCiudad.TabIndex = 5;
-            // 
-            // comboHotel
-            // 
-            comboHotel.FormattingEnabled = true;
-            comboHotel.Location = new Point(393, 55);
-            comboHotel.Name = "comboHotel";
-            comboHotel.Size = new Size(121, 27);
-            comboHotel.TabIndex = 7;
-            // 
-            // dtpAño
-            // 
-            dtpAño.CustomFormat = "yyyy";
-            dtpAño.Format = DateTimePickerFormat.Custom;
-            dtpAño.Location = new Point(295, 56);
-            dtpAño.Name = "dtpAño";
-            dtpAño.Size = new Size(75, 26);
-            dtpAño.TabIndex = 8;
-            // 
-            // btnFiltrar
-            // 
-            btnFiltrar.Location = new Point(543, 55);
-            btnFiltrar.Name = "btnFiltrar";
-            btnFiltrar.Size = new Size(75, 27);
-            btnFiltrar.TabIndex = 9;
-            btnFiltrar.Text = "Filtrar";
-            btnFiltrar.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Ciudad, Nombre, Año, Mes, IngresosHospedaje, IngresosServicios, IngresosTotales });
-            dataGridView1.Location = new Point(6, 25);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(744, 314);
-            dataGridView1.TabIndex = 3;
-            // 
             // groupBox3
             // 
             groupBox3.Controls.Add(dataGridView1);
@@ -297,44 +321,68 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Reporte:";
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Ciudad, Nombre, Año, Mes, IngresosHospedaje, IngresosServicios, IngresosTotales });
+            dataGridView1.Location = new Point(6, 25);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(744, 314);
+            dataGridView1.TabIndex = 3;
+            // 
             // Ciudad
             // 
             Ciudad.HeaderText = "Ciudad";
+            Ciudad.MinimumWidth = 6;
             Ciudad.Name = "Ciudad";
+            Ciudad.Width = 125;
             // 
             // Nombre
             // 
             Nombre.HeaderText = "Nombre";
+            Nombre.MinimumWidth = 6;
             Nombre.Name = "Nombre";
+            Nombre.Width = 125;
             // 
             // Año
             // 
             Año.HeaderText = "Año";
+            Año.MinimumWidth = 6;
             Año.Name = "Año";
+            Año.Width = 125;
             // 
             // Mes
             // 
             Mes.HeaderText = "Mes";
+            Mes.MinimumWidth = 6;
             Mes.Name = "Mes";
+            Mes.Width = 125;
             // 
             // IngresosHospedaje
             // 
             IngresosHospedaje.HeaderText = "Ingresos por hospedaje";
+            IngresosHospedaje.MinimumWidth = 6;
             IngresosHospedaje.Name = "IngresosHospedaje";
+            IngresosHospedaje.Width = 125;
             // 
             // IngresosServicios
             // 
             IngresosServicios.HeaderText = "Ingresos por servicios";
+            IngresosServicios.MinimumWidth = 6;
             IngresosServicios.Name = "IngresosServicios";
+            IngresosServicios.Width = 125;
             // 
             // IngresosTotales
             // 
             IngresosTotales.HeaderText = "Ingresos totales";
+            IngresosTotales.MinimumWidth = 6;
             IngresosTotales.Name = "IngresosTotales";
+            IngresosTotales.Width = 125;
             // 
             // PantallaInicialAdmin
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
             ClientSize = new Size(981, 571);
@@ -353,8 +401,8 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -393,5 +441,9 @@
         private DataGridViewTextBoxColumn IngresosHospedaje;
         private DataGridViewTextBoxColumn IngresosServicios;
         private DataGridViewTextBoxColumn IngresosTotales;
+        private ToolStripMenuItem modificarHotelToolStripMenuItem;
+        private ToolStripMenuItem serviciosAmenidadesToolStripMenuItem;
+        private ToolStripMenuItem agregarServicioToolStripMenuItem;
+        private ToolStripMenuItem agregarAmenidadToolStripMenuItem;
     }
 }

@@ -43,11 +43,64 @@ namespace MAD
 
             contraseña.Contraseña1 = textContrasenia.Text;
 
-            bool insertado = usuarioDAO.insertUsuarioOperativo(persona, contraseña);
+            string tipoUsuario = null;
+
+            if (radioAdmin.Checked)
+                tipoUsuario = "Administrador";
+            else if (radioOperativo.Checked)
+                tipoUsuario = "Operativo";
+            else
+                tipoUsuario = null;
+
+            if (string.IsNullOrEmpty(persona.Nombres) || string.IsNullOrEmpty(persona.Paterno) || string.IsNullOrEmpty(persona.Materno)
+                || string.IsNullOrEmpty(textNumCasa.Text) || string.IsNullOrEmpty(textNumCelular.Text) || string.IsNullOrEmpty(persona.Correo)
+                || string.IsNullOrEmpty(tipoUsuario))
+            {
+                MessageBox.Show("Por favor, complete todos los campos obligatorios.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(contraseña.Contraseña1))
+            {
+                MessageBox.Show("Por favor, ingrese una contraseña.");
+                return;
+            }
+
+            if (contraseña.Contraseña1.Length < 8)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 8 caracteres.");
+                return;
+            }
+
+            bool tieneNumero = false;
+            bool tieneMinuscula = false;
+            bool tieneMayuscula = false;
+            bool tieneEspecial = false;
+
+            foreach (char c in contraseña.Contraseña1)
+            {
+                if (char.IsDigit(c))
+                    tieneNumero = true;
+                else if (char.IsLower(c))
+                    tieneMinuscula = true;
+                else if (char.IsUpper(c))
+                    tieneMayuscula = true;
+                else if (!char.IsLetterOrDigit(c))
+                    tieneEspecial = true;
+            }
+
+            if (!(tieneNumero && tieneMinuscula && tieneMayuscula && tieneEspecial))
+            {
+                MessageBox.Show("La contraseña debe contener al menos un número, una mayúscula, una minúscula y un caracter especial.");
+                return;
+            }
+
+
+            bool insertado = usuarioDAO.insertUsuario(persona, contraseña, tipoUsuario);
 
             if(insertado)
             {
-                MessageBox.Show("Usuario agregado correctamente.");
+                MessageBox.Show("Usuario" + tipoUsuario + " agregado correctamente.");
                 this.Close();
             }
             else

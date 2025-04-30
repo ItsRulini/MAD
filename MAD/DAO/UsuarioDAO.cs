@@ -86,14 +86,14 @@ namespace MAD.DAO
             return usuario;
         }
 
-        public bool insertUsuarioOperativo(DatosPersona persona, Contraseña contraseña)
+        public bool insertUsuario(DatosPersona persona, Contraseña contraseña, string tipoUsuario)
         {
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
                 using (var cmd = new SqlCommand("spInsertUsuario", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@tipoUsuario", "Operativo");
+                    cmd.Parameters.AddWithValue("@tipoUsuario", tipoUsuario);
                     cmd.Parameters.AddWithValue("@correo", persona.Correo);
                     cmd.Parameters.AddWithValue("@nombres", persona.Nombres);
                     cmd.Parameters.AddWithValue("@paterno", persona.Paterno);
