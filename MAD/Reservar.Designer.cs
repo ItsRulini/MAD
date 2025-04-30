@@ -1,4 +1,5 @@
-﻿namespace MAD
+﻿
+namespace MAD
 {
     partial class Reservar
     {
@@ -65,9 +66,23 @@
             agregarClienteToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
             modificarEliminarToolStripMenuItem = new ToolStripMenuItem();
-            Eliminar = new DataGridViewTextBoxColumn();
+            textBuscarCliente = new TextBox();
+            btnBuscarFechas = new Button();
+            label11 = new Label();
+            comboCiudad = new ComboBox();
+            label12 = new Label();
             checkBox1 = new CheckBox();
             label13 = new Label();
+            label14 = new Label();
+            textBox1 = new TextBox();
+            label15 = new Label();
+            label16 = new Label();
+            comboCiudadReserva = new ComboBox();
+            btnBusqueda = new Button();
+            checkBuscarPorApellido = new CheckBox();
+            Habitación = new DataGridViewTextBoxColumn();
+            NumPersonas = new DataGridViewTextBoxColumn();
+            Eliminar = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvHoteles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarritoReserva).BeginInit();
@@ -157,7 +172,7 @@
             dgvCarritoReserva.AllowUserToResizeColumns = false;
             dgvCarritoReserva.AllowUserToResizeRows = false;
             dgvCarritoReserva.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCarritoReserva.Columns.AddRange(new DataGridViewColumn[] { Habitación, NumPersonas });
+            dgvCarritoReserva.Columns.AddRange(new DataGridViewColumn[] { Habitación, NumPersonas, Eliminar });
             dgvCarritoReserva.Location = new Point(652, 282);
             dgvCarritoReserva.Name = "dgvCarritoReserva";
             dgvCarritoReserva.RowHeadersWidth = 51;
@@ -214,32 +229,28 @@
             // 
             // dtpDesde
             // 
-            dtpDesde.Location = new Point(41, 78);
+            dtpDesde.Location = new Point(14, 45);
             dtpDesde.Name = "dtpDesde";
             dtpDesde.Size = new Size(142, 26);
             dtpDesde.TabIndex = 20;
             // 
             // label6
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(6, 23);
+            label6.Location = new Point(0, 0);
             label6.Name = "label6";
-            label6.Size = new Size(51, 19);
-            label6.TabIndex = 21;
-            label6.Text = "Desde:";
+            label6.Size = new Size(100, 23);
+            label6.TabIndex = 0;
             // 
             // label7
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(170, 23);
+            label7.Location = new Point(0, 0);
             label7.Name = "label7";
-            label7.Size = new Size(47, 19);
-            label7.TabIndex = 22;
-            label7.Text = "Hasta:";
+            label7.Size = new Size(100, 23);
+            label7.TabIndex = 0;
             // 
             // dtpHasta
             // 
-            dtpHasta.Location = new Point(205, 78);
+            dtpHasta.Location = new Point(200, 45);
             dtpHasta.Name = "dtpHasta";
             dtpHasta.Size = new Size(142, 26);
             dtpHasta.TabIndex = 23;
@@ -334,29 +345,27 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(comboCiudad);
-            groupBox2.Controls.Add(btnBuscarFechas);
-            groupBox2.Controls.Add(label7);
-            groupBox2.Controls.Add(label6);
-            groupBox2.Location = new Point(35, 30);
+            groupBox2.Controls.Add(checkBuscarPorApellido);
+            groupBox2.Controls.Add(btnBusqueda);
+            groupBox2.Controls.Add(comboCiudadReserva);
+            groupBox2.Controls.Add(label16);
+            groupBox2.Controls.Add(label15);
+            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(label13);
+            groupBox2.Controls.Add(label14);
+            groupBox2.Controls.Add(dtpHasta);
+            groupBox2.Controls.Add(dtpDesde);
+            groupBox2.Location = new Point(24, 25);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(545, 177);
-            groupBox2.TabIndex = 36;
+            groupBox2.Size = new Size(585, 227);
+            groupBox2.TabIndex = 33;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Filtro de hoteles";
-            // 
-            // comboCiudad
-            // 
-            comboCiudad.FormattingEnabled = true;
-            comboCiudad.Location = new Point(6, 124);
-            comboCiudad.Name = "comboCiudad";
-            comboCiudad.Size = new Size(151, 27);
-            comboCiudad.TabIndex = 25;
+            groupBox2.Text = "Filtro de busqueda:";
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(btnComprarReserva);
-            groupBox3.Location = new Point(628, 29);
+            groupBox3.Location = new Point(632, 25);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(355, 228);
             groupBox3.TabIndex = 37;
@@ -591,6 +600,11 @@
             PerformLayout();
         }
 
+        private void label16_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private PictureBox pictureBox1;
@@ -625,13 +639,26 @@
         private NumericUpDown numeroPersonas;
         private DataGridViewTextBoxColumn Hotel;
         private DataGridViewTextBoxColumn idHotel;
-        private Label label11;
-        private TextBox textBuscarCliente;
-        private Label label12;
-        private GroupBox groupBox2;
-        private ComboBox comboCiudad;
         private GroupBox groupBox3;
+        private GroupBox groupBox2;
+        private CheckBox checkBox1;
+        private Label label12;
+        private ComboBox comboCiudad;
+        private Label label11;
+        private Button btnBuscarFechas;
+        private TextBox textBuscarCliente;
+        private Label label7;
+        private Label label6;
+        private ComboBox comboCiudadReserva;
+        private Label label16;
+        private Label label15;
+        private TextBox textBox1;
+        private Label label13;
+        private Label label14;
+        private Button btnBusqueda;
         private DataGridViewTextBoxColumn Habitación;
         private DataGridViewTextBoxColumn NumPersonas;
+        private DataGridViewCheckBoxColumn Eliminar;
+        private CheckBox checkBuscarPorApellido;
     }
 }

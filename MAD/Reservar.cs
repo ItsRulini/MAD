@@ -331,7 +331,7 @@ namespace MAD
             if (e.RowIndex >= 0 && e.RowIndex != subtotalCelda.RowIndex && e.RowIndex != ivaCelda.RowIndex
                 && e.RowIndex != totalCelda.RowIndex) // Para evitar errores si clickeas en los encabezados
             {
-                
+
 
                 TipoHabitacionDAO tipoHab = new TipoHabitacionDAO();
                 Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas(dgvCarritoReserva.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString());
@@ -346,6 +346,16 @@ namespace MAD
 
                 dgvCarritoReserva.Rows.RemoveAt(e.RowIndex);
             }
+        }
+
+        private void comboCiudad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboCiudadReserva_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

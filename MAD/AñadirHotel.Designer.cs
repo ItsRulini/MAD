@@ -57,6 +57,7 @@
             gridServiciosHotel = new DataGridView();
             NombreServicio = new DataGridViewTextBoxColumn();
             PrecioServicio = new DataGridViewTextBoxColumn();
+            EliminarServicio = new DataGridViewCheckBoxColumn();
             textPrecioServicio = new TextBox();
             label11 = new Label();
             btnAgregarServicio = new Button();
@@ -67,11 +68,14 @@
             TipoHab = new DataGridViewTextBoxColumn();
             CantidadHab = new DataGridViewTextBoxColumn();
             AmenidadHab = new DataGridViewTextBoxColumn();
+            EliminarTipoHab = new DataGridViewCheckBoxColumn();
             btnAgregarHabitacion = new Button();
             cantHab = new NumericUpDown();
             label8 = new Label();
             comboTipoHab = new ComboBox();
             label7 = new Label();
+            label14 = new Label();
+            btnConfigurarHabitaciones = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -95,9 +99,9 @@
             groupBox1.Controls.Add(comboCiudad);
             groupBox1.Controls.Add(comboEstado);
             groupBox1.Controls.Add(comboPais);
-            groupBox1.Location = new Point(21, 110);
+            groupBox1.Location = new Point(21, 123);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(495, 214);
+            groupBox1.Size = new Size(551, 214);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Ubicación:";
@@ -221,7 +225,7 @@
             groupBox2.Controls.Add(label1);
             groupBox2.Location = new Point(27, 26);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1066, 537);
+            groupBox2.Size = new Size(1114, 582);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Datos del hotel:";
@@ -245,7 +249,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.LOGO_HOTEL_removebg_preview;
-            pictureBox1.Location = new Point(916, 17);
+            pictureBox1.Location = new Point(971, 25);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(137, 93);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -270,7 +274,7 @@
             // 
             // btnAgregarHotel
             // 
-            btnAgregarHotel.Location = new Point(730, 484);
+            btnAgregarHotel.Location = new Point(776, 534);
             btnAgregarHotel.Name = "btnAgregarHotel";
             btnAgregarHotel.Size = new Size(137, 42);
             btnAgregarHotel.TabIndex = 18;
@@ -304,9 +308,9 @@
             groupBox4.Controls.Add(btnAgregarServicio);
             groupBox4.Controls.Add(comboServicio);
             groupBox4.Controls.Add(label10);
-            groupBox4.Location = new Point(21, 330);
+            groupBox4.Location = new Point(21, 339);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(495, 201);
+            groupBox4.Size = new Size(551, 237);
             groupBox4.TabIndex = 14;
             groupBox4.TabStop = false;
             groupBox4.Text = "Servicios del hotel:";
@@ -317,11 +321,11 @@
             gridServiciosHotel.AllowUserToResizeColumns = false;
             gridServiciosHotel.AllowUserToResizeRows = false;
             gridServiciosHotel.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridServiciosHotel.Columns.AddRange(new DataGridViewColumn[] { NombreServicio, PrecioServicio });
+            gridServiciosHotel.Columns.AddRange(new DataGridViewColumn[] { NombreServicio, PrecioServicio, EliminarServicio });
             gridServiciosHotel.Location = new Point(206, 40);
             gridServiciosHotel.Name = "gridServiciosHotel";
             gridServiciosHotel.RowHeadersWidth = 51;
-            gridServiciosHotel.Size = new Size(267, 150);
+            gridServiciosHotel.Size = new Size(339, 150);
             gridServiciosHotel.TabIndex = 19;
             // 
             // NombreServicio
@@ -340,13 +344,19 @@
             PrecioServicio.MinimumWidth = 6;
             PrecioServicio.Name = "PrecioServicio";
             PrecioServicio.ReadOnly = true;
-            PrecioServicio.Width = 125;
+            PrecioServicio.Width = 80;
+            // 
+            // EliminarServicio
+            // 
+            EliminarServicio.HeaderText = "Eliminar";
+            EliminarServicio.Name = "EliminarServicio";
+            EliminarServicio.Width = 75;
             // 
             // textPrecioServicio
             // 
-            textPrecioServicio.Location = new Point(25, 135);
+            textPrecioServicio.Location = new Point(25, 124);
             textPrecioServicio.Name = "textPrecioServicio";
-            textPrecioServicio.Size = new Size(100, 26);
+            textPrecioServicio.Size = new Size(124, 26);
             textPrecioServicio.TabIndex = 16;
             // 
             // label11
@@ -388,15 +398,17 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(btnConfigurarHabitaciones);
+            groupBox3.Controls.Add(label14);
             groupBox3.Controls.Add(gridHabitaciones);
             groupBox3.Controls.Add(btnAgregarHabitacion);
             groupBox3.Controls.Add(cantHab);
             groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(comboTipoHab);
             groupBox3.Controls.Add(label7);
-            groupBox3.Location = new Point(541, 110);
+            groupBox3.Location = new Point(578, 123);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(493, 355);
+            groupBox3.Size = new Size(530, 406);
             groupBox3.TabIndex = 10;
             groupBox3.TabStop = false;
             groupBox3.Text = "Tipos de habitación:";
@@ -411,7 +423,7 @@
             gridHabitaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             gridHabitaciones.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             gridHabitaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridHabitaciones.Columns.AddRange(new DataGridViewColumn[] { TipoHab, CantidadHab, AmenidadHab });
+            gridHabitaciones.Columns.AddRange(new DataGridViewColumn[] { TipoHab, CantidadHab, AmenidadHab, EliminarTipoHab });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Times New Roman", 12F);
@@ -420,10 +432,10 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             gridHabitaciones.DefaultCellStyle = dataGridViewCellStyle2;
-            gridHabitaciones.Location = new Point(30, 154);
+            gridHabitaciones.Location = new Point(30, 194);
             gridHabitaciones.Name = "gridHabitaciones";
             gridHabitaciones.RowHeadersWidth = 51;
-            gridHabitaciones.Size = new Size(449, 187);
+            gridHabitaciones.Size = new Size(482, 201);
             gridHabitaciones.TabIndex = 20;
             // 
             // TipoHab
@@ -443,7 +455,7 @@
             CantidadHab.Name = "CantidadHab";
             CantidadHab.ReadOnly = true;
             CantidadHab.Resizable = DataGridViewTriState.False;
-            CantidadHab.Width = 80;
+            CantidadHab.Width = 75;
             // 
             // AmenidadHab
             // 
@@ -454,9 +466,15 @@
             AmenidadHab.ReadOnly = true;
             AmenidadHab.Width = 175;
             // 
+            // EliminarTipoHab
+            // 
+            EliminarTipoHab.HeaderText = "Eliminar";
+            EliminarTipoHab.Name = "EliminarTipoHab";
+            EliminarTipoHab.Width = 75;
+            // 
             // btnAgregarHabitacion
             // 
-            btnAgregarHabitacion.Location = new Point(334, 83);
+            btnAgregarHabitacion.Location = new Point(30, 148);
             btnAgregarHabitacion.Name = "btnAgregarHabitacion";
             btnAgregarHabitacion.Size = new Size(133, 37);
             btnAgregarHabitacion.TabIndex = 13;
@@ -466,7 +484,7 @@
             // 
             // cantHab
             // 
-            cantHab.Location = new Point(180, 93);
+            cantHab.Location = new Point(31, 114);
             cantHab.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             cantHab.Name = "cantHab";
             cantHab.Size = new Size(120, 26);
@@ -476,7 +494,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(180, 56);
+            label8.Location = new Point(31, 92);
             label8.Name = "label8";
             label8.Size = new Size(67, 19);
             label8.TabIndex = 2;
@@ -485,7 +503,7 @@
             // comboTipoHab
             // 
             comboTipoHab.FormattingEnabled = true;
-            comboTipoHab.Location = new Point(30, 92);
+            comboTipoHab.Location = new Point(30, 53);
             comboTipoHab.Name = "comboTipoHab";
             comboTipoHab.Size = new Size(121, 27);
             comboTipoHab.TabIndex = 11;
@@ -493,18 +511,37 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(30, 53);
+            label7.Location = new Point(30, 31);
             label7.Name = "label7";
             label7.Size = new Size(39, 19);
             label7.TabIndex = 0;
             label7.Text = "Tipo:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(273, 54);
+            label14.Name = "label14";
+            label14.Size = new Size(185, 19);
+            label14.TabIndex = 21;
+            label14.Text = "¡Configure habitaciones aquí!";
+            // 
+            // btnConfigurarHabitaciones
+            // 
+            btnConfigurarHabitaciones.Location = new Point(285, 82);
+            btnConfigurarHabitaciones.Name = "btnConfigurarHabitaciones";
+            btnConfigurarHabitaciones.Size = new Size(158, 52);
+            btnConfigurarHabitaciones.TabIndex = 22;
+            btnConfigurarHabitaciones.Text = "Configurar habitaciones";
+            btnConfigurarHabitaciones.UseVisualStyleBackColor = true;
+            btnConfigurarHabitaciones.Click += btnConfigurarHabitaciones_Click;
             // 
             // AñadirHotel
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(1116, 575);
+            ClientSize = new Size(1153, 620);
             Controls.Add(groupBox2);
             Font = new Font("Times New Roman", 12F);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -565,10 +602,16 @@
         private Label label12;
         private DateTimePicker dtpInicioOperacion;
         private PictureBox pictureBox1;
+        private Label label13;
+        private TextBox textBox1;
+        private DataGridViewTextBoxColumn NombreServicio;
+        private DataGridViewTextBoxColumn PrecioServicio;
+        private DataGridViewCheckBoxColumn EliminarServicio;
         private DataGridViewTextBoxColumn TipoHab;
         private DataGridViewTextBoxColumn CantidadHab;
         private DataGridViewTextBoxColumn AmenidadHab;
-        private Label label13;
-        private TextBox textBox1;
+        private DataGridViewCheckBoxColumn EliminarTipoHab;
+        private Button btnConfigurarHabitaciones;
+        private Label label14;
     }
 }

@@ -164,8 +164,9 @@
             ClientSize = new Size(482, 405);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "AñadirServicio";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "AñadirServicio";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

@@ -32,6 +32,10 @@ namespace MAD
             comboEstado.Enabled = false; //Estado
             comboCiudad.Enabled = false; //Ciudad
         }
+        private void AñadirHotel_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void inicializarComboServicios()
         {
@@ -273,9 +277,11 @@ namespace MAD
 
         }
 
-        private void AñadirHotel_Load(object sender, EventArgs e)
+        private void btnConfigurarHabitaciones_Click(object sender, EventArgs e)
         {
-
+            ConfigurarHabitaciones configurarHabitaciones = new ConfigurarHabitaciones();
+            configurarHabitaciones.ShowDialog();
+            this.Focus();
         }
     }
 }
