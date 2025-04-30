@@ -11,10 +11,6 @@ public partial class Habitacion
 
     public Guid? IdTipoHabitacion { get; set; }
 
-    public Guid? IdHotel { get; set; }
-
-    public virtual Hotel? IdHotelNavigation { get; set; }
-
     public virtual TipoHabitacion? IdTipoHabitacionNavigation { get; set; }
 
     public virtual ICollection<ReservacionHabitacion> ReservacionHabitacions { get; set; } = new List<ReservacionHabitacion>();

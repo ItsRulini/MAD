@@ -23,8 +23,6 @@ public partial class Hotel
 
     public Guid? IdUbicacion { get; set; }
 
-    public virtual ICollection<Habitacion> Habitacions { get; set; } = new List<Habitacion>();
-
     public virtual ICollection<HotelServicio> HotelServicios { get; set; } = new List<HotelServicio>();
 
     public virtual DatosFiscal IdHotelNavigation { get; set; } = null!;
@@ -34,4 +32,6 @@ public partial class Hotel
     public virtual Usuario? IdUsuarioNavigation { get; set; }
 
     public virtual ICollection<Reservacion> Reservacions { get; set; } = new List<Reservacion>();
+
+    public virtual ICollection<TipoHabitacion> TipoHabitacions { get; set; } = new List<TipoHabitacion>();
 }

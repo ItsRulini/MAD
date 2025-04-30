@@ -19,6 +19,8 @@ public partial class MadContext : DbContext
 
     public virtual DbSet<AmenidadTipoHabitacion> AmenidadTipoHabitacions { get; set; }
 
+    public virtual DbSet<CamaTipoHabitacion> CamaTipoHabitacions { get; set; }
+
     public virtual DbSet<Cancelacion> Cancelacions { get; set; }
 
     public virtual DbSet<ClaveSat> ClaveSats { get; set; }
@@ -98,6 +100,28 @@ public partial class MadContext : DbContext
                 .HasForeignKey(d => d.IdTipoHabitacion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Amenidad___idTip__7E37BEF6");
+        });
+
+        modelBuilder.Entity<CamaTipoHabitacion>(entity =>
+        {
+            entity.HasKey(e => new { e.IdTipoCama, e.IdTipoHabitacion }).HasName("PK__Cama_Tip__01EA38B9CB117827");
+
+            entity.ToTable("Cama_TipoHabitacion");
+
+            entity.Property(e => e.IdTipoCama)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("idTipoCama");
+            entity.Property(e => e.IdTipoHabitacion).HasColumnName("idTipoHabitacion");
+            entity.Property(e => e.CantidadCama).HasColumnName("cantidadCama");
+            entity.Property(e => e.TipoCama)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("tipoCama");
+
+            entity.HasOne(d => d.IdTipoHabitacionNavigation).WithMany(p => p.CamaTipoHabitacions)
+                .HasForeignKey(d => d.IdTipoHabitacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Cama_Tipo__idTip__3EDC53F0");
         });
 
         modelBuilder.Entity<Cancelacion>(entity =>
@@ -308,13 +332,8 @@ public partial class MadContext : DbContext
             entity.Property(e => e.IdHabitacion)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("idHabitacion");
-            entity.Property(e => e.IdHotel).HasColumnName("idHotel");
             entity.Property(e => e.IdTipoHabitacion).HasColumnName("idTipoHabitacion");
             entity.Property(e => e.NumeroHabitacion).HasColumnName("numeroHabitacion");
-
-            entity.HasOne(d => d.IdHotelNavigation).WithMany(p => p.Habitacions)
-                .HasForeignKey(d => d.IdHotel)
-                .HasConstraintName("FK__Habitacio__idHot__04E4BC85");
 
             entity.HasOne(d => d.IdTipoHabitacionNavigation).WithMany(p => p.Habitacions)
                 .HasForeignKey(d => d.IdTipoHabitacion)
@@ -487,25 +506,25 @@ public partial class MadContext : DbContext
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("idTipoHabitacion");
             entity.Property(e => e.CanidadMaximaPersonas).HasColumnName("canidadMaximaPersonas");
+            entity.Property(e => e.IdHotel).HasColumnName("idHotel");
             entity.Property(e => e.NivelHabitacion)
                 .HasMaxLength(150)
                 .IsUnicode(false)
                 .HasColumnName("nivelHabitacion");
-            entity.Property(e => e.NumeroCama).HasColumnName("numeroCama");
             entity.Property(e => e.PrecioPorNoche)
                 .HasColumnType("decimal(7, 2)")
                 .HasColumnName("precioPorNoche");
             entity.Property(e => e.PrecioPorPersona)
                 .HasColumnType("decimal(7, 2)")
                 .HasColumnName("precioPorPersona");
-            entity.Property(e => e.TipoCama)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("tipoCama");
             entity.Property(e => e.Ubicacion)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("ubicacion");
+
+            entity.HasOne(d => d.IdHotelNavigation).WithMany(p => p.TipoHabitacions)
+                .HasForeignKey(d => d.IdHotel)
+                .HasConstraintName("FK__TipoHabit__idHot__3A179ED3");
         });
 
         modelBuilder.Entity<Ubicacion>(entity =>
