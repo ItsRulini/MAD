@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label5 = new Label();
             label6 = new Label();
             groupBox1 = new GroupBox();
-            dgvCamas = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
+            pictureBox1 = new PictureBox();
+            CantCamas = new NumericUpDown();
+            comboTipoCama = new ComboBox();
+            CantMaxPers = new NumericUpDown();
+            textPrecioPersona = new TextBox();
+            textNombre = new TextBox();
             dgvAmenidades = new DataGridView();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            numericUpDown1 = new NumericUpDown();
-            comboBox1 = new ComboBox();
-            numericUpDown2 = new NumericUpDown();
             Amenidad = new DataGridViewTextBoxColumn();
             AmenidadSelect = new DataGridViewCheckBoxColumn();
-            pictureBox1 = new PictureBox();
+            btnAgregarHabitacion = new Button();
+            btnAgregarCama = new Button();
+            dgvConfigHab = new DataGridView();
             Nombre = new DataGridViewTextBoxColumn();
             UbicacionHab = new DataGridViewTextBoxColumn();
             PrecioPorNoche = new DataGridViewTextBoxColumn();
@@ -55,12 +56,13 @@
             CantidadCamas = new DataGridViewTextBoxColumn();
             AmenidadesHab = new DataGridViewTextBoxColumn();
             EliminarHab = new DataGridViewCheckBoxColumn();
+            timer1 = new System.Windows.Forms.Timer(components);
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCamas).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvAmenidades).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CantCamas).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CantMaxPers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAmenidades).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvConfigHab).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -111,15 +113,15 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(pictureBox1);
-            groupBox1.Controls.Add(numericUpDown2);
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(numericUpDown1);
-            groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(CantCamas);
+            groupBox1.Controls.Add(comboTipoCama);
+            groupBox1.Controls.Add(CantMaxPers);
+            groupBox1.Controls.Add(textPrecioPersona);
+            groupBox1.Controls.Add(textNombre);
             groupBox1.Controls.Add(dgvAmenidades);
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(dgvCamas);
+            groupBox1.Controls.Add(btnAgregarHabitacion);
+            groupBox1.Controls.Add(btnAgregarCama);
+            groupBox1.Controls.Add(dgvConfigHab);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label2);
@@ -132,32 +134,52 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Configuración de habitaciones";
             // 
-            // dgvCamas
+            // pictureBox1
             // 
-            dgvCamas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCamas.Columns.AddRange(new DataGridViewColumn[] { Nombre, UbicacionHab, PrecioPorNoche, PrecioPorPersona, MaxPersonas, TipoCama, CantidadCamas, AmenidadesHab, EliminarHab });
-            dgvCamas.Location = new Point(23, 345);
-            dgvCamas.Name = "dgvCamas";
-            dgvCamas.Size = new Size(920, 168);
-            dgvCamas.TabIndex = 6;
+            pictureBox1.Image = Properties.Resources.LOGO_HOTEL_removebg_preview;
+            pictureBox1.Location = new Point(794, 22);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(158, 116);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
             // 
-            // button1
+            // CantCamas
             // 
-            button1.Location = new Point(23, 256);
-            button1.Name = "button1";
-            button1.Size = new Size(128, 31);
-            button1.TabIndex = 7;
-            button1.Text = "Agregar cama";
-            button1.UseVisualStyleBackColor = true;
+            CantCamas.Location = new Point(18, 198);
+            CantCamas.Name = "CantCamas";
+            CantCamas.Size = new Size(133, 26);
+            CantCamas.TabIndex = 15;
             // 
-            // button2
+            // comboTipoCama
             // 
-            button2.Location = new Point(813, 241);
-            button2.Name = "button2";
-            button2.Size = new Size(130, 77);
-            button2.TabIndex = 8;
-            button2.Text = "Agregar habitación";
-            button2.UseVisualStyleBackColor = true;
+            comboTipoCama.FormattingEnabled = true;
+            comboTipoCama.Location = new Point(18, 135);
+            comboTipoCama.Name = "comboTipoCama";
+            comboTipoCama.Size = new Size(133, 27);
+            comboTipoCama.TabIndex = 14;
+            // 
+            // CantMaxPers
+            // 
+            CantMaxPers.Location = new Point(351, 44);
+            CantMaxPers.Name = "CantMaxPers";
+            CantMaxPers.Size = new Size(203, 26);
+            CantMaxPers.TabIndex = 13;
+            // 
+            // textPrecioPersona
+            // 
+            textPrecioPersona.Location = new Point(198, 44);
+            textPrecioPersona.Name = "textPrecioPersona";
+            textPrecioPersona.Size = new Size(132, 26);
+            textPrecioPersona.TabIndex = 11;
+            // 
+            // textNombre
+            // 
+            textNombre.Location = new Point(18, 44);
+            textNombre.Name = "textNombre";
+            textNombre.Size = new Size(154, 26);
+            textNombre.TabIndex = 10;
+            textNombre.TextChanged += timer1_Tick;
             // 
             // dgvAmenidades
             // 
@@ -167,42 +189,6 @@
             dgvAmenidades.Name = "dgvAmenidades";
             dgvAmenidades.Size = new Size(395, 229);
             dgvAmenidades.TabIndex = 9;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(18, 44);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(154, 26);
-            textBox1.TabIndex = 10;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(198, 44);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(132, 26);
-            textBox2.TabIndex = 11;
-            // 
-            // numericUpDown1
-            // 
-            numericUpDown1.Location = new Point(351, 44);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(203, 26);
-            numericUpDown1.TabIndex = 13;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(18, 135);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(133, 27);
-            comboBox1.TabIndex = 14;
-            // 
-            // numericUpDown2
-            // 
-            numericUpDown2.Location = new Point(18, 198);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(133, 26);
-            numericUpDown2.TabIndex = 15;
             // 
             // Amenidad
             // 
@@ -216,15 +202,32 @@
             AmenidadSelect.Name = "AmenidadSelect";
             AmenidadSelect.Width = 200;
             // 
-            // pictureBox1
+            // btnAgregarHabitacion
             // 
-            pictureBox1.Image = Properties.Resources.LOGO_HOTEL_removebg_preview;
-            pictureBox1.Location = new Point(794, 22);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(158, 116);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 16;
-            pictureBox1.TabStop = false;
+            btnAgregarHabitacion.Location = new Point(813, 241);
+            btnAgregarHabitacion.Name = "btnAgregarHabitacion";
+            btnAgregarHabitacion.Size = new Size(130, 77);
+            btnAgregarHabitacion.TabIndex = 8;
+            btnAgregarHabitacion.Text = "Agregar habitación";
+            btnAgregarHabitacion.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarCama
+            // 
+            btnAgregarCama.Location = new Point(23, 256);
+            btnAgregarCama.Name = "btnAgregarCama";
+            btnAgregarCama.Size = new Size(128, 31);
+            btnAgregarCama.TabIndex = 7;
+            btnAgregarCama.Text = "Agregar cama";
+            btnAgregarCama.UseVisualStyleBackColor = true;
+            // 
+            // dgvConfigHab
+            // 
+            dgvConfigHab.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConfigHab.Columns.AddRange(new DataGridViewColumn[] { Nombre, UbicacionHab, PrecioPorNoche, PrecioPorPersona, MaxPersonas, TipoCama, CantidadCamas, AmenidadesHab, EliminarHab });
+            dgvConfigHab.Location = new Point(23, 345);
+            dgvConfigHab.Name = "dgvConfigHab";
+            dgvConfigHab.Size = new Size(920, 168);
+            dgvConfigHab.TabIndex = 6;
             // 
             // Nombre
             // 
@@ -272,6 +275,10 @@
             EliminarHab.Name = "EliminarHab";
             EliminarHab.Width = 75;
             // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // ConfigurarHabitaciones
             // 
             AutoScaleDimensions = new SizeF(9F, 19F);
@@ -281,16 +288,17 @@
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F);
             ForeColor = SystemColors.ControlText;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "ConfigurarHabitaciones";
             Text = "ConfigurarHabitaciones";
+            Load += ConfigurarHabitaciones_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvCamas).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvAmenidades).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CantCamas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CantMaxPers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAmenidades).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvConfigHab).EndInit();
             ResumeLayout(false);
         }
 
@@ -303,17 +311,17 @@
         private Label label5;
         private Label label6;
         private GroupBox groupBox1;
-        private Button button2;
+        private Button btnAgregarHabitacion;
         private RadioButton radioButton3;
         private RadioButton radioButton1;
-        private Button button1;
-        private DataGridView dgvCamas;
+        private Button btnAgregarCama;
+        private DataGridView dgvConfigHab;
         private DataGridView dgvAmenidades;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private NumericUpDown numericUpDown2;
-        private ComboBox comboBox1;
-        private NumericUpDown numericUpDown1;
+        private TextBox textPrecioPersona;
+        private TextBox textNombre;
+        private NumericUpDown CantCamas;
+        private ComboBox comboTipoCama;
+        private NumericUpDown CantMaxPers;
         private DataGridViewTextBoxColumn Amenidad;
         private DataGridViewCheckBoxColumn AmenidadSelect;
         private PictureBox pictureBox1;
@@ -326,5 +334,6 @@
         private DataGridViewTextBoxColumn CantidadCamas;
         private DataGridViewTextBoxColumn AmenidadesHab;
         private DataGridViewCheckBoxColumn EliminarHab;
+        private System.Windows.Forms.Timer timer1;
     }
 }

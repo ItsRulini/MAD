@@ -37,7 +37,7 @@
             dgvServiciosExistente = new DataGridView();
             Servicio = new DataGridViewTextBoxColumn();
             label2 = new Label();
-            textNombreAmenidad = new TextBox();
+            textNombreServicio = new TextBox();
             btnAgregarServicio = new Button();
             label1 = new Label();
             groupBox1.SuspendLayout();
@@ -54,7 +54,7 @@
             groupBox1.Controls.Add(pictureBox1);
             groupBox1.Controls.Add(dgvServiciosExistente);
             groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(textNombreAmenidad);
+            groupBox1.Controls.Add(textNombreServicio);
             groupBox1.Controls.Add(btnAgregarServicio);
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 11);
@@ -131,12 +131,12 @@
             label2.TabIndex = 3;
             label2.Text = "Servicios existentes:";
             // 
-            // textNombreAmenidad
+            // textNombreServicio
             // 
-            textNombreAmenidad.Location = new Point(6, 51);
-            textNombreAmenidad.Name = "textNombreAmenidad";
-            textNombreAmenidad.Size = new Size(158, 26);
-            textNombreAmenidad.TabIndex = 2;
+            textNombreServicio.Location = new Point(6, 51);
+            textNombreServicio.Name = "textNombreServicio";
+            textNombreServicio.Size = new Size(158, 26);
+            textNombreServicio.TabIndex = 2;
             // 
             // btnAgregarServicio
             // 
@@ -186,7 +186,7 @@
         private DataGridView dgvServiciosExistente;
         private DataGridViewTextBoxColumn Servicio;
         private Label label2;
-        private TextBox textNombreAmenidad;
+        private TextBox textNombreServicio;
         private Button btnAgregarServicio;
         private Label label1;
     }

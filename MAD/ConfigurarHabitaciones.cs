@@ -15,11 +15,29 @@ namespace MAD
         public ConfigurarHabitaciones()
         {
             InitializeComponent();
+            textPrecioPersona.Enabled = false;
+
+        }
+        private void ConfigurarHabitaciones_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void radioVentana_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textNombre.Text))
+            {
+                textPrecioPersona.Enabled = false;
+            }
+            else
+            {
+                textPrecioPersona.Enabled = true;
+            }
         }
     }
 }
