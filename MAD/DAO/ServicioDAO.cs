@@ -64,5 +64,23 @@ namespace MAD.DAO
             return idServicio;
         }
 
+        public bool insertarServicio(string nombre, long claveSAT, string claveUnidad)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spInsertServicio_Amenidad", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tipo", "Servicio");
+                    cmd.Parameters.AddWithValue("@concepto", nombre);
+                    cmd.Parameters.AddWithValue("@claveSAT", claveSAT);
+                    cmd.Parameters.AddWithValue("@claveUnidad", claveUnidad);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+        
+
     }
 }

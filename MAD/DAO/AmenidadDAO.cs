@@ -14,6 +14,32 @@ namespace MAD.DAO
     {
         public AmenidadDAO() { }
 
+        public List<Amenidad> getAmenidaes()
+        {
+            List<Amenidad> amenidades = new List<Amenidad>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAmenidades", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Amenidad amenidad = new Amenidad();
+                                amenidad.IdAmenidad = Guid.Parse(reader["idAmenidad"].ToString());
+                                amenidad.Amenidad1 = reader["amenidad"].ToString();
+                                amenidades.Add(amenidad);
+                            }
+                        }
+                    }
+                }
+            }
+            return amenidades;
+        }
+
         public List<Amenidad> getAmenidadesTipoHabitacion(string habitacion)
         {
             List<Amenidad> amenidades = new List<Amenidad>();
@@ -40,6 +66,23 @@ namespace MAD.DAO
                 }
             }
             return amenidades;
+        }
+
+        public bool insertarAmenidad(string nombre, long claveSAT, string claveUnidad)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spInsertServicio_Amenidad", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tipo", "Amenidad");
+                    cmd.Parameters.AddWithValue("@concepto", nombre);
+                    cmd.Parameters.AddWithValue("@claveSAT", claveSAT);
+                    cmd.Parameters.AddWithValue("@claveUnidad", claveUnidad);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
         }
 
     }

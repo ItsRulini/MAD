@@ -45,13 +45,17 @@ namespace MAD
             
             if (idAdministrador == persona.IdPersona)
             {
-                MessageBox.Show("Un administrador no puede eliminarse a sí mismo");
+                MessageBox.Show("Un administrador no puede eliminarse o cambiar su puesto a sí mismo");
                 radioButton1.Enabled = false;
                 radioButton2.Enabled = false;
+                radioAdmin.Enabled = false;
+                radioOperativo.Enabled = false;
             } else
             {
                 radioButton1.Enabled = true;
                 radioButton2.Enabled = true;
+                radioAdmin.Enabled = true;
+                radioOperativo.Enabled = true;
             }
 
             if (usuario == null || persona == null)
@@ -59,6 +63,8 @@ namespace MAD
                 MessageBox.Show("No se encontró el usuario.");
                 return;
             }
+
+            
 
             contraseña = contraseñaDAO.getContraseña(persona.IdPersona);
 
@@ -74,6 +80,8 @@ namespace MAD
             dtpFechaNacimiento.Value = persona.FechaNacimiento.ToDateTime(new TimeOnly(0, 0));
             radioButton1.Checked = (bool) usuario.Estado;
             radioButton2.Checked = (bool) !usuario.Estado;
+            radioAdmin.Checked = (usuario.TipoUsuario == "Administrador");
+            radioOperativo.Checked = (usuario.TipoUsuario == "Operativo");
 
         }
 
@@ -159,15 +167,25 @@ namespace MAD
                 return; // Únicamente actualiza la contraseña
             }
 
+            string tipoUsuario = null;
+
+            if (radioAdmin.Checked)
+                tipoUsuario = "Administrador";
+            else if (radioOperativo.Checked)
+                tipoUsuario = "Operativo";
+            else
+                tipoUsuario = null;
+
             if (string.IsNullOrEmpty(persona.Nombres) || string.IsNullOrEmpty(persona.Paterno) || string.IsNullOrEmpty(persona.Materno)
-                || string.IsNullOrEmpty(textNumCasa.Text) || string.IsNullOrEmpty(textNumCelular.Text) || string.IsNullOrEmpty(persona.Correo))
+                || string.IsNullOrEmpty(textNumCasa.Text) || string.IsNullOrEmpty(textNumCelular.Text) || string.IsNullOrEmpty(persona.Correo)
+                || string.IsNullOrEmpty(tipoUsuario))
             {
                 MessageBox.Show("Por favor, complete todos los campos obligatorios.");
                 return;
             }
 
             // Update a la persona
-            if (usuarioDAO.updateUsuarioOperativo(usuario, persona))
+            if (usuarioDAO.updateUsuarioOperativo(usuario, persona, tipoUsuario))
             {
                 MessageBox.Show("Usuario modificado correctamente.");
             }

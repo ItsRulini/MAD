@@ -75,6 +75,8 @@ namespace MAD.DAO
                             while (reader.Read())
                             {
                                 usuario = new Usuario();
+
+                                usuario.TipoUsuario = reader["tipoUsuario"].ToString();
                                 usuario.Estado = bool.Parse(reader["estado"].ToString());
                                 usuario.Nomina = long.Parse(reader["nomina"].ToString());
                             }
@@ -122,13 +124,14 @@ namespace MAD.DAO
             }
         }
 
-        public bool updateUsuarioOperativo(Usuario usuario, DatosPersona persona)
+        public bool updateUsuarioOperativo(Usuario usuario, DatosPersona persona, string tipoUsuario)
         {
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
                 using (var cmd = new SqlCommand("spUpdateUsuario", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@tipoUsuario", tipoUsuario);
                     cmd.Parameters.AddWithValue("@correo", persona.Correo);
                     cmd.Parameters.AddWithValue("@nombres", persona.Nombres);
                     cmd.Parameters.AddWithValue("@paterno", persona.Paterno);

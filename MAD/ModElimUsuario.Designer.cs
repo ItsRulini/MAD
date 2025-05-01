@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            cambioContraseña = new CheckBox();
             btnModificar = new Button();
             textNomina = new TextBox();
             label9 = new Label();
@@ -56,15 +57,19 @@
             textBuscarEmpleado = new TextBox();
             label10 = new Label();
             pictureBox3 = new PictureBox();
-            cambioContraseña = new CheckBox();
+            groupBox4 = new GroupBox();
+            radioOperativo = new RadioButton();
+            radioAdmin = new RadioButton();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(groupBox4);
             groupBox1.Controls.Add(cambioContraseña);
             groupBox1.Controls.Add(btnModificar);
             groupBox1.Controls.Add(textNomina);
@@ -92,6 +97,16 @@
             groupBox1.TabIndex = 28;
             groupBox1.TabStop = false;
             groupBox1.Text = "Modificar/eliminar usuario:";
+            // 
+            // cambioContraseña
+            // 
+            cambioContraseña.AutoSize = true;
+            cambioContraseña.Location = new Point(232, 309);
+            cambioContraseña.Name = "cambioContraseña";
+            cambioContraseña.Size = new Size(190, 26);
+            cambioContraseña.TabIndex = 55;
+            cambioContraseña.Text = "Cambiar contraseña";
+            cambioContraseña.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
@@ -253,9 +268,9 @@
             // 
             groupBox2.Controls.Add(radioButton2);
             groupBox2.Controls.Add(radioButton1);
-            groupBox2.Location = new Point(470, 188);
+            groupBox2.Location = new Point(457, 188);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(142, 91);
+            groupBox2.Size = new Size(155, 91);
             groupBox2.TabIndex = 54;
             groupBox2.TabStop = false;
             groupBox2.Text = "Estado:";
@@ -331,15 +346,38 @@
             pictureBox3.TabIndex = 30;
             pictureBox3.TabStop = false;
             // 
-            // cambioContraseña
+            // groupBox4
             // 
-            cambioContraseña.AutoSize = true;
-            cambioContraseña.Location = new Point(232, 309);
-            cambioContraseña.Name = "cambioContraseña";
-            cambioContraseña.Size = new Size(190, 26);
-            cambioContraseña.TabIndex = 55;
-            cambioContraseña.Text = "Cambiar contraseña";
-            cambioContraseña.UseVisualStyleBackColor = true;
+            groupBox4.Controls.Add(radioAdmin);
+            groupBox4.Controls.Add(radioOperativo);
+            groupBox4.Location = new Point(457, 58);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(155, 109);
+            groupBox4.TabIndex = 56;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Tipo de usuario:";
+            // 
+            // radioOperativo
+            // 
+            radioOperativo.AutoSize = true;
+            radioOperativo.Location = new Point(7, 36);
+            radioOperativo.Name = "radioOperativo";
+            radioOperativo.Size = new Size(111, 26);
+            radioOperativo.TabIndex = 0;
+            radioOperativo.TabStop = true;
+            radioOperativo.Text = "Operativo";
+            radioOperativo.UseVisualStyleBackColor = true;
+            // 
+            // radioAdmin
+            // 
+            radioAdmin.AutoSize = true;
+            radioAdmin.Location = new Point(7, 71);
+            radioAdmin.Name = "radioAdmin";
+            radioAdmin.Size = new Size(146, 26);
+            radioAdmin.TabIndex = 1;
+            radioAdmin.TabStop = true;
+            radioAdmin.Text = "Administrador";
+            radioAdmin.UseVisualStyleBackColor = true;
             // 
             // ModElimUsuario
             // 
@@ -362,6 +400,8 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -395,5 +435,8 @@
         private Label label10;
         private PictureBox pictureBox3;
         private CheckBox cambioContraseña;
+        private GroupBox groupBox4;
+        private RadioButton radioAdmin;
+        private RadioButton radioOperativo;
     }
 }
