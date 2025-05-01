@@ -88,7 +88,7 @@ namespace MAD
 
         private void comboClaveUnidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboClaveUnidad.SelectedIndex > 0)
+            if(comboClaveUnidad.SelectedIndex >= 0)
                 textBoxUnidad.Text = unidades.Find(u => u.ClaveUnidad == comboClaveUnidad.Text).Unidad1.ToString();
         }
     }

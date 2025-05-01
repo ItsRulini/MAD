@@ -84,6 +84,53 @@ namespace MAD.DAO
                 }
             }
         }
+        public Guid getIdAmenidad(string amenidad)
+        {
+            Guid idAmenidad = Guid.Empty;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetIdAmenidad", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@amenidad", amenidad);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                idAmenidad = Guid.Parse(reader["idAmenidad"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return idAmenidad;
 
+        }
+
+        public string getAmenidadPorId(Guid id) {
+            string amenidad = null;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAmenidadPorId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                amenidad = reader["amenidad"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return amenidad;
+
+        }
     }
 }

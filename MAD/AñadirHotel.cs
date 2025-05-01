@@ -17,6 +17,7 @@ namespace MAD
     public partial class AñadirHotel : Form
     {
         private Guid idAdmin; // Almacena el ID del administrador
+
         public AñadirHotel(Guid idAdmin)
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace MAD
 
         private void inicializarComboServicios()
         {
+            comboServicio.Items.Clear();
             ServicioDAO servicioDAO = new ServicioDAO();
             List<Servicio> servicios = servicioDAO.getServicios();
 
@@ -263,25 +265,79 @@ namespace MAD
                 }
             }
 
-            AmenidadDAO amenidadDAO = new AmenidadDAO();
-            List<Amenidad> amenidades = amenidadDAO.getAmenidadesTipoHabitacion(comboTipoHab.Text);
+            //AmenidadDAO amenidadDAO = new AmenidadDAO();
+            //List<Amenidad> amenidades = amenidadDAO.getAmenidadesTipoHabitacion(comboTipoHab.Text);
 
             StringBuilder amenidadesSeleccionadas = new StringBuilder();
+            AmenidadDAO amenidadDAO = new AmenidadDAO();
 
-            foreach (Amenidad amenidad in amenidades)
+            tipoHabitaciones.Find(x => x.NivelHabitacion == comboTipoHab.Text).AmenidadTipoHabitacions.ToList().ForEach(amenidad =>
             {
-                amenidadesSeleccionadas.Append(amenidad.Amenidad1 + Environment.NewLine);
-            }
+                string nombreAmenidad = amenidadDAO.getAmenidadPorId(amenidad.IdAmenidad);
+                amenidadesSeleccionadas.Append(nombreAmenidad + Environment.NewLine);
+            });
 
             gridHabitaciones.Rows.Add(comboTipoHab.Text, cantHab.Value, amenidadesSeleccionadas.ToString());
 
         }
+        private void gridHabitaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 3) // Para evitar errores si clickeas en los encabezados
+            {
+                gridHabitaciones.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+        private void gridServiciosHotel_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 2) // Para evitar errores si clickeas en los encabezados
+            {
+                gridHabitaciones.Rows.RemoveAt(e.RowIndex);
+            }
+        }
 
+        private List<TipoHabitacion> tipoHabitaciones;
         private void btnConfigurarHabitaciones_Click(object sender, EventArgs e)
         {
+            if(comboTipoHab.Items.Count > 0)
+            {
+                DialogResult result = MessageBox.Show(
+                "¿Está seguro que desea agregar más configuraciones? \nSe perderán las ya existentes",
+                "Advertencia",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.No || result == DialogResult.Cancel)
+                {
+                    // Si el usuario da "No" o "Cancelar", NO seguimos
+                    return;
+                }
+
+            }
+
+            comboTipoHab.SelectedIndex = -1; // Limpiar la selección actual
+            comboTipoHab.Items.Clear();
+            gridHabitaciones.Rows.Clear(); // Limpiar el DataGridView antes de llenarlo
+            cantHab.Value = 1;
+
             ConfigurarHabitaciones configurarHabitaciones = new ConfigurarHabitaciones();
-            configurarHabitaciones.ShowDialog();
-            this.Focus();
+            if (configurarHabitaciones.ShowDialog() == DialogResult.OK)
+            {
+                tipoHabitaciones = configurarHabitaciones.habitacionesTemp;
+                foreach (var item in tipoHabitaciones)
+                {
+                    comboTipoHab.Items.Add(item.NivelHabitacion);
+                }
+            }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AñadirServicio formAddServicio = new AñadirServicio();
+            formAddServicio.ShowDialog();
+            this.Focus();
+            inicializarComboServicios();
+        }
+
     }
 }
