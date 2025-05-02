@@ -4,6 +4,8 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.DirectoryServices;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +40,33 @@ namespace MAD.DAO
             }
             return tiposHabitacion;
         }
+
+        public bool insertTipoHabitacion(TipoHabitacion tipo, Guid idHotel, DataTable camas)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spInsertTipoHabitacion_Hotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nivelHabitacion", tipo.NivelHabitacion);
+                    cmd.Parameters.AddWithValue("@precioPorPersona", tipo.PrecioPorPersona);
+                    cmd.Parameters.AddWithValue("@precioPorNoche", tipo.PrecioPorNoche);
+                    cmd.Parameters.AddWithValue("@canidadMaximaPersonas", tipo.CanidadMaximaPersonas);
+                    cmd.Parameters.AddWithValue("@ubicacion", tipo.Ubicacion);
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    cmd.Parameters.AddWithValue("@idTipo", tipo.IdTipoHabitacion);
+
+                    cmd.Parameters.AddWithValue("@camas", camas);
+                    cmd.Parameters["@camas"].SqlDbType = SqlDbType.Structured;
+                    cmd.Parameters["@camas"].TypeName = "cama"; // El mismo nombre del tipo creado en SQL Server
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+
+            }
+        }
+
 
         public Guid getIdTipoHabitacion(string tipoHabitacion)
         {

@@ -56,6 +56,9 @@
             groupBox4 = new GroupBox();
             linkLabel1 = new LinkLabel();
             gridServiciosHotel = new DataGridView();
+            NombreServicio = new DataGridViewTextBoxColumn();
+            PrecioServicio = new DataGridViewTextBoxColumn();
+            EliminarServicio = new DataGridViewImageColumn();
             textPrecioServicio = new TextBox();
             label11 = new Label();
             btnAgregarServicio = new Button();
@@ -65,18 +68,15 @@
             btnConfigurarHabitaciones = new Button();
             label14 = new Label();
             gridHabitaciones = new DataGridView();
+            TipoHab = new DataGridViewTextBoxColumn();
+            CantidadHab = new DataGridViewTextBoxColumn();
+            AmenidadHab = new DataGridViewTextBoxColumn();
+            EliminarTipoHab = new DataGridViewImageColumn();
             btnAgregarHabitacion = new Button();
             cantHab = new NumericUpDown();
             label8 = new Label();
             comboTipoHab = new ComboBox();
             label7 = new Label();
-            NombreServicio = new DataGridViewTextBoxColumn();
-            PrecioServicio = new DataGridViewTextBoxColumn();
-            EliminarServicio = new DataGridViewImageColumn();
-            TipoHab = new DataGridViewTextBoxColumn();
-            CantidadHab = new DataGridViewTextBoxColumn();
-            AmenidadHab = new DataGridViewTextBoxColumn();
-            EliminarTipoHab = new DataGridViewImageColumn();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -343,6 +343,32 @@
             gridServiciosHotel.TabIndex = 19;
             gridServiciosHotel.CellContentClick += gridServiciosHotel_CellContentClick;
             // 
+            // NombreServicio
+            // 
+            NombreServicio.HeaderText = "Nombre";
+            NombreServicio.MinimumWidth = 6;
+            NombreServicio.Name = "NombreServicio";
+            NombreServicio.ReadOnly = true;
+            NombreServicio.Width = 125;
+            // 
+            // PrecioServicio
+            // 
+            PrecioServicio.HeaderText = "Precio";
+            PrecioServicio.MinimumWidth = 6;
+            PrecioServicio.Name = "PrecioServicio";
+            PrecioServicio.ReadOnly = true;
+            PrecioServicio.Width = 80;
+            // 
+            // EliminarServicio
+            // 
+            EliminarServicio.HeaderText = "Eliminar";
+            EliminarServicio.Image = Properties.Resources.basura;
+            EliminarServicio.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            EliminarServicio.MinimumWidth = 6;
+            EliminarServicio.Name = "EliminarServicio";
+            EliminarServicio.Resizable = DataGridViewTriState.True;
+            EliminarServicio.Width = 75;
+            // 
             // textPrecioServicio
             // 
             textPrecioServicio.Location = new Point(25, 124);
@@ -450,77 +476,6 @@
             gridHabitaciones.TabIndex = 20;
             gridHabitaciones.CellContentClick += gridHabitaciones_CellContentClick;
             // 
-            // btnAgregarHabitacion
-            // 
-            btnAgregarHabitacion.Location = new Point(30, 148);
-            btnAgregarHabitacion.Name = "btnAgregarHabitacion";
-            btnAgregarHabitacion.Size = new Size(121, 37);
-            btnAgregarHabitacion.TabIndex = 13;
-            btnAgregarHabitacion.Text = "Agregar habitación";
-            btnAgregarHabitacion.UseVisualStyleBackColor = true;
-            btnAgregarHabitacion.Click += btnAgregarHabitacion_Click;
-            // 
-            // cantHab
-            // 
-            cantHab.Location = new Point(31, 114);
-            cantHab.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            cantHab.Name = "cantHab";
-            cantHab.Size = new Size(120, 30);
-            cantHab.TabIndex = 12;
-            cantHab.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(31, 92);
-            label8.Name = "label8";
-            label8.Size = new Size(87, 22);
-            label8.TabIndex = 2;
-            label8.Text = "Cantidad:";
-            // 
-            // comboTipoHab
-            // 
-            comboTipoHab.FormattingEnabled = true;
-            comboTipoHab.Location = new Point(30, 53);
-            comboTipoHab.Name = "comboTipoHab";
-            comboTipoHab.Size = new Size(121, 30);
-            comboTipoHab.TabIndex = 11;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(30, 31);
-            label7.Name = "label7";
-            label7.Size = new Size(53, 22);
-            label7.TabIndex = 0;
-            label7.Text = "Tipo:";
-            // 
-            // NombreServicio
-            // 
-            NombreServicio.HeaderText = "Nombre";
-            NombreServicio.MinimumWidth = 6;
-            NombreServicio.Name = "NombreServicio";
-            NombreServicio.ReadOnly = true;
-            NombreServicio.Width = 125;
-            // 
-            // PrecioServicio
-            // 
-            PrecioServicio.HeaderText = "Precio";
-            PrecioServicio.MinimumWidth = 6;
-            PrecioServicio.Name = "PrecioServicio";
-            PrecioServicio.ReadOnly = true;
-            PrecioServicio.Width = 80;
-            // 
-            // EliminarServicio
-            // 
-            EliminarServicio.HeaderText = "Eliminar";
-            EliminarServicio.Image = Properties.Resources.basura;
-            EliminarServicio.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            EliminarServicio.MinimumWidth = 6;
-            EliminarServicio.Name = "EliminarServicio";
-            EliminarServicio.Resizable = DataGridViewTriState.True;
-            EliminarServicio.Width = 75;
-            // 
             // TipoHab
             // 
             TipoHab.HeaderText = "Tipo";
@@ -556,6 +511,52 @@
             EliminarTipoHab.Name = "EliminarTipoHab";
             EliminarTipoHab.Resizable = DataGridViewTriState.True;
             EliminarTipoHab.Width = 75;
+            // 
+            // btnAgregarHabitacion
+            // 
+            btnAgregarHabitacion.Location = new Point(30, 148);
+            btnAgregarHabitacion.Name = "btnAgregarHabitacion";
+            btnAgregarHabitacion.Size = new Size(121, 37);
+            btnAgregarHabitacion.TabIndex = 13;
+            btnAgregarHabitacion.Text = "Agregar habitación";
+            btnAgregarHabitacion.UseVisualStyleBackColor = true;
+            btnAgregarHabitacion.Click += btnAgregarHabitacion_Click;
+            // 
+            // cantHab
+            // 
+            cantHab.Location = new Point(31, 114);
+            cantHab.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            cantHab.Name = "cantHab";
+            cantHab.Size = new Size(120, 30);
+            cantHab.TabIndex = 12;
+            cantHab.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(31, 92);
+            label8.Name = "label8";
+            label8.Size = new Size(87, 22);
+            label8.TabIndex = 2;
+            label8.Text = "Cantidad:";
+            // 
+            // comboTipoHab
+            // 
+            comboTipoHab.FormattingEnabled = true;
+            comboTipoHab.Location = new Point(30, 53);
+            comboTipoHab.Name = "comboTipoHab";
+            comboTipoHab.Size = new Size(121, 30);
+            comboTipoHab.TabIndex = 11;
+            comboTipoHab.SelectedIndexChanged += comboTipoHab_SelectedIndexChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(30, 31);
+            label7.Name = "label7";
+            label7.Size = new Size(53, 22);
+            label7.TabIndex = 0;
+            label7.Text = "Tipo:";
             // 
             // AñadirHotel
             // 

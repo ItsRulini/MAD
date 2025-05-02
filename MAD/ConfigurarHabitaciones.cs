@@ -264,6 +264,7 @@ namespace MAD
                 // Creamos el objeto TipoHabitacion
                 TipoHabitacion tipoHabitacion = new TipoHabitacion
                 {
+                    IdTipoHabitacion = Guid.NewGuid(),
                     NivelHabitacion = row.Cells[0].Value?.ToString(),
                     Ubicacion = row.Cells[1].Value?.ToString(),
                     PrecioPorNoche = decimal.Parse(row.Cells[2].Value?.ToString().Replace("$", "").Replace(",", "")),
@@ -302,7 +303,8 @@ namespace MAD
                     {
                         AmenidadTipoHabitacion amenidad = new AmenidadTipoHabitacion
                         {
-                            IdAmenidad = amenidadDAO.getIdAmenidad(amenidadStr)
+                            IdAmenidad = amenidadDAO.getIdAmenidad(amenidadStr),
+                            IdTipoHabitacion = tipoHabitacion.IdTipoHabitacion
                         };
                         tipoHabitacion.AmenidadTipoHabitacions.Add(amenidad);
                     }

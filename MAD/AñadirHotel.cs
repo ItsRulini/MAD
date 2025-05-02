@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace MAD
 {
@@ -23,7 +24,6 @@ namespace MAD
             InitializeComponent();
             inicializarComboUbicacion();
             inicializarComboServicios();
-            inicializarComboTipoHabitacion();
 
             //gridHabitaciones.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             //gridHabitaciones.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -50,16 +50,6 @@ namespace MAD
             }
         }
 
-        private void inicializarComboTipoHabitacion()
-        {
-            TipoHabitacionDAO tipoHabitacionDAO = new TipoHabitacionDAO();
-            List<TipoHabitacion> tiposHabitacion = tipoHabitacionDAO.getTiposHabitacion();
-
-            foreach (TipoHabitacion tipoHabitacion in tiposHabitacion)
-            {
-                comboTipoHab.Items.Add(tipoHabitacion.NivelHabitacion);
-            }
-        }
 
         private void inicializarComboUbicacion()
         {
@@ -145,7 +135,7 @@ namespace MAD
 
             Hotel hotel = new Hotel();
             List<HotelServicio> servicios = new List<HotelServicio>();
-            Dictionary<TipoHabitacion, int> tipoHabitaciones = new Dictionary<TipoHabitacion, int>();
+            Dictionary<TipoHabitacion, int> mapTipoHabitaciones = new Dictionary<TipoHabitacion, int>();
 
             hotel.Rfc = textBox1.Text;
             hotel.Nombre = textNombreHotel.Text;
@@ -169,23 +159,49 @@ namespace MAD
                 }
             }
 
-            TipoHabitacionDAO tipoHabitacionDAO = new TipoHabitacionDAO();
-
             foreach (DataGridViewRow row in gridHabitaciones.Rows)
             {
                 if (!row.IsNewRow)
                 {
-                    TipoHabitacion tipoHabitacion = new TipoHabitacion();
 
-                    tipoHabitacion.IdTipoHabitacion = tipoHabitacionDAO.getIdTipoHabitacion(row.Cells[0].Value.ToString());
-                    int cantidad = Convert.ToInt32(row.Cells[1].Value);
+                    TipoHabitacion tipoEncontrado =
+                    tipoHabitaciones.Find(x => x.NivelHabitacion == row.Cells[0].Value.ToString());
 
-                    tipoHabitaciones.Add(tipoHabitacion, cantidad);
+                    if (tipoEncontrado != null) // Verifica si el tipo de habitación existe
+                    {
+                        int cantidad = Convert.ToInt32(row.Cells[1].Value);
+
+                        mapTipoHabitaciones.Add(tipoEncontrado, cantidad);
+                    }
+
                 }
             }
 
+            hotel.IdHotel = Guid.NewGuid(); // id del hotel
+            hotel.IdUsuario = idAdmin; // id del admin que lo creo
+
             HotelDAO hotelDAO = new HotelDAO();
-            bool insertado = hotelDAO.insertHotel(hotel, servicios, tipoHabitaciones, idAdmin);
+            hotelDAO.insertHotel(hotel); // insertando el hotel
+
+
+            TipoHabitacionDAO tipoHabitacionDAO = new TipoHabitacionDAO();
+
+            foreach (var item in mapTipoHabitaciones)
+            {
+                DataTable cama = new DataTable();
+                cama.Columns.Add("tipoCama", typeof(string));
+                cama.Columns.Add("cantidadCama", typeof(int));
+
+                foreach (var camaTipo in item.Key.CamaTipoHabitacions)
+                {
+                    cama.Rows.Add(camaTipo.TipoCama, camaTipo.CantidadCama);
+                }
+
+                tipoHabitacionDAO.insertTipoHabitacion(item.Key, hotel.IdHotel, cama); // insertando los tipos de habitación
+            }
+
+            // Insertar los servicios del hotel
+            bool insertado = hotelDAO.insertInfoHotel(hotel, servicios, mapTipoHabitaciones);
 
             if (insertado)
             {
@@ -298,7 +314,7 @@ namespace MAD
         private List<TipoHabitacion> tipoHabitaciones;
         private void btnConfigurarHabitaciones_Click(object sender, EventArgs e)
         {
-            if(comboTipoHab.Items.Count > 0)
+            if (comboTipoHab.Items.Count > 0)
             {
                 DialogResult result = MessageBox.Show(
                 "¿Está seguro que desea agregar más configuraciones? \nSe perderán las ya existentes",
@@ -339,5 +355,9 @@ namespace MAD
             inicializarComboServicios();
         }
 
+        private void comboTipoHab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

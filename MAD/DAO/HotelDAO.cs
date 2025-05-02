@@ -14,45 +14,76 @@ namespace MAD.DAO
     {
         public HotelDAO() { }
 
-        public bool insertHotel(Hotel hotel, List<HotelServicio> servicios, Dictionary<TipoHabitacion, int> tipoHabitaciones, Guid idUsuario)
+        public bool insertHotel(Hotel hotel)
         {
-
-            DataTable guidTable = new DataTable();
-            guidTable.Columns.Add("id", typeof(Guid));
-            guidTable.Columns.Add("precio", typeof(decimal));
-
-            foreach (var item in servicios)
-            {
-                guidTable.Rows.Add(item.IdServicio, item.Precio);
-            }
-
-            DataTable guidTable2 = new DataTable();
-            guidTable2.Columns.Add("id", typeof(Guid));
-            guidTable2.Columns.Add("cantidad", typeof(int));
-
-            foreach (var item in tipoHabitaciones)
-            {
-                guidTable2.Rows.Add(item.Key.IdTipoHabitacion, item.Value);
-            }
-
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
-                using (SqlCommand cmd = new SqlCommand("spInsertHotel", conn))
+                using (var cmd = new SqlCommand("spInsertHotel", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", hotel.IdHotel);
                     cmd.Parameters.AddWithValue("@rfc", hotel.Rfc);
                     cmd.Parameters.AddWithValue("@nombre", hotel.Nombre);
                     cmd.Parameters.AddWithValue("@domicilio", hotel.Domicilio);
                     cmd.Parameters.AddWithValue("@numeroPisos", hotel.NumeroPisos);
                     cmd.Parameters.AddWithValue("@fechaInicioOperaciones", hotel.FechaInicioOperaciones);
+                    cmd.Parameters.AddWithValue("@idUsuario", hotel.IdUsuario);
                     cmd.Parameters.AddWithValue("@idUbicacion", hotel.IdUbicacion);
-                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+        public bool insertInfoHotel(Hotel hotel, List<HotelServicio> servicios, Dictionary<TipoHabitacion, int> tipoHabitaciones)
+        {
 
-                    cmd.Parameters.AddWithValue("@tipoHabitaciones", guidTable2);
+            DataTable serviciosHotel = new DataTable();
+            serviciosHotel.Columns.Add("id", typeof(Guid));
+            serviciosHotel.Columns.Add("precio", typeof(decimal));
+
+            foreach (var item in servicios)
+            {
+                serviciosHotel.Rows.Add(item.IdServicio, item.Precio);
+            }
+
+            DataTable tipos = new DataTable();
+            tipos.Columns.Add("id", typeof(Guid));
+            tipos.Columns.Add("cantidad", typeof(int));
+
+            foreach (var item in tipoHabitaciones)
+            {
+                tipos.Rows.Add(item.Key.IdTipoHabitacion, item.Value);
+            }
+
+            DataTable amenidades = new DataTable();
+            amenidades.Columns.Add("idAmenidad", typeof(Guid));
+            amenidades.Columns.Add("idTipoHabitacion", typeof(Guid));
+            amenidades.Columns.Add("cantidad", typeof(int));
+
+            foreach (var item in tipoHabitaciones)
+            {
+                foreach (var amenidad in item.Key.AmenidadTipoHabitacions)
+                {
+                    amenidades.Rows.Add(amenidad.IdAmenidad, item.Key.IdTipoHabitacion, 1);
+                }
+            }
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spInsertInfoHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", hotel.IdHotel);
+
+                    cmd.Parameters.AddWithValue("@tipoHabitaciones", tipos);
                     cmd.Parameters["@tipoHabitaciones"].SqlDbType = SqlDbType.Structured;
                     cmd.Parameters["@tipoHabitaciones"].TypeName = "tipo_Habitacion"; // El mismo nombre del tipo creado en SQL Server
 
-                    cmd.Parameters.AddWithValue("@servicios", guidTable);
+                    cmd.Parameters.AddWithValue("@amenidades", amenidades);
+                    cmd.Parameters["@amenidades"].SqlDbType = SqlDbType.Structured;
+                    cmd.Parameters["@amenidades"].TypeName = "amenidadTipoHabitacion"; // El mismo nombre del tipo creado en SQL Server
+
+                    cmd.Parameters.AddWithValue("@servicios", serviciosHotel);
                     cmd.Parameters["@servicios"].SqlDbType = SqlDbType.Structured;
                     cmd.Parameters["@servicios"].TypeName = "serviciosHotel"; // El mismo nombre del tipo creado en SQL Server
 
