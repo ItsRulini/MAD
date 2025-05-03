@@ -37,13 +37,12 @@
             label13 = new Label();
             dgvHabExistentes = new DataGridView();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            Amenidades = new DataGridViewTextBoxColumn();
             comboTipoHabitacion = new ComboBox();
             label12 = new Label();
             dgvHabAñadidas = new DataGridView();
             HabitacionNueva = new DataGridViewTextBoxColumn();
             Cantidad = new DataGridViewTextBoxColumn();
-            EliminarHabitacion = new DataGridViewCheckBoxColumn();
+            EliminarHabitacion = new DataGridViewImageColumn();
             label11 = new Label();
             groupBox3 = new GroupBox();
             comboServicio = new ComboBox();
@@ -51,7 +50,7 @@
             dgvServicioAñadido = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             PrecioServicio = new DataGridViewTextBoxColumn();
-            EliminarServicio = new DataGridViewCheckBoxColumn();
+            EliminarServicio = new DataGridViewImageColumn();
             dgvServicioExistente = new DataGridView();
             Servicio = new DataGridViewTextBoxColumn();
             Precio = new Label();
@@ -63,6 +62,7 @@
             label10 = new Label();
             NumPisos = new NumericUpDown();
             groupBox4 = new GroupBox();
+            btnInsertAmenidades = new Button();
             label7 = new Label();
             comboTipohabitacionAmenidad = new ComboBox();
             comboAmenidad = new ComboBox();
@@ -70,7 +70,7 @@
             label6 = new Label();
             dgvAmenidadesAñadidas = new DataGridView();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            Eliminar = new DataGridViewCheckBoxColumn();
+            Eliminar = new DataGridViewImageColumn();
             dgvAmenidadExistentes = new DataGridView();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             label8 = new Label();
@@ -128,6 +128,7 @@
             btnConfirmarCambios.TabIndex = 22;
             btnConfirmarCambios.Text = "Confirmar cambios";
             btnConfirmarCambios.UseVisualStyleBackColor = true;
+            btnConfirmarCambios.Click += btnConfirmarCambios_Click;
             // 
             // groupBox6
             // 
@@ -174,10 +175,11 @@
             btnAgregarHabitacion.Location = new Point(301, 56);
             btnAgregarHabitacion.Margin = new Padding(3, 4, 3, 4);
             btnAgregarHabitacion.Name = "btnAgregarHabitacion";
-            btnAgregarHabitacion.Size = new Size(154, 45);
+            btnAgregarHabitacion.Size = new Size(154, 55);
             btnAgregarHabitacion.TabIndex = 17;
             btnAgregarHabitacion.Text = "Agregar habitación";
             btnAgregarHabitacion.UseVisualStyleBackColor = true;
+            btnAgregarHabitacion.Click += btnAgregarHabitacion_Click;
             // 
             // label13
             // 
@@ -191,8 +193,9 @@
             // 
             // dgvHabExistentes
             // 
+            dgvHabExistentes.AllowUserToAddRows = false;
             dgvHabExistentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHabExistentes.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4, Amenidades });
+            dgvHabExistentes.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn4 });
             dgvHabExistentes.Location = new Point(17, 473);
             dgvHabExistentes.Margin = new Padding(3, 4, 3, 4);
             dgvHabExistentes.Name = "dgvHabExistentes";
@@ -207,13 +210,6 @@
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.Width = 150;
             // 
-            // Amenidades
-            // 
-            Amenidades.HeaderText = "Amenidades";
-            Amenidades.MinimumWidth = 6;
-            Amenidades.Name = "Amenidades";
-            Amenidades.Width = 125;
-            // 
             // comboTipoHabitacion
             // 
             comboTipoHabitacion.FormattingEnabled = true;
@@ -222,6 +218,7 @@
             comboTipoHabitacion.Name = "comboTipoHabitacion";
             comboTipoHabitacion.Size = new Size(162, 28);
             comboTipoHabitacion.TabIndex = 20;
+            comboTipoHabitacion.SelectedIndexChanged += comboTipoHabitacion_SelectedIndexChanged;
             // 
             // label12
             // 
@@ -235,6 +232,7 @@
             // 
             // dgvHabAñadidas
             // 
+            dgvHabAñadidas.AllowUserToAddRows = false;
             dgvHabAñadidas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHabAñadidas.Columns.AddRange(new DataGridViewColumn[] { HabitacionNueva, Cantidad, EliminarHabitacion });
             dgvHabAñadidas.Location = new Point(17, 151);
@@ -243,6 +241,7 @@
             dgvHabAñadidas.RowHeadersWidth = 51;
             dgvHabAñadidas.Size = new Size(454, 260);
             dgvHabAñadidas.TabIndex = 18;
+            dgvHabAñadidas.CellContentClick += dgvHabAñadidas_CellContentClick_1;
             // 
             // HabitacionNueva
             // 
@@ -261,6 +260,8 @@
             // EliminarHabitacion
             // 
             EliminarHabitacion.HeaderText = "Eliminar";
+            EliminarHabitacion.Image = Properties.Resources.basura;
+            EliminarHabitacion.ImageLayout = DataGridViewImageCellLayout.Zoom;
             EliminarHabitacion.MinimumWidth = 6;
             EliminarHabitacion.Name = "EliminarHabitacion";
             EliminarHabitacion.Resizable = DataGridViewTriState.True;
@@ -318,6 +319,7 @@
             // 
             // dgvServicioAñadido
             // 
+            dgvServicioAñadido.AllowUserToAddRows = false;
             dgvServicioAñadido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServicioAñadido.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, PrecioServicio, EliminarServicio });
             dgvServicioAñadido.Location = new Point(5, 159);
@@ -326,6 +328,7 @@
             dgvServicioAñadido.RowHeadersWidth = 51;
             dgvServicioAñadido.Size = new Size(422, 224);
             dgvServicioAñadido.TabIndex = 14;
+            dgvServicioAñadido.CellContentClick += dgvServicioAñadido_CellContentClick_1;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -344,6 +347,8 @@
             // EliminarServicio
             // 
             EliminarServicio.HeaderText = "Eliminar";
+            EliminarServicio.Image = Properties.Resources.basura;
+            EliminarServicio.ImageLayout = DataGridViewImageCellLayout.Zoom;
             EliminarServicio.MinimumWidth = 6;
             EliminarServicio.Name = "EliminarServicio";
             EliminarServicio.Resizable = DataGridViewTriState.True;
@@ -352,6 +357,7 @@
             // 
             // dgvServicioExistente
             // 
+            dgvServicioExistente.AllowUserToAddRows = false;
             dgvServicioExistente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServicioExistente.Columns.AddRange(new DataGridViewColumn[] { Servicio });
             dgvServicioExistente.Location = new Point(443, 159);
@@ -395,6 +401,7 @@
             textPrecioServicio.Name = "textPrecioServicio";
             textPrecioServicio.Size = new Size(180, 27);
             textPrecioServicio.TabIndex = 12;
+            textPrecioServicio.KeyPress += textPrecioServicio_KeyPress;
             // 
             // btnAgregarServicio
             // 
@@ -402,10 +409,11 @@
             btnAgregarServicio.Location = new Point(427, 65);
             btnAgregarServicio.Margin = new Padding(3, 4, 3, 4);
             btnAgregarServicio.Name = "btnAgregarServicio";
-            btnAgregarServicio.Size = new Size(154, 45);
+            btnAgregarServicio.Size = new Size(192, 45);
             btnAgregarServicio.TabIndex = 1;
             btnAgregarServicio.Text = "Agregar servicio";
             btnAgregarServicio.UseVisualStyleBackColor = true;
+            btnAgregarServicio.Click += btnAgregarServicio_Click;
             // 
             // label1
             // 
@@ -449,6 +457,7 @@
             // 
             // groupBox4
             // 
+            groupBox4.Controls.Add(btnInsertAmenidades);
             groupBox4.Controls.Add(label7);
             groupBox4.Controls.Add(comboTipohabitacionAmenidad);
             groupBox4.Controls.Add(comboAmenidad);
@@ -466,6 +475,17 @@
             groupBox4.TabIndex = 16;
             groupBox4.TabStop = false;
             groupBox4.Text = "Gestión de amenidades:";
+            // 
+            // btnInsertAmenidades
+            // 
+            btnInsertAmenidades.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnInsertAmenidades.Location = new Point(430, 14);
+            btnInsertAmenidades.Name = "btnInsertAmenidades";
+            btnInsertAmenidades.Size = new Size(189, 45);
+            btnInsertAmenidades.TabIndex = 20;
+            btnInsertAmenidades.Text = "Agregar amenidades";
+            btnInsertAmenidades.UseVisualStyleBackColor = true;
+            btnInsertAmenidades.Click += btnInsertAmenidades_Click;
             // 
             // label7
             // 
@@ -485,6 +505,7 @@
             comboTipohabitacionAmenidad.Name = "comboTipohabitacionAmenidad";
             comboTipohabitacionAmenidad.Size = new Size(162, 28);
             comboTipohabitacionAmenidad.TabIndex = 18;
+            comboTipohabitacionAmenidad.SelectedIndexChanged += comboTipohabitacionAmenidad_SelectedIndexChanged;
             // 
             // comboAmenidad
             // 
@@ -498,13 +519,14 @@
             // btnAdgregarAmenidad
             // 
             btnAdgregarAmenidad.Font = new Font("Times New Roman", 12F);
-            btnAdgregarAmenidad.Location = new Point(430, 56);
+            btnAdgregarAmenidad.Location = new Point(430, 67);
             btnAdgregarAmenidad.Margin = new Padding(3, 4, 3, 4);
             btnAdgregarAmenidad.Name = "btnAdgregarAmenidad";
-            btnAdgregarAmenidad.Size = new Size(159, 44);
+            btnAdgregarAmenidad.Size = new Size(189, 53);
             btnAdgregarAmenidad.TabIndex = 16;
-            btnAdgregarAmenidad.Text = "Agregar amenidad";
+            btnAdgregarAmenidad.Text = "Añadir amenidad a la lista";
             btnAdgregarAmenidad.UseVisualStyleBackColor = true;
+            btnAdgregarAmenidad.Click += btnAdgregarAmenidad_Click;
             // 
             // label6
             // 
@@ -518,6 +540,7 @@
             // 
             // dgvAmenidadesAñadidas
             // 
+            dgvAmenidadesAñadidas.AllowUserToAddRows = false;
             dgvAmenidadesAñadidas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAmenidadesAñadidas.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2, Eliminar });
             dgvAmenidadesAñadidas.Location = new Point(7, 160);
@@ -526,6 +549,7 @@
             dgvAmenidadesAñadidas.RowHeadersWidth = 51;
             dgvAmenidadesAñadidas.Size = new Size(394, 214);
             dgvAmenidadesAñadidas.TabIndex = 14;
+            dgvAmenidadesAñadidas.CellContentClick += dgvAmenidadesAñadidas_CellContentClick_1;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -537,6 +561,8 @@
             // Eliminar
             // 
             Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Properties.Resources.basura;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
             Eliminar.MinimumWidth = 6;
             Eliminar.Name = "Eliminar";
             Eliminar.Resizable = DataGridViewTriState.True;
@@ -545,6 +571,7 @@
             // 
             // dgvAmenidadExistentes
             // 
+            dgvAmenidadExistentes.AllowUserToAddRows = false;
             dgvAmenidadExistentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAmenidadExistentes.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn3 });
             dgvAmenidadExistentes.Location = new Point(430, 160);
@@ -607,6 +634,7 @@
             btnBusquedaHotel.TabIndex = 4;
             btnBusquedaHotel.Text = "Buscar";
             btnBusquedaHotel.UseVisualStyleBackColor = true;
+            btnBusquedaHotel.Click += btnBusquedaHotel_Click;
             // 
             // label4
             // 
@@ -719,8 +747,6 @@
         private Button btnAdgregarAmenidad;
         private Label label6;
         private DataGridView dgvAmenidadesAñadidas;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewCheckBoxColumn Eliminar;
         private DataGridView dgvAmenidadExistentes;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private Label label8;
@@ -740,13 +766,15 @@
         private Label label14;
         private NumericUpDown CantTipoHab;
         private Button btnAgregarHabitacion;
+        private Button btnInsertAmenidades;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn HabitacionNueva;
         private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewCheckBoxColumn EliminarHabitacion;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn Amenidades;
+        private DataGridViewImageColumn EliminarHabitacion;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn PrecioServicio;
-        private DataGridViewCheckBoxColumn EliminarServicio;
+        private DataGridViewImageColumn EliminarServicio;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewImageColumn Eliminar;
     }
 }

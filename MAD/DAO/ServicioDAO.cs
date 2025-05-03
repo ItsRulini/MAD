@@ -14,6 +14,33 @@ namespace MAD.DAO
     {
         public ServicioDAO() { }
 
+        public List<Servicio> getServiciosHotel(Guid idHotel)
+        {
+            List<Servicio> servicios = new List<Servicio>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetServiciosHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Servicio servicio = new Servicio();
+                                servicio.IdServicio = Guid.Parse(reader["idServicio"].ToString());
+                                servicio.Nombre = reader["nombre"].ToString();
+                                servicios.Add(servicio);
+                            }
+                        }
+                    }
+                }
+            }
+            return servicios;
+        }
+
         public List<Servicio> getServicios()
         {
             List<Servicio> servicios = new List<Servicio>();
@@ -64,6 +91,31 @@ namespace MAD.DAO
             return idServicio;
         }
 
+        public Servicio getServicioPorId(Guid id)
+        {
+            Servicio servicio = null;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetServicioPorId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idServicio", id);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                servicio = new Servicio();
+                                servicio.Nombre = reader["nombre"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return servicio;
+        }
+
         public bool insertarServicio(string nombre, long claveSAT, string claveUnidad)
         {
             using (SqlConnection conn = Conexion.ObtenerConexion())
@@ -80,7 +132,34 @@ namespace MAD.DAO
                 }
             }
         }
-        
+
+        public List<Servicio> getServiciosNoHotel(Guid idHotel)
+        {
+            List<Servicio> servicios = new List<Servicio>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetServiciosNoEnHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Servicio servicio = new Servicio();
+                                servicio.IdServicio = Guid.Parse(reader["idServicio"].ToString());
+                                servicio.Nombre = reader["nombre"].ToString();
+                                servicios.Add(servicio);
+                            }
+                        }
+                    }
+                }
+            }
+            return servicios;
+        }
+
 
     }
 }

@@ -40,15 +40,16 @@ namespace MAD.DAO
             return amenidades;
         }
 
-        public List<Amenidad> getAmenidadesTipoHabitacion(string habitacion)
+        public ICollection<Amenidad> getAmenidadesNoEnTipoHabitacion(Guid habitacion)
         {
-            List<Amenidad> amenidades = new List<Amenidad>();
+            ICollection<Amenidad> amenidades = new List<Amenidad>();
+
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
-                using (var cmd = new SqlCommand("spGetAmenidadPorTipoHabitacion", conn))
+                using (var cmd = new SqlCommand("spGetAmenidadNoEnTipoHabitacion", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@nivel", habitacion);
+                    cmd.Parameters.AddWithValue("@idTipoHabitacion", habitacion);
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -59,6 +60,34 @@ namespace MAD.DAO
                                 Amenidad amenidad = new Amenidad();
                                 amenidad.IdAmenidad = Guid.Parse(reader["idAmenidad"].ToString());
                                 amenidad.Amenidad1 = reader["amenidad"].ToString();
+                                amenidades.Add(amenidad);
+                            }
+                        }
+                    }
+                }
+            }
+            return amenidades;
+        }
+
+        public ICollection<AmenidadTipoHabitacion> getAmenidadesTipoHabitacion(Guid habitacion)
+        {
+            ICollection<AmenidadTipoHabitacion> amenidades = new List<AmenidadTipoHabitacion>();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAmenidadPorTipoHabitacion", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idTipoHabitacion", habitacion);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                AmenidadTipoHabitacion amenidad = new AmenidadTipoHabitacion();
+                                amenidad.IdAmenidad = Guid.Parse(reader["idAmenidad"].ToString());
                                 amenidades.Add(amenidad);
                             }
                         }
@@ -83,6 +112,35 @@ namespace MAD.DAO
                     return rowsAffected > 0;
                 }
             }
+        }
+
+        public bool insertAmenidadesTipoHabitacion(ICollection<Amenidad> amenidades, Guid idTipoHabitacion)
+        {
+            DataTable amenidad = new DataTable();
+            amenidad.Columns.Add("idAmenidad", typeof(Guid));
+            amenidad.Columns.Add("idTipoHabitacion", typeof(Guid));
+            amenidad.Columns.Add("cantidad", typeof(int));
+
+            foreach (Amenidad item in amenidades)
+            {
+                DataRow row = amenidad.NewRow();
+                row["idAmenidad"] = item.IdAmenidad;
+                row["idTipoHabitacion"] = idTipoHabitacion;
+                row["cantidad"] = 1; // Asignar un valor por defecto o el que necesites
+                amenidad.Rows.Add(row);
+            }
+
+            using (SqlCommand cmd = new SqlCommand("spInsertAmenidadesTipoHabitacion", Conexion.ObtenerConexion()))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@amenidades", amenidad);
+                cmd.Parameters["@amenidades"].SqlDbType = SqlDbType.Structured;
+                cmd.Parameters["@amenidades"].TypeName = "amenidadTipohabitacion"; // El mismo nombre del tipo creado en SQL Server
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+
         }
         public Guid getIdAmenidad(string amenidad)
         {

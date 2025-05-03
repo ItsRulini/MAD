@@ -41,6 +41,33 @@ namespace MAD.DAO
             return tiposHabitacion;
         }
 
+        public List<TipoHabitacion> getTiposHabitacionPorHotel(Guid idHotel)
+        {
+            List<TipoHabitacion> tiposHabitacion = new List<TipoHabitacion>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetTipoHabitacionHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                TipoHabitacion tipoHabitacion = new TipoHabitacion();
+                                tipoHabitacion.IdTipoHabitacion = Guid.Parse(reader["idTipoHabitacion"].ToString());
+                                tipoHabitacion.NivelHabitacion = reader["nivelHabitacion"].ToString();
+                                tiposHabitacion.Add(tipoHabitacion);
+                            }
+                        }
+                    }
+                }
+            }
+            return tiposHabitacion;
+        }
+
         public bool insertTipoHabitacion(TipoHabitacion tipo, Guid idHotel, DataTable camas)
         {
             using (SqlConnection conn = Conexion.ObtenerConexion())

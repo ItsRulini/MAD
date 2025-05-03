@@ -1,6 +1,7 @@
 ﻿using MAD.Connection;
 using MAD.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -91,10 +92,112 @@ namespace MAD.DAO
                     return rowsAffected > 0;
                 }
             }
-
-
-            return false;
         }
+
+        public int getNumPisosHotel(Guid idHotel)
+        {
+            int numPisos = 0;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetNumPisosHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                numPisos = int.Parse(reader["numeroPisos"].ToString());
+
+                            }
+                        }
+                    }
+                }
+            }
+            return numPisos;
+        }
+
+        public Guid getIdHotel(string ciudad, string hotel)
+        {
+            Guid idHotel = Guid.Empty;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spBuscarHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ciudad", ciudad);
+                    cmd.Parameters.AddWithValue("@nombreHotel", hotel);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                // Validar si la primera columna es de tipo string
+                                if (reader.GetFieldType(0) == typeof(string))
+                                {
+                                    string mensaje = reader.GetString(0);
+                                    if (mensaje == "Hotel no encontrado")
+                                    {
+                                        MessageBox.Show(mensaje);
+                                        return idHotel;
+                                    }
+                                }
+                                else
+                                {
+                                    idHotel = Guid.Parse(reader["Resultado"].ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return idHotel;
+        }
+
+        public bool updateHotel(Guid idHotel, int numPisos, List<HotelServicio> servicios, Dictionary<TipoHabitacion, int> tipoHabitaciones)
+        {
+
+            using(SqlCommand cmd = new SqlCommand("spUpdateHotel", Conexion.ObtenerConexion()))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                cmd.Parameters.AddWithValue("@numeroPisos", numPisos);
+
+                DataTable serviciosHotel = new DataTable();
+                serviciosHotel.Columns.Add("id", typeof(Guid));
+                serviciosHotel.Columns.Add("precio", typeof(decimal));
+
+                foreach (var item in servicios)
+                {
+                    serviciosHotel.Rows.Add(item.IdServicio, item.Precio);
+                }
+
+                DataTable tipos = new DataTable();
+                tipos.Columns.Add("id", typeof(Guid));
+                tipos.Columns.Add("cantidad", typeof(int));
+
+                foreach (var item in tipoHabitaciones)
+                {
+                    tipos.Rows.Add(item.Key.IdTipoHabitacion, item.Value);
+                }
+
+                cmd.Parameters.AddWithValue("@servicios", serviciosHotel);
+                cmd.Parameters["@servicios"].SqlDbType = SqlDbType.Structured;
+                cmd.Parameters["@servicios"].TypeName = "serviciosHotel"; // El mismo nombre del tipo creado en SQL Server
+
+                cmd.Parameters.AddWithValue("@tiposHabitacion", tipos);
+                cmd.Parameters["@tiposHabitacion"].SqlDbType = SqlDbType.Structured;
+                cmd.Parameters["@tiposHabitacion"].TypeName = "tipo_Habitacion"; // El mismo nombre del tipo creado en SQL Server
+                
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
+
 
         public List<Hotel> getHotelesDisponibles(DateOnly inicio, DateOnly fin, string ciudad)
         {

@@ -276,7 +276,7 @@ namespace MAD
                     else
                     {
                         gridHabitaciones.Rows.RemoveAt(row.Index); // Eliminar la fila existente
-                        MessageBox.Show("Cantidad actualizado.");
+                        MessageBox.Show("Cantidad actualizada.");
                     }
                 }
             }
