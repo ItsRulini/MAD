@@ -1,8 +1,8 @@
 ﻿using MAD.DAO;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,7 @@ namespace MAD
 {
     public partial class Reservar : Form
     {
+        private Guid idHotelSeleccionado; // id del hotel seleccionado
         private string precioNocheHabitacion;
         private string precioPersonaHabitacion;
 
@@ -103,7 +104,7 @@ namespace MAD
 
             foreach (Ubicacion ci in ciudades)
             {
-                comboCiudad.Items.Add(ci.Ciudad);
+                comboCiudadReserva.Items.Add(ci.Ciudad);
             }
 
         }
@@ -121,7 +122,7 @@ namespace MAD
             DateOnly inicio = DateOnly.FromDateTime(dtpDesde.Value);
             DateOnly fin = DateOnly.FromDateTime(dtpHasta.Value);
 
-            List<Hotel> hoteles = hotelDAO.getHotelesDisponibles(inicio, fin, comboCiudad.Text);
+            List<Hotel> hoteles = hotelDAO.getHotelesDisponibles(inicio, fin, comboCiudadReserva.Text);
 
             foreach (Hotel hotel in hoteles)
             {
@@ -199,7 +200,7 @@ namespace MAD
             }
 
             TipoHabitacionDAO tipoHab = new TipoHabitacionDAO();
-            Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas(comboHabitacion.Text);
+            Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas(comboHabitacion.Text, idHotelSeleccionado);
 
 
 
@@ -241,7 +242,7 @@ namespace MAD
 
             textDetallesHab.Text = "";
             TipoHabitacionDAO tipoDAO = new TipoHabitacionDAO();
-            Dictionary<TipoHabitacion, Amenidad> caracteristicas = tipoDAO.getCaracteristicas(comboHabitacion.Text);
+            Dictionary<TipoHabitacion, Amenidad> caracteristicas = tipoDAO.getCaracteristicas(comboHabitacion.Text, idHotelSeleccionado); //:::::::::::::::::
 
             StringBuilder caracteristicasStrs = new StringBuilder();
 
@@ -283,6 +284,7 @@ namespace MAD
         private void dgvHoteles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //MessageBox.Show("Seleccionado: " + dgvHoteles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+            idHotelSeleccionado = Guid.Parse(dgvHoteles.Rows[e.RowIndex].Cells[1].Value.ToString());
             comboHabitacion.Items.Clear();
             llenarComboHabitaciones();
         }
@@ -296,23 +298,7 @@ namespace MAD
         }
         private void btnBuscarFechas_Click(object sender, EventArgs e)
         {
-            List<string> persona = new List<string>();
-            DatosPersonaDAO personaDAO = new DatosPersonaDAO();
-
-            comboBox1.SelectedIndex = -1;
-            comboBox1.Items.Clear();
-            dgvHoteles.Rows.Clear();
-
-            persona = personaDAO.busquedaAvanzadaCliente(textBuscarCliente.Text);
-
-            if (persona.FirstOrDefault() == "Cliente no encontrado")
-            {
-                MessageBox.Show("Cliente no encontrado");
-                return;
-            }
-
-            llenarComboCliente(persona);
-            incializarGridHotelesDisponibles();
+            
         }
 
 
@@ -328,13 +314,13 @@ namespace MAD
         // Eliminar del carrito un item
         private void dgvCarritoReserva_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex != subtotalCelda.RowIndex && e.RowIndex != ivaCelda.RowIndex
+            if (e.ColumnIndex == 2  && e.RowIndex != subtotalCelda.RowIndex && e.RowIndex != ivaCelda.RowIndex
                 && e.RowIndex != totalCelda.RowIndex) // Para evitar errores si clickeas en los encabezados
             {
 
 
                 TipoHabitacionDAO tipoHab = new TipoHabitacionDAO();
-                Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas(dgvCarritoReserva.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString());
+                Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas((dgvCarritoReserva.Rows[e.RowIndex].Cells[0].Value?.ToString()), idHotelSeleccionado);
 
                 subtotal -= Math.Round(double.Parse(precio.FirstOrDefault().Key.PrecioPorNoche.ToString()));
                 iva = Math.Round(subtotal * 0.16);
@@ -347,6 +333,47 @@ namespace MAD
                 dgvCarritoReserva.Rows.RemoveAt(e.RowIndex);
             }
         }
+        private void btnBusqueda_Click(object sender, EventArgs e)
+        {
+            List<string> persona = new List<string>();
+            DatosPersonaDAO personaDAO = new DatosPersonaDAO();
+
+            comboBox1.SelectedIndex = -1; // Limpiar el combo de clientes
+            comboBox1.Items.Clear(); // Limpiar el combo de clientes
+            comboHabitacion.SelectedIndex = -1;
+            comboHabitacion.Items.Clear();
+            dgvHoteles.Rows.Clear();
+
+            if (checkBuscarPorApellido.Checked) // búsqueda por apellidos  
+            {
+                // Fixing the declaration of the array and assignment  
+                string[] apellidos = textBox1.Text.Split(' ');
+
+                // Ensure we pass the required arguments to the method  
+                if (apellidos.Length >= 2)
+                {
+                    persona = personaDAO.busquedaAvanzadaApellidos(apellidos[0], apellidos[1]);
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, ingrese ambos apellidos separados por un espacio.");
+                    return;
+                }
+            }
+            else // rfc o correo  
+            {
+                persona = personaDAO.busquedaAvanzadaCliente(textBox1.Text);
+            }
+
+            if (persona.FirstOrDefault() == "Cliente no encontrado")
+            {
+                MessageBox.Show("Cliente no encontrado");
+                return;
+            }
+
+            llenarComboCliente(persona);
+            incializarGridHotelesDisponibles();
+        }
 
         private void comboCiudad_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -357,5 +384,6 @@ namespace MAD
         {
 
         }
+
     }
 }

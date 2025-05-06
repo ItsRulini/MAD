@@ -2,8 +2,8 @@
 using MAD.Models;
 using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
+using System.Collections.Generic;
 using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
@@ -149,7 +149,7 @@ namespace MAD.DAO
 
 
 
-        public Dictionary<TipoHabitacion, Amenidad> getCaracteristicas(string habitacion)
+        public Dictionary<TipoHabitacion, Amenidad> getCaracteristicas(string habitacion, Guid idHotel)
         {
             Dictionary<TipoHabitacion, Amenidad> caracteristicas = new Dictionary<TipoHabitacion, Amenidad>();
             using (SqlConnection conn = Conexion.ObtenerConexion())
@@ -158,6 +158,7 @@ namespace MAD.DAO
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@nivel", habitacion);
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
 
                     using (var reader = cmd.ExecuteReader())
                     {

@@ -1,9 +1,9 @@
 ﻿using MAD.Connection;
 using MAD.Models;
+using System.Data;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +45,7 @@ namespace MAD.DAO
             }
             return null;
         }
+        //Busqueda RFC o Correo
         public List<string> busquedaAvanzadaCliente (string DatosCliente) {
             List<string> listaClientes = new List<string>();
             using (SqlConnection conn = Conexion.ObtenerConexion())
@@ -70,6 +71,34 @@ namespace MAD.DAO
 
             return listaClientes;
         }
-            
+        //Busqueda por Apellidos
+        public List<string> busquedaAvanzadaApellidos(string A_Paterno, string A_Materno)
+        {
+            List<string> listaClientes = new List<string>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spBuscarClientePorApellidos", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@paterno", A_Paterno);
+                    cmd.Parameters.AddWithValue("@materno", A_Materno);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                //ver qué hacer aquí xd no le entiendo tilin ayuda, llevamos un vergo de veces y sigo sin entender, no me papies bro, al menos ya le avancé en esto xdxdxd
+                                string datosPersona = reader["Resultado"].ToString();
+                                listaClientes.Add(datosPersona);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return listaClientes;
+        }
+
     }
 }
