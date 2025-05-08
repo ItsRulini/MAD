@@ -11,6 +11,8 @@ public partial class ReservacionHabitacion
 
     public int CantidadPersonas { get; set; }
 
+    public string? Estatus { get; set; }
+
     public virtual Habitacion IdHabitacionNavigation { get; set; } = null!;
 
     public virtual Reservacion IdReservacionNavigation { get; set; } = null!;

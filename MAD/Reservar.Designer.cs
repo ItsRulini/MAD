@@ -39,6 +39,9 @@ namespace MAD
             label2 = new Label();
             label3 = new Label();
             dgvCarritoReserva = new DataGridView();
+            Habitación = new DataGridViewTextBoxColumn();
+            NumPersonas = new DataGridViewTextBoxColumn();
+            Eliminar = new DataGridViewImageColumn();
             label4 = new Label();
             textDetallesHab = new TextBox();
             label5 = new Label();
@@ -80,9 +83,6 @@ namespace MAD
             comboCiudad = new ComboBox();
             label12 = new Label();
             checkBox1 = new CheckBox();
-            Habitación = new DataGridViewTextBoxColumn();
-            NumPersonas = new DataGridViewTextBoxColumn();
-            Eliminar = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvHoteles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarritoReserva).BeginInit();
@@ -106,6 +106,7 @@ namespace MAD
             // 
             // dgvHoteles
             // 
+            dgvHoteles.AllowUserToAddRows = false;
             dgvHoteles.AllowUserToResizeColumns = false;
             dgvHoteles.AllowUserToResizeRows = false;
             dgvHoteles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -169,6 +170,7 @@ namespace MAD
             // 
             // dgvCarritoReserva
             // 
+            dgvCarritoReserva.AllowUserToAddRows = false;
             dgvCarritoReserva.AllowUserToResizeColumns = false;
             dgvCarritoReserva.AllowUserToResizeRows = false;
             dgvCarritoReserva.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -179,6 +181,31 @@ namespace MAD
             dgvCarritoReserva.Size = new Size(461, 365);
             dgvCarritoReserva.TabIndex = 14;
             dgvCarritoReserva.CellContentClick += dgvCarritoReserva_CellContentClick;
+            // 
+            // Habitación
+            // 
+            Habitación.HeaderText = "Habitacion";
+            Habitación.MinimumWidth = 6;
+            Habitación.Name = "Habitación";
+            Habitación.Width = 200;
+            // 
+            // NumPersonas
+            // 
+            NumPersonas.HeaderText = "Numero de personas";
+            NumPersonas.MinimumWidth = 6;
+            NumPersonas.Name = "NumPersonas";
+            NumPersonas.Width = 125;
+            // 
+            // Eliminar
+            // 
+            Eliminar.HeaderText = "Eliminar";
+            Eliminar.Image = Properties.Resources.basura;
+            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            Eliminar.MinimumWidth = 6;
+            Eliminar.Name = "Eliminar";
+            Eliminar.Resizable = DataGridViewTriState.True;
+            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
+            Eliminar.Width = 125;
             // 
             // label4
             // 
@@ -342,6 +369,7 @@ namespace MAD
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(183, 30);
             comboBox1.TabIndex = 30;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // groupBox2
             // 
@@ -550,31 +578,6 @@ namespace MAD
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(104, 24);
             checkBox1.TabIndex = 0;
-            // 
-            // Habitación
-            // 
-            Habitación.HeaderText = "Habitacion";
-            Habitación.MinimumWidth = 6;
-            Habitación.Name = "Habitación";
-            Habitación.Width = 200;
-            // 
-            // NumPersonas
-            // 
-            NumPersonas.HeaderText = "Numero de personas";
-            NumPersonas.MinimumWidth = 6;
-            NumPersonas.Name = "NumPersonas";
-            NumPersonas.Width = 125;
-            // 
-            // Eliminar
-            // 
-            Eliminar.HeaderText = "Eliminar";
-            Eliminar.Image = Properties.Resources.basura;
-            Eliminar.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Eliminar.MinimumWidth = 6;
-            Eliminar.Name = "Eliminar";
-            Eliminar.Resizable = DataGridViewTriState.True;
-            Eliminar.SortMode = DataGridViewColumnSortMode.Automatic;
-            Eliminar.Width = 125;
             // 
             // Reservar
             // 

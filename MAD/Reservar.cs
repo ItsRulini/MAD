@@ -10,12 +10,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MAD.Models;
 using System.Reflection.PortableExecutable;
+using System.Xml.Linq;
+using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel; // Necesario para ListSortDirection
 
 namespace MAD
 {
     public partial class Reservar : Form
     {
         private Guid idHotelSeleccionado; // id del hotel seleccionado
+        private Guid idComprador;
+        private Guid idVendedor;
+
         private string precioNocheHabitacion;
         private string precioPersonaHabitacion;
 
@@ -28,11 +34,13 @@ namespace MAD
         DataGridViewCell totalCelda;
 
 
-        public Reservar()
+        public Reservar(Guid idUsuario)
         {
             InitializeComponent();
             inicializarComboPagos();
             inicializarComboCiudades();
+
+            idVendedor = idUsuario;
 
             inicializarGridCarrito();
         }
@@ -199,8 +207,9 @@ namespace MAD
                 return;
             }
 
+            string tipoHabitacion = comboHabitacion.Text;
             TipoHabitacionDAO tipoHab = new TipoHabitacionDAO();
-            Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas(comboHabitacion.Text, idHotelSeleccionado);
+            Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas(tipoHabitacion, idHotelSeleccionado);
 
 
 
@@ -211,6 +220,7 @@ namespace MAD
                 MessageBox.Show("La cantidad máxima de personas es de: " + cantidadMaxina);
                 return;
             }
+
 
             subtotal += Math.Round(double.Parse(precio.FirstOrDefault().Key.PrecioPorNoche.ToString()));
             iva = Math.Round(subtotal * 0.16);
@@ -223,15 +233,274 @@ namespace MAD
             // Insertar la nueva fila en la posición 0
             dgvCarritoReserva.Rows.Insert(0, comboHabitacion.Text, numeroPersonas.Value);
 
-            MessageBox.Show("Articulo agregado al carrito.");
+
+            int numeroHabitacionesDelTipo = 0;
+
+            foreach (DataGridViewRow row in dgvCarritoReserva.Rows)
+            {
+                if (row.IsNewRow) continue; // Ignorar la fila nueva en DataGridView si está habilitada
+                string tipo = row.Cells[0].Value.ToString();
+                if (tipo == tipoHabitacion)
+                {
+                    numeroHabitacionesDelTipo++;
+                }
+            }
+
+            HabitacionDAO habitacionDAO = new HabitacionDAO();
+            int cantidadHabitaciones = habitacionDAO.getCantidadTipoHabitacion_Hotel(idHotelSeleccionado, tipoHabitacion, dtpDesde.Value, dtpHasta.Value);
+
+            if (numeroHabitacionesDelTipo > cantidadHabitaciones)
+            {
+                MessageBox.Show("No hay habitaciones disponibles de este tipo");
+                dgvCarritoReserva.Rows.RemoveAt(0);
+                subtotal -= Math.Round(double.Parse(precio.FirstOrDefault().Key.PrecioPorNoche.ToString()));
+                iva = Math.Round(subtotal * 0.16);
+                total = Math.Round(iva + subtotal);
+                subtotalCelda.Value = "$" + subtotal + " MXN";
+                ivaCelda.Value = "$" + iva + " MXN";
+                totalCelda.Value = "$" + total + " MXN";
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Articulo agregado al carrito.");
+            }
+
+
+            
             comboHabitacion.SelectedIndex = -1;
             textDetallesHab.Clear();
 
+
+            if (dgvCarritoReserva.Rows.Count == 4)
+            {
+                //dgvHoteles.Rows.Clear();
+                // Iterar desde el final hacia el principio para evitar problemas al eliminar filas
+                for (int i = dgvHoteles.Rows.Count - 1; i >= 0; i--)
+                {
+                    DataGridViewRow fila = dgvHoteles.Rows[i];
+
+                    // Verificar si la fila no está seleccionada
+                    if (fila.Cells[1].Value.ToString() != idHotelSeleccionado.ToString())
+                    {
+                        dgvHoteles.Rows.RemoveAt(i);
+                    }
+                }
+            }
 
         }
 
         private void btnComprarReserva_Click(object sender, EventArgs e)
         {
+            if (comboMetodoPago.SelectedIndex < 0)
+            {
+                MessageBox.Show("Debe seleccionar un método de pago");
+                return;
+            }
+
+            if (comboBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Debe seleccionar un cliente");
+                return;
+            }
+
+            if (dgvCarritoReserva.Rows.Count == 3)
+            {
+                MessageBox.Show("No hay artículos en el carrito");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textAnticipo.Text))
+            {
+                MessageBox.Show("El anticipo no puede estar vacío");
+                return;
+            }
+            //decimal.Parse(row.Cells[1].Value.ToString().Replace("$", "").Replace("MXN", ""));
+            if (decimal.Parse(textAnticipo.Text.ToString())
+                > decimal.Parse(totalCelda.Value.ToString().Replace("$","").Replace(" MXN", "")))
+            {
+                MessageBox.Show("El anticipo no puede ser mayor al total de su cuenta");
+                return;
+            }
+
+            HabitacionDAO habitacionDAO = new HabitacionDAO();
+
+            // Diccionary para almacenar las habitaciones y su cantidad
+            Dictionary<Guid, int> tipoHabitaciones = new Dictionary<Guid, int>();
+            TipoHabitacionDAO tipoHabitacionDAO = new TipoHabitacionDAO();
+            TipoHabitacion tipoHabitacion = new TipoHabitacion();
+
+            foreach (DataGridViewRow row in dgvCarritoReserva.Rows)
+            {
+                if (row.IsNewRow) continue; // Ignorar la fila nueva en DataGridView si está habilitada
+
+                string tipo = row.Cells[0].Value.ToString();
+                
+                if (!string.IsNullOrEmpty(tipo))
+                {
+                    if (tipo == "Subtotal" || tipo == "IVA" || tipo == "Total")
+                    {
+                        continue; // Ignoranos las filas de subtotal, IVA y total
+                    }
+
+                    Guid tipoHabitacionKey = new Guid();
+                    tipoHabitacionKey = tipoHabitacionDAO.getIdTipoHabitacion(tipo, idHotelSeleccionado);
+
+                    if (tipoHabitaciones.ContainsKey(tipoHabitacionKey))
+                    {
+                        Guid claveExistente = tipoHabitaciones.Keys.First(k => k.Equals(tipoHabitacionKey));
+                        tipoHabitaciones[claveExistente]++;
+                    }
+                    else
+                    {
+                        tipoHabitaciones[tipoHabitacionKey] = 1;
+                    }
+                }
+            }
+
+            List<Habitacion> habitaciones = habitacionDAO.getHabitacionesParaReservar(idHotelSeleccionado, tipoHabitaciones, dtpDesde.Value, dtpHasta.Value);
+
+            DataGridViewRow[] filas = { };
+
+
+            int numFilasAExcluir = 3;
+            List<object[]> datosFilasExcluidas = new List<object[]>();
+
+            int indiceUltimaFilaDeDatos = dgvCarritoReserva.Rows.Count - 1;
+            if (dgvCarritoReserva.AllowUserToAddRows && indiceUltimaFilaDeDatos >= 0 && dgvCarritoReserva.Rows[indiceUltimaFilaDeDatos].IsNewRow)
+            {
+                indiceUltimaFilaDeDatos--;
+            }
+
+            if (indiceUltimaFilaDeDatos + 1 >= numFilasAExcluir)
+            {
+                for (int i = 0; i < numFilasAExcluir; i++)
+                {
+                    DataGridViewRow filaACapturar = dgvCarritoReserva.Rows[indiceUltimaFilaDeDatos - numFilasAExcluir + 1 + i];
+
+                    // Guardar los valores de las celdas de esta fila.
+                    object[] valoresCelda = new object[filaACapturar.Cells.Count];
+                    for (int j = 0; j < filaACapturar.Cells.Count; j++)
+                    {
+                        valoresCelda[j] = filaACapturar.Cells[j].Value;
+                    }
+                    datosFilasExcluidas.Add(valoresCelda);
+                }
+
+                for (int i = 0; i < numFilasAExcluir; i++)
+                {
+                    // Recalcular el índice de la última fila de datos antes de cada eliminación.
+                    int indiceRealUltimaFila = dgvCarritoReserva.Rows.Count - 1;
+                    if (dgvCarritoReserva.AllowUserToAddRows && indiceRealUltimaFila >= 0 && dgvCarritoReserva.Rows[indiceRealUltimaFila].IsNewRow)
+                    {
+                        indiceRealUltimaFila--;
+                    }
+
+                    if (indiceRealUltimaFila >= 0) // Asegurarse de que aún hay filas de datos para eliminar.
+                    {
+                        dgvCarritoReserva.Rows.RemoveAt(indiceRealUltimaFila);
+                    }
+                    else
+                    {
+                        break; // No hay más filas de datos para eliminar.
+                    }
+                }
+            }
+
+            if (dgvCarritoReserva.Columns.Count > 0) // Asegurarse de que haya al menos una columna
+            {
+                dgvCarritoReserva.Sort(dgvCarritoReserva.Columns[0], ListSortDirection.Ascending);
+            }
+
+            if (datosFilasExcluidas.Any()) // Verifica si la lista tiene elementos.
+            {
+                foreach (object[] dataFila in datosFilasExcluidas)
+                {
+                    // Añade una nueva fila al final del DataGridView con los datos guardados.
+                    dgvCarritoReserva.Rows.Add(dataFila);
+                }
+            }
+
+            indiceUltimaFilaDeDatos = dgvCarritoReserva.Rows.Count - 1;
+            if (dgvCarritoReserva.AllowUserToAddRows && indiceUltimaFilaDeDatos >= 0 && dgvCarritoReserva.Rows[indiceUltimaFilaDeDatos].IsNewRow)
+            {
+                indiceUltimaFilaDeDatos--;
+            }
+
+            subtotalCelda = dgvCarritoReserva.Rows[indiceUltimaFilaDeDatos - 2].Cells[1]; // Columna 1: el monto
+            ivaCelda = dgvCarritoReserva.Rows[indiceUltimaFilaDeDatos - 1].Cells[1];
+            totalCelda = dgvCarritoReserva.Rows[indiceUltimaFilaDeDatos].Cells[1];
+
+
+            Dictionary<Habitacion, int> habitacionesReservadas = new Dictionary<Habitacion, int>();
+
+            foreach (DataGridViewRow row in dgvCarritoReserva.Rows)
+            {
+                if (row.IsNewRow) continue; // Ignorar la fila nueva en DataGridView si está habilitada
+
+                string tipo = row.Cells[0].Value.ToString();
+
+                if (tipo == "Subtotal" || tipo == "IVA" || tipo == "Total")
+                {
+                    continue; // Ignoranos las filas de subtotal, IVA y total
+                }
+
+                int cantidad = int.Parse(row.Cells[1].Value.ToString());
+                if (!string.IsNullOrEmpty(tipo))
+                {
+
+                    habitacionesReservadas.Add(habitaciones.FirstOrDefault(), cantidad);
+                    habitaciones.Remove(habitaciones.FirstOrDefault());
+                }
+            }
+
+            DatosPersonaDAO datosPersonaDAO = new DatosPersonaDAO();
+
+            if (comboBox1.Text.Contains("@"))
+            {
+                idComprador = datosPersonaDAO.getIdPersonaPorCorreo(comboBox1.Text);
+            }
+            else
+            {
+                string nombreCompleto = comboBox1.Text;
+                string[] partesNombre = nombreCompleto.Split(' ');
+
+                if(partesNombre.Length > 3)
+                {
+                    partesNombre[0] = partesNombre[0] + " " + partesNombre[1];
+                    partesNombre[1] = partesNombre[2];
+                    partesNombre[2] = partesNombre[3];
+
+                }
+
+                idComprador = datosPersonaDAO.getIdPersonaPorApellidos(partesNombre[0], partesNombre[1], partesNombre[2]);
+            }
+
+
+            Reservacion reservacion = new Reservacion();
+            reservacion.IdReservacion = Guid.NewGuid();
+            reservacion.IdComprador = idComprador;
+            reservacion.IdVendedor = idVendedor;
+            reservacion.IdHotel = idHotelSeleccionado;
+            reservacion.MetodoPago = comboMetodoPago.Text;
+            reservacion.Anticipo = decimal.Parse(textAnticipo.Text);
+            reservacion.MontoTotal = decimal.Parse(total.ToString());
+            reservacion.FechaInicioHospedaje = DateOnly.FromDateTime(dtpDesde.Value);
+            reservacion.FechaFinHospedaje = DateOnly.FromDateTime(dtpHasta.Value);
+
+            // Llamar al pop-up de confirmación
+            ConfirmarReserva confirmarReserva = new ConfirmarReserva(reservacion, habitacionesReservadas);
+            confirmarReserva.ShowDialog();
+
+            if(confirmarReserva.DialogResult == DialogResult.OK)
+            {
+                dgvCarritoReserva.Rows.Clear();
+                comboBox1.Items.Clear();
+                textAnticipo.Clear();
+                textBox1.Clear();
+                textDetallesHab.Clear();
+                inicializarGridCarrito();
+            }
 
         }
 
@@ -298,7 +567,7 @@ namespace MAD
         }
         private void btnBuscarFechas_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -314,11 +583,9 @@ namespace MAD
         // Eliminar del carrito un item
         private void dgvCarritoReserva_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 2  && e.RowIndex != subtotalCelda.RowIndex && e.RowIndex != ivaCelda.RowIndex
+            if (e.ColumnIndex == 2 && e.RowIndex != subtotalCelda.RowIndex && e.RowIndex != ivaCelda.RowIndex
                 && e.RowIndex != totalCelda.RowIndex) // Para evitar errores si clickeas en los encabezados
             {
-
-
                 TipoHabitacionDAO tipoHab = new TipoHabitacionDAO();
                 Dictionary<TipoHabitacion, Amenidad> precio = tipoHab.getCaracteristicas((dgvCarritoReserva.Rows[e.RowIndex].Cells[0].Value?.ToString()), idHotelSeleccionado);
 
@@ -343,6 +610,11 @@ namespace MAD
             comboHabitacion.SelectedIndex = -1;
             comboHabitacion.Items.Clear();
             dgvHoteles.Rows.Clear();
+
+            //Limpia carrito cada que buscar y lo vuelve a inicializar
+            dgvCarritoReserva.Rows.Clear();
+            inicializarGridCarrito();
+
 
             if (checkBuscarPorApellido.Checked) // búsqueda por apellidos  
             {
@@ -375,6 +647,11 @@ namespace MAD
             incializarGridHotelesDisponibles();
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Obtener id del usuario seleccionado
+            //XDeclaration;1
+        }
         private void comboCiudad_SelectedIndexChanged(object sender, EventArgs e)
         {
 

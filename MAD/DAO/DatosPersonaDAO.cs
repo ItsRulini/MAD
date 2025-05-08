@@ -100,5 +100,61 @@ namespace MAD.DAO
             return listaClientes;
         }
 
+
+        public Guid getIdPersonaPorCorreo (string correo)
+        {
+            Guid idPersona = Guid.Empty;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetIdPersonaPorCorreo", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@correo", correo);
+                    
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                //ver qué hacer aquí xd no le entiendo tilin ayuda, llevamos un vergo de veces y sigo sin entender, no me papies bro, al menos ya le avancé en esto xdxdxd
+                                idPersona = Guid.Parse(reader["idPersona"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+
+            return idPersona;
+        }
+
+
+        public Guid getIdPersonaPorApellidos (string nombre, string A_Paterno, string A_Materno)
+        {
+            Guid idPersona = Guid.Empty;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetIdPersonaPorNombreCompleto", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@nombres", nombre);
+                    cmd.Parameters.AddWithValue("@paterno", A_Paterno);
+                    cmd.Parameters.AddWithValue("@materno", A_Materno);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                //ver qué hacer aquí xd no le entiendo tilin ayuda, llevamos un vergo de veces y sigo sin entender, no me papies bro, al menos ya le avancé en esto xdxdxd
+                                idPersona = Guid.Parse(reader["idPersona"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return idPersona;
+        }
+
     }
 }

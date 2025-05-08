@@ -291,6 +291,8 @@ public partial class MadContext : DbContext
 
             entity.ToTable("Factura");
 
+            entity.HasIndex(e => e.IdReservacion, "IX_Reservacion");
+
             entity.Property(e => e.IdFactura)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("idFactura");
@@ -411,7 +413,7 @@ public partial class MadContext : DbContext
         {
             entity.HasKey(e => e.IdReservacion).HasName("PK__Reservac__C813D8AD09F4127B");
 
-            entity.ToTable("Reservacion");
+            entity.ToTable("Reservacion", tb => tb.HasTrigger("trAgregarFactura"));
 
             entity.Property(e => e.IdReservacion)
                 .HasDefaultValueSql("(newid())")
@@ -464,6 +466,11 @@ public partial class MadContext : DbContext
             entity.Property(e => e.IdReservacion).HasColumnName("idReservacion");
             entity.Property(e => e.IdHabitacion).HasColumnName("idHabitacion");
             entity.Property(e => e.CantidadPersonas).HasColumnName("cantidadPersonas");
+            entity.Property(e => e.Estatus)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("Reservada")
+                .HasColumnName("estatus");
 
             entity.HasOne(d => d.IdHabitacionNavigation).WithMany(p => p.ReservacionHabitacions)
                 .HasForeignKey(d => d.IdHabitacion)

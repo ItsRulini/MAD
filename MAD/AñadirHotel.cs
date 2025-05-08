@@ -307,7 +307,7 @@ namespace MAD
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 2) // Para evitar errores si clickeas en los encabezados
             {
-                gridHabitaciones.Rows.RemoveAt(e.RowIndex);
+                gridServiciosHotel.Rows.RemoveAt(e.RowIndex);
             }
         }
 

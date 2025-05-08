@@ -95,15 +95,16 @@ namespace MAD.DAO
         }
 
 
-        public Guid getIdTipoHabitacion(string tipoHabitacion)
+        public Guid getIdTipoHabitacion(string tipoHabitacion, Guid idHotel)
         {
             Guid idTipohabitacion = Guid.Empty;
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
-                using (var cmd = new SqlCommand("spGetIdTipoHabitacion", conn))
+                using (var cmd = new SqlCommand("spGetIdTipoHabitacion_Hotel", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@tipo", tipoHabitacion);
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -184,6 +185,57 @@ namespace MAD.DAO
             return caracteristicas;
         }
 
+
+        public Dictionary<Guid, int> getCantidadHabitacionesPorTipo(Guid idHotel, Dictionary<Guid, int> habitacionesSolicitadas)
+        {
+            Dictionary<Guid, int> habitaciones = new Dictionary<Guid, int>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetCantidadHabitacionesPorTipoEnHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    cmd.Parameters.AddWithValue("@habitacionesSolicitadas", habitacionesSolicitadas);   
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Guid idTipoHabitacion = Guid.Parse(reader["idTipoHabitacion"].ToString());
+                                int cantidadHabitaciones = int.Parse(reader["cantidadHabitaciones"].ToString());
+                                habitaciones.Add(idTipoHabitacion, cantidadHabitaciones);
+                            }
+                        }
+                    }
+                }
+            }
+            return habitaciones;
+        }
+
+        public string getTipoHabitacionPorIdHabitacion(Guid idHabitacion)
+        {
+            string tipoHabitacion = string.Empty;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetTipoPorIdHabitacion", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHabitacion", idHabitacion);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                tipoHabitacion = reader["nivel"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return tipoHabitacion;
+        }
 
     }
 }

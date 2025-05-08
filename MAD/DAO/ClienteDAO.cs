@@ -109,5 +109,30 @@ namespace MAD.DAO
             return cliente;
         }
 
+        public Cliente getIdCliente(string correo)
+        {
+            Cliente cliente = null;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetDatosCliente", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@correo", correo);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                cliente = new Cliente();
+                                cliente.IdCliente = Guid.Parse(reader["idCliente"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return cliente;
+        }
+
     }
 }

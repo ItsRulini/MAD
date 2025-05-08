@@ -38,7 +38,7 @@ namespace MAD
             }
             else
             {
-                Reservar freservar = new Reservar();
+                Reservar freservar = new Reservar(usuario.IdUsuario);
                 this.Hide();
                 freservar.ShowDialog();
                 this.Show();
