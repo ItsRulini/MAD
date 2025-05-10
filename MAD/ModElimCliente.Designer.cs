@@ -65,6 +65,14 @@
             textApellidoPaterno = new TextBox();
             textNumCasa = new TextBox();
             pictureBox1 = new PictureBox();
+            textCP = new TextBox();
+            textColonia = new TextBox();
+            label16 = new Label();
+            label17 = new Label();
+            textNumero = new TextBox();
+            textCalle = new TextBox();
+            label15 = new Label();
+            label18 = new Label();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -82,7 +90,7 @@
             groupBox1.Controls.Add(pictureBox1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(657, 603);
+            groupBox1.Size = new Size(657, 720);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Gestionar clientes";
@@ -128,9 +136,9 @@
             // 
             // btnElimCliente
             // 
-            btnElimCliente.Location = new Point(527, 429);
+            btnElimCliente.Location = new Point(508, 358);
             btnElimCliente.Name = "btnElimCliente";
-            btnElimCliente.Size = new Size(99, 42);
+            btnElimCliente.Size = new Size(142, 55);
             btnElimCliente.TabIndex = 34;
             btnElimCliente.Text = "Eliminar";
             btnElimCliente.UseVisualStyleBackColor = true;
@@ -138,9 +146,9 @@
             // 
             // btnModCliente
             // 
-            btnModCliente.Location = new Point(527, 360);
+            btnModCliente.Location = new Point(508, 265);
             btnModCliente.Name = "btnModCliente";
-            btnModCliente.Size = new Size(99, 42);
+            btnModCliente.Size = new Size(142, 62);
             btnModCliente.TabIndex = 33;
             btnModCliente.Text = "Modificar";
             btnModCliente.UseVisualStyleBackColor = true;
@@ -148,17 +156,25 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(textCP);
+            groupBox3.Controls.Add(textColonia);
             groupBox3.Controls.Add(comboBox3);
+            groupBox3.Controls.Add(label16);
             groupBox3.Controls.Add(comboBox2);
+            groupBox3.Controls.Add(label17);
             groupBox3.Controls.Add(comboBox1);
+            groupBox3.Controls.Add(textNumero);
             groupBox3.Controls.Add(label12);
+            groupBox3.Controls.Add(textCalle);
             groupBox3.Controls.Add(label11);
+            groupBox3.Controls.Add(label15);
             groupBox3.Controls.Add(label10);
+            groupBox3.Controls.Add(label18);
             groupBox3.Controls.Add(textCorreo);
             groupBox3.Controls.Add(label4);
             groupBox3.Location = new Point(6, 475);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(570, 108);
+            groupBox3.Size = new Size(570, 239);
             groupBox3.TabIndex = 32;
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos de contacto:";
@@ -416,12 +432,76 @@
             pictureBox1.TabIndex = 22;
             pictureBox1.TabStop = false;
             // 
+            // textCP
+            // 
+            textCP.Location = new Point(422, 203);
+            textCP.Name = "textCP";
+            textCP.Size = new Size(114, 30);
+            textCP.TabIndex = 41;
+            // 
+            // textColonia
+            // 
+            textColonia.Location = new Point(9, 203);
+            textColonia.Name = "textColonia";
+            textColonia.Size = new Size(407, 30);
+            textColonia.TabIndex = 40;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(422, 171);
+            label16.Name = "label16";
+            label16.Size = new Size(40, 22);
+            label16.TabIndex = 43;
+            label16.Text = "CP:";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(6, 171);
+            label17.Name = "label17";
+            label17.Size = new Size(79, 22);
+            label17.TabIndex = 42;
+            label17.Text = "Colonia:";
+            // 
+            // textNumero
+            // 
+            textNumero.Location = new Point(422, 130);
+            textNumero.Name = "textNumero";
+            textNumero.Size = new Size(114, 30);
+            textNumero.TabIndex = 37;
+            // 
+            // textCalle
+            // 
+            textCalle.Location = new Point(9, 130);
+            textCalle.Name = "textCalle";
+            textCalle.Size = new Size(407, 30);
+            textCalle.TabIndex = 36;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(422, 98);
+            label15.Name = "label15";
+            label15.Size = new Size(80, 22);
+            label15.TabIndex = 39;
+            label15.Text = "Número:";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(6, 98);
+            label18.Name = "label18";
+            label18.Size = new Size(131, 22);
+            label18.TabIndex = 38;
+            label18.Text = "Calle/Avenida:";
+            // 
             // ModElimCliente
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(685, 627);
+            ClientSize = new Size(685, 744);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.ControlText;
@@ -480,5 +560,13 @@
         private TextBox textBuscarCliente;
         private Label label14;
         private Button btnBuscarCliente;
+        private TextBox textCP;
+        private TextBox textColonia;
+        private Label label16;
+        private Label label17;
+        private TextBox textNumero;
+        private TextBox textCalle;
+        private Label label15;
+        private Label label18;
     }
 }

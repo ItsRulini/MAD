@@ -179,6 +179,42 @@ namespace MAD.DAO
             }
         }
 
+        public Reservacion ObtenerReservacion(Guid idReservacion)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAllDatosReservacion", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idReservacion", idReservacion);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Reservacion
+                            {
+                                IdReservacion = reader.GetGuid(reader.GetOrdinal("idReservacion")),
+                                MetodoPago = reader.GetString(reader.GetOrdinal("metodoPago")),
+                                Anticipo = reader.GetDecimal(reader.GetOrdinal("anticipo")),
+                                MontoTotal = reader.GetDecimal(reader.GetOrdinal("montoTotal")),
+                                FechaInicioHospedaje = DateOnly.FromDateTime(reader.GetDateTime(reader.GetOrdinal("fechaInicioHospedaje"))),
+                                FechaFinHospedaje = DateOnly.FromDateTime(reader.GetDateTime(reader.GetOrdinal("fechaFinHospedaje"))),
+                                CheckIn = reader.GetBoolean(reader.GetOrdinal("checkIn")),
+                                ChekOut = reader.GetBoolean(reader.GetOrdinal("chekOut")), // ojo: es "chekOut" en tu tabla
+                                FechaReservacion = reader.GetDateTime(reader.GetOrdinal("fechaReservacion")),
+                                IdComprador = reader.GetGuid(reader.GetOrdinal("idComprador")),
+                                IdVendedor = reader.GetGuid(reader.GetOrdinal("idVendedor")),
+                                IdHotel = reader.GetGuid(reader.GetOrdinal("idHotel"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+
     }
 
 

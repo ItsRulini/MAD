@@ -185,5 +185,38 @@ namespace MAD.DAO
             return Datos;
         }
 
+
+        public DatosPersona ObtenerDatosPersona(Guid idPersona)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAllDatosPersona", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idPersona", idPersona);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new DatosPersona
+                            {
+                                IdPersona = reader.GetGuid(reader.GetOrdinal("idPersona")),
+                                Correo = reader.GetString(reader.GetOrdinal("correo")),
+                                Nombres = reader.GetString(reader.GetOrdinal("nombres")),
+                                Paterno = reader.GetString(reader.GetOrdinal("paterno")),
+                                Materno = reader.GetString(reader.GetOrdinal("materno")),
+                                FechaNacimiento = DateOnly.FromDateTime(reader.GetDateTime(reader.GetOrdinal("fechaNacimiento"))),
+                                TelefonoCasa = reader.GetInt64(reader.GetOrdinal("telefonoCasa")),
+                                Celular = reader.GetInt64(reader.GetOrdinal("celular")),
+                                FechaRegistro = reader.GetDateTime(reader.GetOrdinal("fechaRegistro"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
     }
 }

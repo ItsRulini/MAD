@@ -40,5 +40,32 @@ namespace MAD.DAO
             }
             return null;
         }
+
+        public DatosFiscal ObtenerDatosFiscal(Guid idContribuyente)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAllDatosFiscales", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idContribuyente", idContribuyente);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new DatosFiscal
+                            {
+                                IdContribuyente = reader.GetGuid(reader.GetOrdinal("idContribuyente")),
+                                TipoContribuyente = reader.GetString(reader.GetOrdinal("tipoContribuyente")),
+                                RegimenFiscal = reader.GetString(reader.GetOrdinal("regimenFiscal"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
     }
 }

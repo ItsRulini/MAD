@@ -15,6 +15,12 @@ public partial class Cliente
 
     public bool? Estado { get; set; }
 
+    public string? Domicilio { get; set; }
+
+    public string? Colonia { get; set; }
+
+    public int? Cp { get; set; }
+
     public virtual DatosPersona IdClienteNavigation { get; set; } = null!;
 
     public virtual Ubicacion? IdUbicacionNavigation { get; set; }

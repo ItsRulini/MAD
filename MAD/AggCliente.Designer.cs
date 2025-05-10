@@ -32,8 +32,16 @@
             groupBox1 = new GroupBox();
             btnAggCliente = new Button();
             groupBox3 = new GroupBox();
+            textCP = new TextBox();
+            textColonia = new TextBox();
+            label16 = new Label();
+            label17 = new Label();
+            textNumero = new TextBox();
             comboBox3 = new ComboBox();
+            textCalle = new TextBox();
+            label14 = new Label();
             comboBox2 = new ComboBox();
+            label15 = new Label();
             comboBox1 = new ComboBox();
             label12 = new Label();
             label11 = new Label();
@@ -74,16 +82,16 @@
             groupBox1.Controls.Add(pictureBox1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(657, 510);
+            groupBox1.Size = new Size(657, 655);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Registar cliente:";
             // 
             // btnAggCliente
             // 
-            btnAggCliente.Location = new Point(532, 211);
+            btnAggCliente.Location = new Point(507, 188);
             btnAggCliente.Name = "btnAggCliente";
-            btnAggCliente.Size = new Size(99, 57);
+            btnAggCliente.Size = new Size(142, 57);
             btnAggCliente.TabIndex = 33;
             btnAggCliente.Text = "Agregar cliente";
             btnAggCliente.UseVisualStyleBackColor = true;
@@ -91,8 +99,16 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(textCP);
+            groupBox3.Controls.Add(textColonia);
+            groupBox3.Controls.Add(label16);
+            groupBox3.Controls.Add(label17);
+            groupBox3.Controls.Add(textNumero);
             groupBox3.Controls.Add(comboBox3);
+            groupBox3.Controls.Add(textCalle);
+            groupBox3.Controls.Add(label14);
             groupBox3.Controls.Add(comboBox2);
+            groupBox3.Controls.Add(label15);
             groupBox3.Controls.Add(comboBox1);
             groupBox3.Controls.Add(label12);
             groupBox3.Controls.Add(label11);
@@ -101,10 +117,49 @@
             groupBox3.Controls.Add(label4);
             groupBox3.Location = new Point(6, 388);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(570, 108);
+            groupBox3.Size = new Size(551, 261);
             groupBox3.TabIndex = 32;
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos de contacto:";
+            // 
+            // textCP
+            // 
+            textCP.Location = new Point(422, 208);
+            textCP.Name = "textCP";
+            textCP.Size = new Size(114, 30);
+            textCP.TabIndex = 32;
+            // 
+            // textColonia
+            // 
+            textColonia.Location = new Point(9, 208);
+            textColonia.Name = "textColonia";
+            textColonia.Size = new Size(407, 30);
+            textColonia.TabIndex = 31;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(422, 176);
+            label16.Name = "label16";
+            label16.Size = new Size(40, 22);
+            label16.TabIndex = 34;
+            label16.Text = "CP:";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(6, 176);
+            label17.Name = "label17";
+            label17.Size = new Size(79, 22);
+            label17.TabIndex = 33;
+            label17.Text = "Colonia:";
+            // 
+            // textNumero
+            // 
+            textNumero.Location = new Point(422, 135);
+            textNumero.Name = "textNumero";
+            textNumero.Size = new Size(114, 30);
+            textNumero.TabIndex = 9;
             // 
             // comboBox3
             // 
@@ -115,6 +170,22 @@
             comboBox3.TabIndex = 30;
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             // 
+            // textCalle
+            // 
+            textCalle.Location = new Point(9, 135);
+            textCalle.Name = "textCalle";
+            textCalle.Size = new Size(407, 30);
+            textCalle.TabIndex = 8;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(422, 103);
+            label14.Name = "label14";
+            label14.Size = new Size(80, 22);
+            label14.TabIndex = 11;
+            label14.Text = "Número:";
+            // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
@@ -123,6 +194,15 @@
             comboBox2.Size = new Size(121, 30);
             comboBox2.TabIndex = 29;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(6, 103);
+            label15.Name = "label15";
+            label15.Size = new Size(131, 22);
+            label15.TabIndex = 10;
+            label15.Text = "Calle/Avenida:";
             // 
             // comboBox1
             // 
@@ -365,7 +445,7 @@
             AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(684, 534);
+            ClientSize = new Size(684, 679);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -415,5 +495,13 @@
         private Label label10;
         private ComboBox comboRegimenFiscal;
         private Label label13;
+        private TextBox textCP;
+        private TextBox textColonia;
+        private Label label16;
+        private Label label17;
+        private TextBox textNumero;
+        private TextBox textCalle;
+        private Label label14;
+        private Label label15;
     }
 }

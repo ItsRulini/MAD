@@ -180,6 +180,15 @@ public partial class MadContext : DbContext
             entity.Property(e => e.IdCliente)
                 .ValueGeneratedNever()
                 .HasColumnName("idCliente");
+            entity.Property(e => e.Colonia)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("colonia");
+            entity.Property(e => e.Cp).HasColumnName("CP");
+            entity.Property(e => e.Domicilio)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("domicilio");
             entity.Property(e => e.Estado)
                 .HasDefaultValue(true)
                 .HasColumnName("estado");

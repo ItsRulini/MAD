@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MAD.DAO;
 using MAD.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MAD
@@ -37,6 +38,12 @@ namespace MAD
             comboBox1.Enabled = false; //Pais
             comboBox2.Enabled = false; //Estado
             comboBox3.Enabled = false; //Ciudad
+
+
+            textCalle.Enabled = false;
+            textNumero.Enabled = false;
+            textColonia.Enabled = false;
+            textCP.Enabled = false;
         }
 
         private void inicializarComboUbicacion()
@@ -135,6 +142,10 @@ namespace MAD
             cliente.EstadoCivil = comboEstadoCivil.Text;
             cliente.Rfc = textRFC.Text;
 
+            cliente.Domicilio = textCalle.Text + textNumero.Text;
+            cliente.Colonia = textColonia.Text;
+            cliente.Cp = int.Parse(textCP.Text.ToString());
+
             ubicacion.Pais = comboBox1.Text;
             ubicacion.Estado = comboBox2.Text;
             ubicacion.Ciudad = comboBox3.Text;
@@ -176,6 +187,13 @@ namespace MAD
             if (string.IsNullOrEmpty(cliente.Rfc))
             {
                 MessageBox.Show("El RFC no puede estar vacío.");
+                return;
+            }
+
+            //Validad lo del domicilio
+            if (string.IsNullOrEmpty(cliente.Domicilio) || string.IsNullOrEmpty(cliente.Colonia) || string.IsNullOrEmpty(cliente.Cp.ToString()))
+            {
+                MessageBox.Show("Rellene los datos de contacto");
                 return;
             }
 
@@ -240,6 +258,15 @@ namespace MAD
             comboEstadoCivil.Text = cliente.EstadoCivil;
             textRFC.Text = cliente.Rfc;
 
+            // Acceder a las partes
+            string[] partes = cliente.Domicilio.Split(" #");
+            string calle = partes[0];
+            string numero = partes[1];
+
+            textCalle.Text = calle;
+            textNumero.Text = numero;
+            textColonia.Text = cliente.Colonia;
+            textCP.Text    = cliente.Cp.ToString();
 
             comboRegimenFiscal.Text = fiscal.RegimenFiscal;
 
@@ -300,6 +327,11 @@ namespace MAD
             comboBox1.Enabled = true; //Pais
             comboBox2.Enabled = false; //Estado
             comboBox3.Enabled = false; //Ciudad
+
+            textCalle.Enabled = true;
+            textNumero.Enabled = true;
+            textColonia.Enabled = true;
+            textCP.Enabled = true;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

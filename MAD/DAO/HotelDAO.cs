@@ -274,5 +274,37 @@ namespace MAD.DAO
             return nombreHotel;
         }
 
+        public Hotel ObtenerHotel(Guid idHotel)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAllDatosHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Hotel
+                            {
+                                IdHotel = reader.GetGuid(reader.GetOrdinal("idHotel")),
+                                Rfc = reader.GetString(reader.GetOrdinal("rfc")),
+                                Nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                                Domicilio = reader.GetString(reader.GetOrdinal("domicilio")),
+                                NumeroPisos = reader.GetInt32(reader.GetOrdinal("numeroPisos")),
+                                FechaInicioOperaciones = DateOnly.FromDateTime(reader.GetDateTime(reader.GetOrdinal("fechaInicioOperaciones"))),
+                                FechaRegistro = reader.GetDateTime(reader.GetOrdinal("fechaRegistro")),
+                                IdUsuario = reader.GetGuid(reader.GetOrdinal("idUsuario")),
+                                IdUbicacion = reader.GetGuid(reader.GetOrdinal("idUbicacion"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
     }
 }

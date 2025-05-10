@@ -73,6 +73,10 @@ namespace MAD
             cliente.EstadoCivil = comboEstadoCivil.Text;
             cliente.Rfc = textRFC.Text;
 
+            cliente.Domicilio = textCalle.Text + " #" + textNumero.Text;
+            cliente.Colonia = textColonia.Text;
+            cliente.Cp = int.Parse(textCP.Text.ToString());
+
             ubicacion.Pais = comboBox1.Text;
             ubicacion.Estado = comboBox2.Text;
             ubicacion.Ciudad = comboBox3.Text;
@@ -110,6 +114,12 @@ namespace MAD
             if (string.IsNullOrEmpty(cliente.Rfc))
             {
                 MessageBox.Show("El RFC no puede estar vacío.");
+                return;
+            }
+            //Validad lo del domicilio
+            if (string.IsNullOrEmpty(cliente.Domicilio) || string.IsNullOrEmpty(cliente.Colonia) || string.IsNullOrEmpty(cliente.Cp.ToString()))
+            {
+                MessageBox.Show("Rellene los datos de contacto");
                 return;
             }
 

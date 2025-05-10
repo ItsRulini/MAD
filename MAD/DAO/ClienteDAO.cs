@@ -31,6 +31,11 @@ namespace MAD.DAO
                     cmd.Parameters.AddWithValue("@nacimiento", persona.FechaNacimiento);
                     cmd.Parameters.AddWithValue("@estadoCivil", cliente.EstadoCivil);
                     cmd.Parameters.AddWithValue("@rfc", cliente.Rfc);
+
+                    cmd.Parameters.AddWithValue("@domicilio", cliente.Domicilio);
+                    cmd.Parameters.AddWithValue("@colonia", cliente.Colonia);
+                    cmd.Parameters.AddWithValue("@CP", cliente.Cp);
+
                     cmd.Parameters.AddWithValue("@ubicacion", ubicacion.IdUbicacion);
                     cmd.Parameters.AddWithValue("@regimenFiscal", fiscal.RegimenFiscal);
                     // Ejecutar el comando
@@ -71,6 +76,11 @@ namespace MAD.DAO
                     cmd.Parameters.AddWithValue("@celular", persona.Celular);
                     cmd.Parameters.AddWithValue("@estadoCivil", cliente.EstadoCivil);
                     cmd.Parameters.AddWithValue("@rfc", cliente.Rfc);
+
+                    cmd.Parameters.AddWithValue("@domicilio", cliente.Domicilio);
+                    cmd.Parameters.AddWithValue("@colonia", cliente.Colonia);
+                    cmd.Parameters.AddWithValue("@CP", cliente.Cp);
+
                     cmd.Parameters.AddWithValue("@regimenFiscal", fiscal.RegimenFiscal);
                     cmd.Parameters.AddWithValue("@ubicacion", cliente.IdUbicacion);
 
@@ -101,6 +111,9 @@ namespace MAD.DAO
                                 cliente.EstadoCivil = reader["estadoCivil"].ToString();
                                 cliente.Estado = bool.Parse(reader["estado"].ToString());
                                 cliente.IdUbicacion = Guid.Parse(reader["idUbicacion"].ToString());
+                                cliente.Domicilio = reader["domicilio"].ToString();
+                                cliente.Colonia = reader["colonia"].ToString();
+                                cliente.Cp = int.Parse(reader["CP"].ToString());
                             }
                         }
                     }
@@ -133,6 +146,36 @@ namespace MAD.DAO
             }
             return cliente;
         }
+
+        public Cliente ObtenerCliente(Guid idCliente)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetAllDatosCliente", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idCliente", idCliente);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Cliente
+                            {
+                                IdCliente = reader.GetGuid(reader.GetOrdinal("idCliente")),
+                                Rfc = reader.IsDBNull(reader.GetOrdinal("rfc")) ? null : reader.GetString(reader.GetOrdinal("rfc")),
+                                EstadoCivil = reader.GetString(reader.GetOrdinal("estadoCivil")),
+                                Estado = reader.GetBoolean(reader.GetOrdinal("estado")),
+                                IdUbicacion = reader.GetGuid(reader.GetOrdinal("idUbicacion"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        
 
     }
 }
