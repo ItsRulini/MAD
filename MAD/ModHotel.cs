@@ -53,8 +53,8 @@ namespace MAD
                     string servicioNombre = row.Cells[0].Value.ToString();
 
                     Servicio servicio = new Servicio();
-                     servicio = servicioNoHotel
-                        .FirstOrDefault(x => x.Nombre == servicioNombre);
+                    servicio = servicioNoHotel
+                       .FirstOrDefault(x => x.Nombre == servicioNombre);
 
 
                     decimal.TryParse(row.Cells[1].Value.ToString(), out decimal precio);
@@ -69,7 +69,7 @@ namespace MAD
                 }
             }
 
-            foreach(DataGridViewRow row in dgvHabAñadidas.Rows)
+            foreach (DataGridViewRow row in dgvHabAñadidas.Rows)
             {
                 if (!row.IsNewRow && row.Cells[0].Value.ToString() != null)
                 {
@@ -78,13 +78,13 @@ namespace MAD
 
                     TipoHabitacion tipoHab = tipoHabitacion
                         .FirstOrDefault(x => x.NivelHabitacion == tipoHabitacionNombre);
-                    
+
                     habitacionesToInsert.Add(tipoHab, cantidad);
                 }
             }
 
             HotelDAO hotelDAO = new HotelDAO();
-            if (hotelDAO.updateHotel(idHotel,int.Parse(NumPisos.Value.ToString()), serviciosToInsert, habitacionesToInsert))
+            if (hotelDAO.updateHotel(idHotel, int.Parse(NumPisos.Value.ToString()), serviciosToInsert, habitacionesToInsert))
             {
                 MessageBox.Show("Cambios guardados correctamente");
                 this.Close();
@@ -142,7 +142,7 @@ namespace MAD
 
         private void comboTipohabitacionAmenidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             if (comboTipohabitacionAmenidad.SelectedIndex < 0)
             {
                 return; // No hay selección válida
@@ -185,13 +185,13 @@ namespace MAD
         }
         private void btnInsertAmenidades_Click(object sender, EventArgs e)
         {
-            TipoHabitacion tipoHabitacionToInsert = 
+            TipoHabitacion tipoHabitacionToInsert =
             tipoHabitacion.Find(x => x.NivelHabitacion == comboTipohabitacionAmenidad.Text);
 
             Guid idTipoHabitacion = tipoHabitacionToInsert.IdTipoHabitacion;
 
             List<Amenidad> amenidadesToInsert = new List<Amenidad>();
-            
+
             foreach (DataGridViewRow row in dgvAmenidadesAñadidas.Rows)
             {
                 if (!row.IsNewRow && row.Cells[0].Value.ToString() != null)
@@ -305,7 +305,7 @@ namespace MAD
                     else
                     {
                         dgvServicioAñadido.Rows.RemoveAt(row.Index); // Eliminar la fila existente
-                        MessageBox.Show("Precio actualizado.");
+                        MessageBox.Show("Precio actualizado con éxito.");
                     }
                 }
             }
@@ -431,6 +431,11 @@ namespace MAD
             {
                 dgvServicioAñadido.Rows.RemoveAt(e.RowIndex);
             }
+        }
+
+        private void ModHotel_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
