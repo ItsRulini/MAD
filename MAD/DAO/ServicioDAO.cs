@@ -90,7 +90,7 @@ namespace MAD.DAO
             }
             return idServicio;
         }
-
+        //Obtiene nombre por ID
         public Servicio getServicioPorId(Guid id)
         {
             Servicio servicio = null;
@@ -157,6 +157,34 @@ namespace MAD.DAO
                     }
                 }
             }
+            return servicios;
+        }
+        //Obtiene servicios y precios de cada hotel (complementar con el método de obtener el nombre del servicio por el id de servicio)
+        public Dictionary<Guid,decimal> getIdServicio_Precio_Hotel(Guid idHotel)
+        {
+            Dictionary<Guid, decimal> servicios = new Dictionary<Guid, decimal>();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetId_PrecioServiciosHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Guid idServicio = Guid.Parse(reader["idServicio"].ToString());
+                                decimal precio = decimal.Parse(reader["precio"].ToString());
+                                servicios.Add(idServicio, precio);
+                            }
+                        }
+                    }
+                }
+            }
+
             return servicios;
         }
 

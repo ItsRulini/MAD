@@ -155,6 +155,35 @@ namespace MAD.DAO
             }
             return idPersona;
         }
+        //Obtiene los datos de la persona por un Id de Reserva
+        public DatosPersona getDatosPersonaPorId(Guid? idPersona)
+        {
+            DatosPersona Datos = null;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetNombreCompletoPorId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    // Asignar parámetros
+                    cmd.Parameters.AddWithValue("@idPersona", idPersona);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Datos = new DatosPersona();
+                                Datos.Nombres = reader["nombres"].ToString();
+                                Datos.Paterno = reader["paterno"].ToString();
+                                Datos.Materno = reader["materno"].ToString();
+                            }
+                        }
+                    }
+
+                }
+            }
+            return Datos;
+        }
 
     }
 }

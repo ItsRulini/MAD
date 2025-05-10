@@ -35,6 +35,8 @@ public partial class MadContext : DbContext
 
     public virtual DbSet<Factura> Facturas { get; set; }
 
+    public virtual DbSet<FacturaServicio> FacturaServicios { get; set; }
+
     public virtual DbSet<Habitacion> Habitacions { get; set; }
 
     public virtual DbSet<Hotel> Hotels { get; set; }
@@ -304,25 +306,27 @@ public partial class MadContext : DbContext
             entity.HasOne(d => d.IdReservacionNavigation).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.IdReservacion)
                 .HasConstraintName("FK__Factura__idReser__18EBB532");
+        });
 
-            entity.HasMany(d => d.IdServicios).WithMany(p => p.IdFacturas)
-                .UsingEntity<Dictionary<string, object>>(
-                    "FacturaServicio",
-                    r => r.HasOne<Servicio>().WithMany()
-                        .HasForeignKey("IdServicio")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Factura_S__idSer__1CBC4616"),
-                    l => l.HasOne<Factura>().WithMany()
-                        .HasForeignKey("IdFactura")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__Factura_S__idFac__1BC821DD"),
-                    j =>
-                    {
-                        j.HasKey("IdFactura", "IdServicio").HasName("PK__Factura___B03EF06FEBB1C84D");
-                        j.ToTable("Factura_Servicio");
-                        j.IndexerProperty<Guid>("IdFactura").HasColumnName("idFactura");
-                        j.IndexerProperty<Guid>("IdServicio").HasColumnName("idServicio");
-                    });
+        modelBuilder.Entity<FacturaServicio>(entity =>
+        {
+            entity.HasKey(e => new { e.IdFactura, e.IdServicio }).HasName("PK__Factura___B03EF06F17CEAC0D");
+
+            entity.ToTable("Factura_Servicio");
+
+            entity.Property(e => e.IdFactura).HasColumnName("idFactura");
+            entity.Property(e => e.IdServicio).HasColumnName("idServicio");
+            entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+            entity.HasOne(d => d.IdFacturaNavigation).WithMany(p => p.FacturaServicios)
+                .HasForeignKey(d => d.IdFactura)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Factura_S__idFac__436BFEE3");
+
+            entity.HasOne(d => d.IdServicioNavigation).WithMany(p => p.FacturaServicios)
+                .HasForeignKey(d => d.IdServicio)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Factura_S__idSer__4460231C");
         });
 
         modelBuilder.Entity<Habitacion>(entity =>

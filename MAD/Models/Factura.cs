@@ -11,7 +11,7 @@ public partial class Factura
 
     public decimal? MontoTotal { get; set; }
 
-    public virtual Reservacion? IdReservacionNavigation { get; set; }
+    public virtual ICollection<FacturaServicio> FacturaServicios { get; set; } = new List<FacturaServicio>();
 
-    public virtual ICollection<Servicio> IdServicios { get; set; } = new List<Servicio>();
+    public virtual Reservacion? IdReservacionNavigation { get; set; }
 }

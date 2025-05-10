@@ -226,6 +226,53 @@ namespace MAD.DAO
             }
             return hoteles;
         }
+        public Guid getIdHotelPorReserva(Guid idReserva)
+        {
+            Guid idHotel = Guid.Empty;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetIdHotelPorReserva", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idReserva", idReserva);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                idHotel = Guid.Parse(reader["idHotel"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return idHotel;
+        }
+
+        public string getNombreHotelPorId(Guid idHotel)
+        {
+            string nombreHotel = null;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetNombreHotelPorId", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                nombreHotel = reader["nombre"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            return nombreHotel;
+        }
 
     }
 }

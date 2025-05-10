@@ -11,9 +11,9 @@ public partial class Servicio
 
     public Guid? IdClave { get; set; }
 
+    public virtual ICollection<FacturaServicio> FacturaServicios { get; set; } = new List<FacturaServicio>();
+
     public virtual ICollection<HotelServicio> HotelServicios { get; set; } = new List<HotelServicio>();
 
     public virtual ClaveSat? IdClaveNavigation { get; set; }
-
-    public virtual ICollection<Factura> IdFacturas { get; set; } = new List<Factura>();
 }

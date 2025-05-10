@@ -164,6 +164,16 @@ namespace MAD
             ResetForm(this);
             inicializarGridCarrito();
             this.Show();
+            //CALAR
+            if(FCheckInOut.DialogResult == DialogResult.OK)
+            {
+                Facturar FFacturar = new Facturar();
+                this.Hide();
+                FFacturar.ShowDialog();
+                ResetForm(this);
+                inicializarGridCarrito();
+                this.Show();
+            }
         }
 
         private void facturarToolStripMenuItem_Click(object sender, EventArgs e)

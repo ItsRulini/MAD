@@ -54,5 +54,128 @@ namespace MAD.DAO
 
             return false;
         }
+        //Validamos si ya hizo check in/out para poder vender servicios
+        public bool validarCheckInOut(Guid idReserva)
+        {
+            bool validar = false;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spValidarVentaServicio", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    // Asignar parámetros
+                    cmd.Parameters.AddWithValue("@idReservacion", idReserva);
+                    // Ejecutar el comando
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                validar = bool.Parse(reader["Resultado"].ToString());
+                            }
+                        }
+                    }
+                }
+                return validar;
+            }
+        }
+        
+        //Obtiene fecha de inicio/fin de hospedaje y el id del comprado
+        public Reservacion getInfoReservacion(Guid idReservacion)
+        {
+            Reservacion reserva = null;
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetInfoReservacion", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    // Asignar parámetros
+                    cmd.Parameters.AddWithValue("@idReservacion", idReservacion);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                reserva = new Reservacion();
+                                reserva.FechaInicioHospedaje = reader["fechaInicioHospedaje"] is DBNull
+                                ? null
+                                : DateOnly.FromDateTime((DateTime)reader["fechaInicioHospedaje"]);
+
+                                reserva.FechaFinHospedaje = reader["fechaFinHospedaje"] is DBNull
+                                ? null
+                                : DateOnly.FromDateTime((DateTime)reader["fechaFinHospedaje"]);
+
+                                reserva.IdComprador = Guid.Parse(reader["idComprador"].ToString());
+                                reserva.CheckIn = bool.Parse(reader["checkIn"].ToString());
+                                reserva.ChekOut = bool.Parse(reader["chekOut"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return reserva;
+        }
+
+        public DataTable ObtenerHabitacionesPorReservacion(Guid idReservacion)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spGetHabitacionesPorReservacion", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idReservacion", idReservacion);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        public bool setCheckIn(Guid idReservacion, DateOnly? FechaInicio)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spSetCheckIn", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    // Asignar parámetros
+                    cmd.Parameters.AddWithValue("@idReservacion", idReservacion);
+                    cmd.Parameters.AddWithValue("@fechaInicio", FechaInicio);
+                    
+                    // Ejecutar el comando
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0; // Retorna true si se actualizó
+                }
+            }
+        }
+        
+        public bool setCheckOut(Guid idReservacion)
+        {
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spSetCheckOut", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    // Asignar parámetros
+                    cmd.Parameters.AddWithValue("@idReservacion", idReservacion);
+
+                    // Ejecutar el comando
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
     }
+
+
+
 }
