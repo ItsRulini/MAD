@@ -104,7 +104,7 @@ namespace MAD
 
             if (reservacionDAO.setCheckOut(idReservacion))
             {
-                MessageBox.Show("Check out realizado correctamente.\n Visite la pestaña de facturas en caso de ser requerida.");
+                MessageBox.Show("Check out realizado correctamente.\nRedirigiengo a la facturación");
                 btnCheckOut.Enabled = false;
                 DialogResult = DialogResult.OK;
                 this.Close();

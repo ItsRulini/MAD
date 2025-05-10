@@ -42,7 +42,7 @@ namespace MAD
 
         private void cancelacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cancelaciones FCancelaciones = new Cancelaciones();
+            Cancelaciones FCancelaciones = new Cancelaciones(idAdmin);
             this.Hide();
             FCancelaciones.ShowDialog();
             this.Show();

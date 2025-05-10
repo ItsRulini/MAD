@@ -306,6 +306,7 @@ namespace MAD
             textAnticipo.Name = "textAnticipo";
             textAnticipo.Size = new Size(139, 30);
             textAnticipo.TabIndex = 28;
+            textAnticipo.KeyPress += textAnticipo_KeyPress;
             // 
             // comboMetodoPago
             // 

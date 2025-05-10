@@ -27,6 +27,11 @@ namespace MAD.DAO
                 habTable.Rows.Add(item.Key.IdHabitacion, item.Key.NumeroHabitacion, item.Value);
             }
 
+            if(datosReservacion.MetodoPago == "Transferencia")
+            {
+                datosReservacion.MetodoPago = "Transeferencia";
+            }
+
             using (SqlConnection conn = Conexion.ObtenerConexion())
             {
                 using (var cmd = new SqlCommand("spReservar", conn))

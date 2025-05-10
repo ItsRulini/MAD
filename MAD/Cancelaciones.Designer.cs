@@ -30,14 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cancelaciones));
             groupBox1 = new GroupBox();
+            fechaFin = new Label();
+            label5 = new Label();
+            fechaInicio = new Label();
+            label3 = new Label();
             pictureBox1 = new PictureBox();
             btnBuscarReservacion = new Button();
             btnCancelarReservacion = new Button();
             groupBox2 = new GroupBox();
             dgvDetallesReserva = new DataGridView();
-            HabReservadas = new DataGridViewTextBoxColumn();
-            FechaEntrada = new DataGridViewTextBoxColumn();
-            FechaSalida = new DataGridViewTextBoxColumn();
             textHotel = new TextBox();
             label2 = new Label();
             textNumReservacion = new TextBox();
@@ -50,6 +51,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(fechaFin);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(fechaInicio);
+            groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(pictureBox1);
             groupBox1.Controls.Add(btnBuscarReservacion);
             groupBox1.Controls.Add(btnCancelarReservacion);
@@ -60,10 +65,46 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(600, 325);
+            groupBox1.Size = new Size(600, 394);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Gestión de cancelaciones";
+            // 
+            // fechaFin
+            // 
+            fechaFin.AutoSize = true;
+            fechaFin.Location = new Point(148, 146);
+            fechaFin.Name = "fechaFin";
+            fechaFin.Size = new Size(52, 22);
+            fechaFin.TabIndex = 15;
+            fechaFin.Text = "0/0/0";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(16, 146);
+            label5.Name = "label5";
+            label5.Size = new Size(89, 22);
+            label5.TabIndex = 14;
+            label5.Text = "Fecha fin:";
+            // 
+            // fechaInicio
+            // 
+            fechaInicio.AutoSize = true;
+            fechaInicio.Location = new Point(148, 114);
+            fechaInicio.Name = "fechaInicio";
+            fechaInicio.Size = new Size(52, 22);
+            fechaInicio.TabIndex = 13;
+            fechaInicio.Text = "0/0/0";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(16, 114);
+            label3.Name = "label3";
+            label3.Size = new Size(114, 22);
+            label3.TabIndex = 12;
+            label3.Text = "Fecha inicio:";
             // 
             // pictureBox1
             // 
@@ -77,26 +118,28 @@
             // 
             // btnBuscarReservacion
             // 
-            btnBuscarReservacion.Location = new Point(411, 220);
+            btnBuscarReservacion.Location = new Point(419, 310);
             btnBuscarReservacion.Name = "btnBuscarReservacion";
             btnBuscarReservacion.Size = new Size(175, 36);
             btnBuscarReservacion.TabIndex = 3;
             btnBuscarReservacion.Text = "Buscar reservación";
             btnBuscarReservacion.UseVisualStyleBackColor = true;
+            btnBuscarReservacion.Click += btnBuscarReservacion_Click;
             // 
             // btnCancelarReservacion
             // 
-            btnCancelarReservacion.Location = new Point(411, 262);
+            btnCancelarReservacion.Location = new Point(419, 352);
             btnCancelarReservacion.Name = "btnCancelarReservacion";
             btnCancelarReservacion.Size = new Size(175, 36);
             btnCancelarReservacion.TabIndex = 4;
             btnCancelarReservacion.Text = "Cancelar reservación";
             btnCancelarReservacion.UseVisualStyleBackColor = true;
+            btnCancelarReservacion.Click += btnCancelarReservacion_Click;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(dgvDetallesReserva);
-            groupBox2.Location = new Point(6, 114);
+            groupBox2.Location = new Point(6, 183);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(399, 205);
             groupBox2.TabIndex = 5;
@@ -106,47 +149,26 @@
             // dgvDetallesReserva
             // 
             dgvDetallesReserva.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDetallesReserva.Columns.AddRange(new DataGridViewColumn[] { HabReservadas, FechaEntrada, FechaSalida });
-            dgvDetallesReserva.Location = new Point(34, 34);
+            dgvDetallesReserva.Location = new Point(10, 34);
             dgvDetallesReserva.Name = "dgvDetallesReserva";
-            dgvDetallesReserva.Size = new Size(344, 150);
+            dgvDetallesReserva.RowHeadersWidth = 51;
+            dgvDetallesReserva.Size = new Size(383, 150);
             dgvDetallesReserva.TabIndex = 6;
-            // 
-            // HabReservadas
-            // 
-            HabReservadas.Frozen = true;
-            HabReservadas.HeaderText = "Habitaciones reservadas";
-            HabReservadas.Name = "HabReservadas";
-            HabReservadas.ReadOnly = true;
-            // 
-            // FechaEntrada
-            // 
-            FechaEntrada.Frozen = true;
-            FechaEntrada.HeaderText = "Entrada";
-            FechaEntrada.Name = "FechaEntrada";
-            FechaEntrada.ReadOnly = true;
-            // 
-            // FechaSalida
-            // 
-            FechaSalida.Frozen = true;
-            FechaSalida.HeaderText = "Salida";
-            FechaSalida.Name = "FechaSalida";
-            FechaSalida.ReadOnly = true;
             // 
             // textHotel
             // 
             textHotel.Enabled = false;
-            textHotel.Location = new Point(206, 60);
+            textHotel.Location = new Point(251, 60);
             textHotel.Name = "textHotel";
-            textHotel.Size = new Size(154, 26);
+            textHotel.Size = new Size(154, 30);
             textHotel.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(206, 38);
+            label2.Location = new Point(251, 35);
             label2.Name = "label2";
-            label2.Size = new Size(45, 19);
+            label2.Size = new Size(60, 22);
             label2.TabIndex = 2;
             label2.Text = "Hotel:";
             // 
@@ -154,24 +176,24 @@
             // 
             textNumReservacion.Location = new Point(15, 60);
             textNumReservacion.Name = "textNumReservacion";
-            textNumReservacion.Size = new Size(154, 26);
+            textNumReservacion.Size = new Size(193, 30);
             textNumReservacion.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(15, 38);
+            label1.Location = new Point(6, 35);
             label1.Name = "label1";
-            label1.Size = new Size(154, 19);
+            label1.Size = new Size(202, 22);
             label1.TabIndex = 0;
             label1.Text = "Número de reservación:";
             // 
             // Cancelaciones
             // 
-            AutoScaleDimensions = new SizeF(9F, 19F);
+            AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(624, 349);
+            ClientSize = new Size(624, 418);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -192,9 +214,6 @@
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private DataGridView dgvDetallesReserva;
-        private DataGridViewTextBoxColumn HabReservadas;
-        private DataGridViewTextBoxColumn FechaEntrada;
-        private DataGridViewTextBoxColumn FechaSalida;
         private TextBox textHotel;
         private Label label2;
         private TextBox textNumReservacion;
@@ -202,5 +221,9 @@
         private Button btnCancelarReservacion;
         private Button btnBuscarReservacion;
         private PictureBox pictureBox1;
+        private Label fechaFin;
+        private Label label5;
+        private Label fechaInicio;
+        private Label label3;
     }
 }

@@ -178,6 +178,10 @@ namespace MAD
 
         private void facturarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
+            //QUITAR AL TERMINAR DE DARLE FUNCIONALIDAD
+
             Facturar FFacturar = new Facturar();
             this.Hide();
             FFacturar.ShowDialog();
@@ -300,6 +304,16 @@ namespace MAD
 
         }
 
+        private void textAnticipo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite solo dígitos y teclas de control como backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla presionada
+                MessageBox.Show("Por favor, ingrese solo números.", "Entrada no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void btnComprarReserva_Click(object sender, EventArgs e)
         {
             if (comboMetodoPago.SelectedIndex < 0)
@@ -325,6 +339,7 @@ namespace MAD
                 MessageBox.Show("El anticipo no puede estar vacío");
                 return;
             }
+
             //decimal.Parse(row.Cells[1].Value.ToString().Replace("$", "").Replace("MXN", ""));
             if (decimal.Parse(textAnticipo.Text.ToString())
                 > decimal.Parse(totalCelda.Value.ToString().Replace("$","").Replace(" MXN", "")))
@@ -624,6 +639,12 @@ namespace MAD
             //Limpia carrito cada que buscar y lo vuelve a inicializar
             dgvCarritoReserva.Rows.Clear();
             inicializarGridCarrito();
+
+            if (dtpDesde.Value.Date < DateTime.Today || dtpHasta.Value.Date < dtpDesde.Value.Date)
+            {
+                MessageBox.Show("Fechas inválidas");
+                return;
+            }
 
 
             if (checkBuscarPorApellido.Checked) // búsqueda por apellidos  
