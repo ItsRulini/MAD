@@ -166,6 +166,9 @@ namespace MAD.DAO
                                 Rfc = reader.IsDBNull(reader.GetOrdinal("rfc")) ? null : reader.GetString(reader.GetOrdinal("rfc")),
                                 EstadoCivil = reader.GetString(reader.GetOrdinal("estadoCivil")),
                                 Estado = reader.GetBoolean(reader.GetOrdinal("estado")),
+                                Domicilio = reader.GetString(reader.GetOrdinal("domicilio")),
+                                Cp = reader.GetInt32(reader.GetOrdinal("CP")),
+                                Colonia = reader.GetString(reader.GetOrdinal("colonia")),
                                 IdUbicacion = reader.GetGuid(reader.GetOrdinal("idUbicacion"))
                             };
                         }
@@ -173,6 +176,53 @@ namespace MAD.DAO
                 }
             }
             return null;
+        }
+        
+        //
+        //public DataTable getHistorialClienteCompleto(Guid idCliente)
+        //{
+        //    DataTable dt = new DataTable();
+
+        //    using (SqlConnection conn = Conexion.ObtenerConexion())
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("spGetHabitacionesPorReservacion", conn))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.AddWithValue("@idCliente", idCliente);
+                    
+
+        //            using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+        //            {
+        //                adapter.Fill(dt);
+        //            }
+        //        }
+        //    }
+
+        //    return dt;
+        //}
+
+        //
+        public DataTable getHistorialClientePorFechas(Guid idCliente, DateOnly rangoMenor, DateOnly rangoMayor)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spGetHistorial", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idCliente", idCliente);
+                    cmd.Parameters.AddWithValue("@fechaInicio",rangoMenor);
+                    cmd.Parameters.AddWithValue("@fechaFin",rangoMayor);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
         }
 
         

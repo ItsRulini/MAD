@@ -73,7 +73,6 @@ namespace MAD
             reservarToolStripMenuItem = new ToolStripMenuItem();
             venderToolStripMenuItem = new ToolStripMenuItem();
             checkInCheckOutToolStripMenuItem = new ToolStripMenuItem();
-            facturarToolStripMenuItem = new ToolStripMenuItem();
             agregarClienteToolStripMenuItem = new ToolStripMenuItem();
             agregarToolStripMenuItem = new ToolStripMenuItem();
             modificarEliminarToolStripMenuItem = new ToolStripMenuItem();
@@ -478,7 +477,7 @@ namespace MAD
             // 
             menuStrip1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { reservarToolStripMenuItem, venderToolStripMenuItem, checkInCheckOutToolStripMenuItem, facturarToolStripMenuItem, agregarClienteToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { reservarToolStripMenuItem, venderToolStripMenuItem, checkInCheckOutToolStripMenuItem, agregarClienteToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1176, 30);
@@ -505,13 +504,6 @@ namespace MAD
             checkInCheckOutToolStripMenuItem.Size = new Size(181, 26);
             checkInCheckOutToolStripMenuItem.Text = "Check In/Check Out";
             checkInCheckOutToolStripMenuItem.Click += checkInCheckOutToolStripMenuItem_Click;
-            // 
-            // facturarToolStripMenuItem
-            // 
-            facturarToolStripMenuItem.Name = "facturarToolStripMenuItem";
-            facturarToolStripMenuItem.Size = new Size(90, 26);
-            facturarToolStripMenuItem.Text = "Facturar";
-            facturarToolStripMenuItem.Click += facturarToolStripMenuItem_Click;
             // 
             // agregarClienteToolStripMenuItem
             // 
@@ -642,7 +634,6 @@ namespace MAD
         private ComboBox comboBox1;
         private ToolStripMenuItem venderToolStripMenuItem;
         private ToolStripMenuItem checkInCheckOutToolStripMenuItem;
-        private ToolStripMenuItem facturarToolStripMenuItem;
         private ToolStripMenuItem agregarClienteToolStripMenuItem;
         private ToolStripMenuItem agregarToolStripMenuItem;
         private ToolStripMenuItem modificarEliminarToolStripMenuItem;

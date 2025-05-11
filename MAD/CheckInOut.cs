@@ -61,7 +61,11 @@ namespace MAD
             else
             {
                 btnCheckOut.Enabled = true;
-                
+            }
+
+            if (reservacion.ChekOut.Value)
+            {
+                btnCheckOut.Enabled = false;
             }
 
             textDesde.Text = reservacion.FechaInicioHospedaje.ToString();
@@ -85,6 +89,12 @@ namespace MAD
 
             DateOnly? dateOnly = textDesde.Text != null ? DateOnly.Parse(textDesde.Text) : null;
 
+            if (DateOnly.FromDateTime(DateTime.Today) < dateOnly)
+            {
+                MessageBox.Show("No se puede hacer check in hasta que llegue el día de la reservación");
+                return;
+            }
+
             if (reservacionDAO.setCheckIn(idReservacion, dateOnly))
             {
                 MessageBox.Show("Check in realizado correctamente");
@@ -106,7 +116,9 @@ namespace MAD
             {
                 MessageBox.Show("Check out realizado correctamente.\nRedirigiengo a la facturación");
                 btnCheckOut.Enabled = false;
-                DialogResult = DialogResult.OK;
+                
+                Facturar FFacturar = new Facturar(idReservacion);
+                FFacturar.ShowDialog();
                 this.Close();
             }
             else
