@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label5 = new Label();
             label6 = new Label();
             groupBox1 = new GroupBox();
+            btnFinConf = new Button();
             dgvCamas = new DataGridView();
             tipoDeCama = new DataGridViewTextBoxColumn();
             cantDeCama = new DataGridViewTextBoxColumn();
@@ -57,6 +60,7 @@
             btnAgregarHabitacion = new Button();
             btnAgregarCama = new Button();
             dgvConfigHab = new DataGridView();
+            timer1 = new System.Windows.Forms.Timer(components);
             Nombre = new DataGridViewTextBoxColumn();
             UbicacionHab = new DataGridViewTextBoxColumn();
             PrecioPorNoche = new DataGridViewTextBoxColumn();
@@ -66,8 +70,6 @@
             CantidadCamas = new DataGridViewTextBoxColumn();
             AmenidadesHab = new DataGridViewTextBoxColumn();
             EliminarHab = new DataGridViewImageColumn();
-            timer1 = new System.Windows.Forms.Timer(components);
-            btnFinConf = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCamas).BeginInit();
             groupBox2.SuspendLayout();
@@ -150,6 +152,16 @@
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Configuración de habitaciones";
+            // 
+            // btnFinConf
+            // 
+            btnFinConf.Location = new Point(1045, 579);
+            btnFinConf.Name = "btnFinConf";
+            btnFinConf.Size = new Size(130, 68);
+            btnFinConf.TabIndex = 20;
+            btnFinConf.Text = "Terminar configuración";
+            btnFinConf.UseVisualStyleBackColor = true;
+            btnFinConf.Click += btnFinConf_Click;
             // 
             // dgvCamas
             // 
@@ -344,20 +356,24 @@
             dgvConfigHab.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             dgvConfigHab.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConfigHab.Columns.AddRange(new DataGridViewColumn[] { Nombre, UbicacionHab, PrecioPorNoche, PrecioPorPersona, MaxPersonas, TipoCama, CantidadCamas, AmenidadesHab, EliminarHab });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvConfigHab.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Times New Roman", 12F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvConfigHab.DefaultCellStyle = dataGridViewCellStyle3;
             dgvConfigHab.Location = new Point(18, 356);
             dgvConfigHab.Name = "dgvConfigHab";
             dgvConfigHab.RowHeadersWidth = 51;
             dgvConfigHab.Size = new Size(993, 291);
             dgvConfigHab.TabIndex = 6;
             dgvConfigHab.CellContentClick += dgvConfigHab_CellContentClick;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
             // 
             // Nombre
             // 
@@ -375,6 +391,9 @@
             // 
             // PrecioPorNoche
             // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            PrecioPorNoche.DefaultCellStyle = dataGridViewCellStyle1;
             PrecioPorNoche.HeaderText = "Precio por noche";
             PrecioPorNoche.MinimumWidth = 6;
             PrecioPorNoche.Name = "PrecioPorNoche";
@@ -382,6 +401,9 @@
             // 
             // PrecioPorPersona
             // 
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            PrecioPorPersona.DefaultCellStyle = dataGridViewCellStyle2;
             PrecioPorPersona.HeaderText = "Precio por persona";
             PrecioPorPersona.MinimumWidth = 6;
             PrecioPorPersona.Name = "PrecioPorPersona";
@@ -424,20 +446,6 @@
             EliminarHab.Name = "EliminarHab";
             EliminarHab.Resizable = DataGridViewTriState.True;
             EliminarHab.Width = 75;
-            // 
-            // timer1
-            // 
-            timer1.Tick += timer1_Tick;
-            // 
-            // btnFinConf
-            // 
-            btnFinConf.Location = new Point(1045, 579);
-            btnFinConf.Name = "btnFinConf";
-            btnFinConf.Size = new Size(130, 68);
-            btnFinConf.TabIndex = 20;
-            btnFinConf.Text = "Terminar configuración";
-            btnFinConf.UseVisualStyleBackColor = true;
-            btnFinConf.Click += btnFinConf_Click;
             // 
             // ConfigurarHabitaciones
             // 
@@ -496,6 +504,7 @@
         private DataGridViewTextBoxColumn tipoDeCama;
         private DataGridViewTextBoxColumn cantDeCama;
         private DataGridViewImageColumn eliminarCama;
+        private Button btnFinConf;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn UbicacionHab;
         private DataGridViewTextBoxColumn PrecioPorNoche;
@@ -505,6 +514,5 @@
         private DataGridViewTextBoxColumn CantidadCamas;
         private DataGridViewTextBoxColumn AmenidadesHab;
         private DataGridViewImageColumn EliminarHab;
-        private Button btnFinConf;
     }
 }

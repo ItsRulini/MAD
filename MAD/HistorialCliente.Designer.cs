@@ -45,6 +45,7 @@
             textBuscar = new TextBox();
             label1 = new Label();
             dgvHistCliente = new DataGridView();
+            label4 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -53,6 +54,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(groupBox2);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(comboCliente);
@@ -66,7 +68,7 @@
             groupBox1.Controls.Add(dgvHistCliente);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1357, 577);
+            groupBox1.Size = new Size(1357, 597);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Historial de cliente";
@@ -211,18 +213,27 @@
             // dgvHistCliente
             // 
             dgvHistCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistCliente.Location = new Point(6, 171);
+            dgvHistCliente.Location = new Point(6, 191);
             dgvHistCliente.Name = "dgvHistCliente";
             dgvHistCliente.RowHeadersWidth = 51;
             dgvHistCliente.Size = new Size(1334, 400);
             dgvHistCliente.TabIndex = 0;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(1184, 151);
+            label4.Name = "label4";
+            label4.Size = new Size(156, 22);
+            label4.TabIndex = 22;
+            label4.Text = "(precios en MXN)";
             // 
             // HistorialCliente
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(1381, 601);
+            ClientSize = new Size(1381, 621);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F);
             ForeColor = SystemColors.ControlText;
@@ -258,5 +269,6 @@
         private RadioButton radioTodaHistoria;
         private RadioButton radioMesAño;
         private RadioButton radioAño;
+        private Label label4;
     }
 }

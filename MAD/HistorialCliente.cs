@@ -82,7 +82,7 @@ namespace MAD
                 return;
             }
 
-            if(radioAño.Checked && dateTimePicker1.Value > DateTime.Today)
+            if(radioAño.Checked && dateTimePicker1.Value.Year > DateTime.Today.Year)
             {
                 MessageBox.Show("No puedes buscar un año futuro");
                 return;
@@ -137,6 +137,19 @@ namespace MAD
 
             dt = clienteDAO.getHistorialClientePorFechas(idComprador, inicio, fin);
             dgvHistCliente.DataSource = dt;
+
+            // Establece el DataSource
+            dgvHistCliente.DataSource = dt;
+
+            // Da formato a la columna "Total" como divisa mexicana (MXN)
+            if (dgvHistCliente.Columns.Contains("Total"))
+            {
+                dgvHistCliente.Columns["Anticipo"].DefaultCellStyle.Format = "C2";
+                dgvHistCliente.Columns["Total"].DefaultCellStyle.Format = "C2";
+                dgvHistCliente.Columns["Monto por Servicios"].DefaultCellStyle.Format = "C2";
+                dgvHistCliente.Columns["Monto por Hospedaje"].DefaultCellStyle.Format = "C2";
+            }
+
         }
     }
 }

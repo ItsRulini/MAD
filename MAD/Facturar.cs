@@ -75,7 +75,14 @@ namespace MAD
             Tablefactura = facturaDAO.generarFactura(idReservacion);
 
             dataGridView1.DataSource = Tablefactura;
-            
+
+            // Da formato a la columna "Total" como divisa mexicana (MXN)
+            if (dataGridView1.Columns.Contains("IVA"))
+            {
+                dataGridView1.Columns["Valor Unitario"].DefaultCellStyle.Format = "C2";
+                dataGridView1.Columns["IVA"].DefaultCellStyle.Format = "C2";
+                dataGridView1.Columns["Importe"].DefaultCellStyle.Format = "C2";
+            }
 
             subtotal = facturaDAO.GetSubtotalPorReservacion(idReservacion).ToString();
             anticipo = reservacion.Anticipo.ToString();

@@ -372,7 +372,7 @@
             // 
             // textPrecioServicio
             // 
-            textPrecioServicio.Location = new Point(25, 124);
+            textPrecioServicio.Location = new Point(28, 141);
             textPrecioServicio.Name = "textPrecioServicio";
             textPrecioServicio.Size = new Size(124, 30);
             textPrecioServicio.TabIndex = 16;
@@ -380,17 +380,17 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(25, 102);
+            label11.Location = new Point(28, 116);
             label11.Name = "label11";
-            label11.Size = new Size(68, 22);
+            label11.Size = new Size(132, 22);
             label11.TabIndex = 3;
-            label11.Text = "Precio:";
+            label11.Text = "Precio (MXN):";
             // 
             // btnAgregarServicio
             // 
-            btnAgregarServicio.Location = new Point(25, 168);
+            btnAgregarServicio.Location = new Point(25, 177);
             btnAgregarServicio.Name = "btnAgregarServicio";
-            btnAgregarServicio.Size = new Size(124, 63);
+            btnAgregarServicio.Size = new Size(124, 54);
             btnAgregarServicio.TabIndex = 17;
             btnAgregarServicio.Text = "Agregar servicio";
             btnAgregarServicio.UseVisualStyleBackColor = true;

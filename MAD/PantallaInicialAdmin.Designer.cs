@@ -59,6 +59,7 @@
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
             dataGridView1 = new DataGridView();
+            label5 = new Label();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
@@ -310,6 +311,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(groupBox3);
             groupBox2.Controls.Add(pictureBox1);
             groupBox2.Controls.Add(groupBox1);
@@ -339,6 +341,15 @@
             dataGridView1.Size = new Size(744, 314);
             dataGridView1.TabIndex = 3;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(773, 233);
+            label5.Name = "label5";
+            label5.Size = new Size(156, 22);
+            label5.TabIndex = 23;
+            label5.Text = "(precios en MXN)";
+            // 
             // PantallaInicialAdmin
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
@@ -360,6 +371,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -398,5 +410,6 @@
         private ToolStripMenuItem agregarServicioToolStripMenuItem;
         private ToolStripMenuItem agregarAmenidadToolStripMenuItem;
         private CheckBox checkBox1;
+        private Label label5;
     }
 }

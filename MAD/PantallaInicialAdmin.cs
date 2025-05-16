@@ -244,6 +244,14 @@ namespace MAD
             }
 
             dataGridView1.DataSource = dt;
+
+            // Da formato a la columna "Total" como divisa mexicana (MXN)
+            if (dataGridView1.Columns.Contains("IngresosTotales"))
+            {
+                dataGridView1.Columns["Ingresos Hospedaje"].DefaultCellStyle.Format = "C2";
+                dataGridView1.Columns["Ingresos Servicios"].DefaultCellStyle.Format = "C2";
+                dataGridView1.Columns["IngresosTotales"].DefaultCellStyle.Format = "C2";
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e) // filtrar todos los de esa ciudad
