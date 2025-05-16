@@ -50,6 +50,7 @@
             groupBox1 = new GroupBox();
             precioTotal = new Label();
             label5 = new Label();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvServicio).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarritoServicio).BeginInit();
@@ -72,10 +73,10 @@
             dgvServicio.AllowUserToAddRows = false;
             dgvServicio.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServicio.Columns.AddRange(new DataGridViewColumn[] { Servicio, CostoServicio, id });
-            dgvServicio.Location = new Point(34, 157);
+            dgvServicio.Location = new Point(22, 164);
             dgvServicio.Name = "dgvServicio";
             dgvServicio.RowHeadersWidth = 51;
-            dgvServicio.Size = new Size(275, 225);
+            dgvServicio.Size = new Size(275, 250);
             dgvServicio.TabIndex = 27;
             // 
             // Servicio
@@ -124,10 +125,10 @@
             dgvCarritoServicio.AllowUserToAddRows = false;
             dgvCarritoServicio.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarritoServicio.Columns.AddRange(new DataGridViewColumn[] { servicioCarrito, costo, eliminar, idSerCarrito });
-            dgvCarritoServicio.Location = new Point(329, 145);
+            dgvCarritoServicio.Location = new Point(329, 164);
             dgvCarritoServicio.Name = "dgvCarritoServicio";
             dgvCarritoServicio.RowHeadersWidth = 51;
-            dgvCarritoServicio.Size = new Size(476, 225);
+            dgvCarritoServicio.Size = new Size(476, 250);
             dgvCarritoServicio.TabIndex = 31;
             dgvCarritoServicio.CellContentClick += dgvCarritoServicio_CellContentClick;
             // 
@@ -192,7 +193,7 @@
             // 
             // btnAggServicio
             // 
-            btnAggServicio.Location = new Point(835, 317);
+            btnAggServicio.Location = new Point(835, 361);
             btnAggServicio.Name = "btnAggServicio";
             btnAggServicio.Size = new Size(108, 53);
             btnAggServicio.TabIndex = 35;
@@ -202,7 +203,7 @@
             // 
             // btnComprarServicio
             // 
-            btnComprarServicio.Location = new Point(949, 317);
+            btnComprarServicio.Location = new Point(949, 361);
             btnComprarServicio.Name = "btnComprarServicio";
             btnComprarServicio.Size = new Size(108, 53);
             btnComprarServicio.TabIndex = 36;
@@ -231,15 +232,17 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(precioTotal);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(btnComprarServicio);
             groupBox1.Controls.Add(btnAggServicio);
             groupBox1.Controls.Add(pictureBox2);
             groupBox1.Controls.Add(dgvCarritoServicio);
+            groupBox1.Controls.Add(dgvServicio);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1063, 387);
+            groupBox1.Size = new Size(1063, 420);
             groupBox1.TabIndex = 39;
             groupBox1.TabStop = false;
             groupBox1.Text = "Venta de servicios:";
@@ -247,7 +250,7 @@
             // precioTotal
             // 
             precioTotal.AutoSize = true;
-            precioTotal.Location = new Point(920, 263);
+            precioTotal.Location = new Point(920, 292);
             precioTotal.Name = "precioTotal";
             precioTotal.Size = new Size(85, 22);
             precioTotal.TabIndex = 28;
@@ -256,18 +259,27 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(835, 263);
+            label5.Location = new Point(835, 292);
             label5.Name = "label5";
             label5.Size = new Size(57, 22);
             label5.TabIndex = 27;
             label5.Text = "Total:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(22, 139);
+            label6.Name = "label6";
+            label6.Size = new Size(407, 22);
+            label6.TabIndex = 37;
+            label6.Text = "Seleccione la primer celda (la que está en blanco)";
             // 
             // VentaServicios
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(1087, 411);
+            ClientSize = new Size(1087, 444);
             Controls.Add(label4);
             Controls.Add(btnBuscarReservacion);
             Controls.Add(textHotel);
@@ -275,7 +287,6 @@
             Controls.Add(textNumReserva);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(dgvServicio);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F);
             Margin = new Padding(4);
@@ -315,5 +326,6 @@
         private DataGridViewTextBoxColumn costo;
         private DataGridViewImageColumn eliminar;
         private DataGridViewTextBoxColumn idSerCarrito;
+        private Label label6;
     }
 }

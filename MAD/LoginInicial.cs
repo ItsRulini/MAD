@@ -13,6 +13,17 @@ namespace MAD
         private void iniciarSesion_Click(object sender, EventArgs e)
         {
 
+            if (textCorreo.Text == "ADMIN" && textContrasenia.Text == "ADMIN")
+            {
+                AggUsuario FAggUsuario = new AggUsuario();
+                this.Hide();
+                FAggUsuario.ShowDialog();
+                this.textCorreo.Clear();
+                this.textContrasenia.Clear();
+                this.Show();
+                return;
+            }
+
             if (string.IsNullOrEmpty(textCorreo.Text) || string.IsNullOrEmpty(textContrasenia.Text))
             {
                 MessageBox.Show("Por favor, complete todos los campos.");

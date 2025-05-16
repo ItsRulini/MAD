@@ -137,6 +137,14 @@ namespace MAD
             List<HotelServicio> servicios = new List<HotelServicio>();
             Dictionary<TipoHabitacion, int> mapTipoHabitaciones = new Dictionary<TipoHabitacion, int>();
 
+            dtpInicioOperacion.MinDate = DateTime.Now; // Establecer la fecha mínima a la fecha actual
+
+            if (dtpInicioOperacion.Value < dtpInicioOperacion.MinDate)
+            {
+                MessageBox.Show("La fecha de inicio de operaciones no puede ser anterior a la fecha actual.");
+                return;
+            }
+
             hotel.Rfc = textBox1.Text;
             hotel.Nombre = textNombreHotel.Text;
             hotel.Domicilio = textCalle.Text + " " + textNumero.Text;
@@ -214,6 +222,15 @@ namespace MAD
             }
         }
 
+        private bool EsPrecioValido(string precio)
+        {
+            // Verifica que el precio contenga solo dígitos y un punto decimal
+            int countPuntos = precio.Count(c => c == '.');
+            if (countPuntos > 1) return false;
+
+            // Intenta convertir el precio a un número decimal
+            return decimal.TryParse(precio, out _);
+        }
         private void btnAgregarServicio_Click(object sender, EventArgs e)
         {
             bool seleccionado = comboServicio.SelectedIndex < 0 ? false : true;
@@ -227,6 +244,13 @@ namespace MAD
             if (seleccionado == true && string.IsNullOrEmpty(textPrecioServicio.Text))
             {
                 MessageBox.Show("El precio del servicio no puede estar vacío.");
+                return;
+            }
+
+            // Validar que el precio sea un número válido con un solo punto decimal
+            if (!EsPrecioValido(textPrecioServicio.Text))
+            {
+                MessageBox.Show("El precio debe ser un número válido y puede contener solo un punto decimal.");
                 return;
             }
 
@@ -359,5 +383,16 @@ namespace MAD
         {
 
         }
+
+        private void textClaveSAT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite solo dígitos y teclas de control como backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla presionada
+                MessageBox.Show("Por favor, ingrese solo números.", "Entrada no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
     }
 }

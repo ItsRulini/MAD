@@ -46,6 +46,7 @@
             agregarAmenidadToolStripMenuItem = new ToolStripMenuItem();
             pictureBox1 = new PictureBox();
             groupBox1 = new GroupBox();
+            checkBox1 = new CheckBox();
             btnFiltrar = new Button();
             dtpAño = new DateTimePicker();
             comboHotel = new ComboBox();
@@ -58,13 +59,6 @@
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
             dataGridView1 = new DataGridView();
-            Ciudad = new DataGridViewTextBoxColumn();
-            Nombre = new DataGridViewTextBoxColumn();
-            Año = new DataGridViewTextBoxColumn();
-            Mes = new DataGridViewTextBoxColumn();
-            IngresosHospedaje = new DataGridViewTextBoxColumn();
-            IngresosServicios = new DataGridViewTextBoxColumn();
-            IngresosTotales = new DataGridViewTextBoxColumn();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
@@ -204,6 +198,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(btnFiltrar);
             groupBox1.Controls.Add(dtpAño);
             groupBox1.Controls.Add(comboHotel);
@@ -215,10 +210,21 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(6, 25);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(658, 109);
+            groupBox1.Size = new Size(658, 129);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtros:";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(154, 97);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(252, 26);
+            checkBox1.TabIndex = 10;
+            checkBox1.Text = "Buscar todos en esta ciudad";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // btnFiltrar
             // 
@@ -228,6 +234,7 @@
             btnFiltrar.TabIndex = 9;
             btnFiltrar.Text = "Filtrar";
             btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.Click += btnFiltrar_Click;
             // 
             // dtpAño
             // 
@@ -253,6 +260,7 @@
             comboCiudad.Name = "comboCiudad";
             comboCiudad.Size = new Size(121, 30);
             comboCiudad.TabIndex = 5;
+            comboCiudad.SelectedIndexChanged += comboCiudad_SelectedIndexChanged;
             // 
             // comboPais
             // 
@@ -261,6 +269,7 @@
             comboPais.Name = "comboPais";
             comboPais.Size = new Size(121, 30);
             comboPais.TabIndex = 4;
+            comboPais.SelectedIndexChanged += comboPais_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -324,61 +333,11 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Ciudad, Nombre, Año, Mes, IngresosHospedaje, IngresosServicios, IngresosTotales });
             dataGridView1.Location = new Point(6, 25);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(744, 314);
             dataGridView1.TabIndex = 3;
-            // 
-            // Ciudad
-            // 
-            Ciudad.HeaderText = "Ciudad";
-            Ciudad.MinimumWidth = 6;
-            Ciudad.Name = "Ciudad";
-            Ciudad.Width = 125;
-            // 
-            // Nombre
-            // 
-            Nombre.HeaderText = "Nombre";
-            Nombre.MinimumWidth = 6;
-            Nombre.Name = "Nombre";
-            Nombre.Width = 125;
-            // 
-            // Año
-            // 
-            Año.HeaderText = "Año";
-            Año.MinimumWidth = 6;
-            Año.Name = "Año";
-            Año.Width = 125;
-            // 
-            // Mes
-            // 
-            Mes.HeaderText = "Mes";
-            Mes.MinimumWidth = 6;
-            Mes.Name = "Mes";
-            Mes.Width = 125;
-            // 
-            // IngresosHospedaje
-            // 
-            IngresosHospedaje.HeaderText = "Ingresos por hospedaje";
-            IngresosHospedaje.MinimumWidth = 6;
-            IngresosHospedaje.Name = "IngresosHospedaje";
-            IngresosHospedaje.Width = 125;
-            // 
-            // IngresosServicios
-            // 
-            IngresosServicios.HeaderText = "Ingresos por servicios";
-            IngresosServicios.MinimumWidth = 6;
-            IngresosServicios.Name = "IngresosServicios";
-            IngresosServicios.Width = 125;
-            // 
-            // IngresosTotales
-            // 
-            IngresosTotales.HeaderText = "Ingresos totales";
-            IngresosTotales.MinimumWidth = 6;
-            IngresosTotales.Name = "IngresosTotales";
-            IngresosTotales.Width = 125;
             // 
             // PantallaInicialAdmin
             // 
@@ -434,16 +393,10 @@
         private Button btnFiltrar;
         private GroupBox groupBox3;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Ciudad;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewTextBoxColumn Año;
-        private DataGridViewTextBoxColumn Mes;
-        private DataGridViewTextBoxColumn IngresosHospedaje;
-        private DataGridViewTextBoxColumn IngresosServicios;
-        private DataGridViewTextBoxColumn IngresosTotales;
         private ToolStripMenuItem modificarHotelToolStripMenuItem;
         private ToolStripMenuItem serviciosAmenidadesToolStripMenuItem;
         private ToolStripMenuItem agregarServicioToolStripMenuItem;
         private ToolStripMenuItem agregarAmenidadToolStripMenuItem;
+        private CheckBox checkBox1;
     }
 }

@@ -176,6 +176,13 @@ namespace MAD
                 return;
             }
 
+
+            if (!EsPrecioValido(textPrecioPersona.Text))
+            {
+                MessageBox.Show("El precio por persona no es válido.");
+                return;
+            }
+
             bool ubicacionSeleccionada = false;
 
             if (radioPasillo.Checked)
@@ -242,9 +249,25 @@ namespace MAD
 
         }
 
+        private bool EsPrecioValido(string precio)
+        {
+            // Verifica que el precio contenga solo dígitos y un punto decimal
+            int countPuntos = precio.Count(c => c == '.');
+            if (countPuntos > 1) return false;
+
+            // Intenta convertir el precio a un número decimal
+            return decimal.TryParse(precio, out _);
+        }
         public List<TipoHabitacion> habitacionesTemp { get; private set; }
         private void btnFinConf_Click(object sender, EventArgs e)
         {
+            
+            if(dgvConfigHab.Rows.Count == 0)
+            {
+                MessageBox.Show("Por favor, agregue al menos una habitación.");
+                return;
+            }
+
             DialogResult result = MessageBox.Show("¿Está seguro que desea agregar estas configuraciones?", "Advertencia", 
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 

@@ -21,7 +21,15 @@ namespace MAD
             InitializeComponent();
             idAdministrador = idAdmin;
         }
-
+        private void textClaveSAT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite solo dígitos y teclas de control como backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla presionada
+                MessageBox.Show("Por favor, ingrese solo números.", "Entrada no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
         private void btnBuscarEmpleado_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBuscarEmpleado.Text))
@@ -104,6 +112,24 @@ namespace MAD
             long celular;
             long nomina;
 
+            DateTime fechaNacimiento = dtpFechaNacimiento.Value;
+            DateTime fechaActual = DateTime.Today;
+
+            int edad = fechaActual.Year - fechaNacimiento.Year;
+
+            // Ajustar si no ha cumplido años todavía este año
+            if (fechaNacimiento > fechaActual.AddYears(-edad))
+            {
+                edad--;
+            }
+
+            if (edad < 18)
+            {
+                MessageBox.Show("El usuario debe tener al menos 18 años.", "Edad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
             persona.Nombres = textNombre.Text;
             persona.Paterno = textApellidoPaterno.Text;
             persona.Materno = textApellidoMaterno.Text;
@@ -178,9 +204,21 @@ namespace MAD
 
             if (string.IsNullOrEmpty(persona.Nombres) || string.IsNullOrEmpty(persona.Paterno) || string.IsNullOrEmpty(persona.Materno)
                 || string.IsNullOrEmpty(textNumCasa.Text) || string.IsNullOrEmpty(textNumCelular.Text) || string.IsNullOrEmpty(persona.Correo)
-                || string.IsNullOrEmpty(tipoUsuario))
+                || string.IsNullOrEmpty(tipoUsuario) || string.IsNullOrEmpty(textNomina.Text))
             {
                 MessageBox.Show("Por favor, complete todos los campos obligatorios.");
+                return;
+            }
+
+            if(persona.Correo.Contains("@") == false || persona.Correo.Contains(".com") == false)
+            {
+                MessageBox.Show("El formato del correo no es válido.");
+                return;
+            }
+
+            if (persona.TelefonoCasa.ToString().Length != 10 || persona.Celular.ToString().Length != 10)
+            {
+                MessageBox.Show("El número de teléfono debe tener 10 dígitos.");
                 return;
             }
 

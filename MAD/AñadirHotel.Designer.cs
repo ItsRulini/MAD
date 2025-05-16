@@ -114,6 +114,7 @@
             textNumero.Name = "textNumero";
             textNumero.Size = new Size(114, 30);
             textNumero.TabIndex = 6;
+            textNumero.KeyPress += textClaveSAT_KeyPress;
             // 
             // textCalle
             // 

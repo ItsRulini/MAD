@@ -89,6 +89,13 @@ namespace MAD
         }
         private void button2_Click(object sender, EventArgs e) // Imprimir factura
         {
+            
+            if(dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay datos para imprimir");
+                return;
+            }
+
             PreparaFactura(persona, hotel, fiscalComprador, fiscalHotel, cliente, Tablefactura);
         }
 
@@ -213,8 +220,18 @@ namespace MAD
             try
             {
                 string nombreCompleto = persona.Nombres + " " + persona.Paterno + " " + persona.Materno;
+
+                // Formatear la fecha de forma válida para nombre de archivo
+                string fecha = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+
+                // Limpiar el nombre completo quitando caracteres no válidos (opcional pero recomendable)
+                foreach (char c in Path.GetInvalidFileNameChars())
+                {
+                    nombreCompleto = nombreCompleto.Replace(c, '_');
+                }
+
                 // Crear el escritor para el documento
-                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream($"Factura {nombreCompleto} {DateTime.Now}.pdf", FileMode.Create));
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream($"Factura_{nombreCompleto}_{fecha}.pdf", FileMode.Create));
 
                 // Abrir el documento
                 doc.Open();
@@ -258,12 +275,12 @@ namespace MAD
                 string formaPago = reservacion.MontoTotal == reservacion.Anticipo ? "Una sola exhibición" : "A parcialidades";
 
                 // Agregar la información general de la factura
-                doc.Add(new Paragraph($"Tipo de Comprobante: Inrgeso", FontFactory.GetFont("Arial", 10)));
+                doc.Add(new Paragraph($"Tipo de Comprobante: Ingreso", FontFactory.GetFont("Arial", 10)));
                 doc.Add(new Paragraph($"Lugar de Expedición: {GenerateRandomPositiveSixDigitNumber()}", FontFactory.GetFont("Arial", 10)));
                 doc.Add(new Paragraph($"Folio: {GenerateRandomPositiveLong()}", FontFactory.GetFont("Arial", 10)));
                 doc.Add(new Paragraph($"Fecha: {DateTime.Now}", FontFactory.GetFont("Arial", 10)));
-                doc.Add(new Paragraph($"Forma de Pago: {formaPago}", FontFactory.GetFont("Arial", 10)));
-                doc.Add(new Paragraph($"Método de Pago: {reservacion.MetodoPago}", FontFactory.GetFont("Arial", 10)));
+                doc.Add(new Paragraph($"Forma de Pago: {reservacion.MetodoPago}", FontFactory.GetFont("Arial", 10)));
+                doc.Add(new Paragraph($"Método de Pago: {formaPago}", FontFactory.GetFont("Arial", 10)));
                 doc.Add(new Paragraph($"Moneda: MXN", FontFactory.GetFont("Arial", 10)));
                 doc.Add(new Paragraph($"Serie: {GenerateRandomPositiveLong()}", FontFactory.GetFont("Arial", 10)));
                 doc.Add(new Paragraph($"UUID: {uuid}", FontFactory.GetFont("Arial", 10))); // Si aplica

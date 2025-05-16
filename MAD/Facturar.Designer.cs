@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Facturar));
             label1 = new Label();
             groupBox1 = new GroupBox();
+            textAnticipo = new Label();
+            label4 = new Label();
             textTotal = new Label();
             label7 = new Label();
             textIVA = new Label();
@@ -43,8 +45,6 @@
             btnBuscarReservacion = new Button();
             textIdReservacion = new TextBox();
             pictureBox1 = new PictureBox();
-            label4 = new Label();
-            textAnticipo = new Label();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -82,6 +82,24 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Facturar:";
+            // 
+            // textAnticipo
+            // 
+            textAnticipo.AutoSize = true;
+            textAnticipo.Location = new Point(531, 589);
+            textAnticipo.Name = "textAnticipo";
+            textAnticipo.Size = new Size(85, 22);
+            textAnticipo.TabIndex = 20;
+            textAnticipo.Text = "$ 0 MXN";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(344, 589);
+            label4.Name = "label4";
+            label4.Size = new Size(181, 22);
+            label4.TabIndex = 19;
+            label4.Text = "Descuento (anticipo):";
             // 
             // textTotal
             // 
@@ -179,6 +197,7 @@
             // 
             textIdReservacion.Location = new Point(6, 62);
             textIdReservacion.Name = "textIdReservacion";
+            textIdReservacion.ReadOnly = true;
             textIdReservacion.Size = new Size(390, 30);
             textIdReservacion.TabIndex = 9;
             // 
@@ -192,24 +211,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(344, 589);
-            label4.Name = "label4";
-            label4.Size = new Size(181, 22);
-            label4.TabIndex = 19;
-            label4.Text = "Descuento (anticipo):";
-            // 
-            // textAnticipo
-            // 
-            textAnticipo.AutoSize = true;
-            textAnticipo.Location = new Point(531, 589);
-            textAnticipo.Name = "textAnticipo";
-            textAnticipo.Size = new Size(85, 22);
-            textAnticipo.TabIndex = 20;
-            textAnticipo.Text = "$ 0 MXN";
             // 
             // Facturar
             // 

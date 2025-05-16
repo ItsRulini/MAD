@@ -32,8 +32,6 @@ namespace MAD
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reservar));
             pictureBox1 = new PictureBox();
             dgvHoteles = new DataGridView();
-            Hotel = new DataGridViewTextBoxColumn();
-            idHotel = new DataGridViewTextBoxColumn();
             label1 = new Label();
             comboHabitacion = new ComboBox();
             label2 = new Label();
@@ -82,6 +80,8 @@ namespace MAD
             comboCiudad = new ComboBox();
             label12 = new Label();
             checkBox1 = new CheckBox();
+            Hotel = new DataGridViewTextBoxColumn();
+            idHotel = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvHoteles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarritoReserva).BeginInit();
@@ -110,35 +110,21 @@ namespace MAD
             dgvHoteles.AllowUserToResizeRows = false;
             dgvHoteles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvHoteles.Columns.AddRange(new DataGridViewColumn[] { Hotel, idHotel });
-            dgvHoteles.Location = new Point(24, 282);
+            dgvHoteles.Location = new Point(24, 285);
             dgvHoteles.Name = "dgvHoteles";
             dgvHoteles.RowHeadersWidth = 51;
             dgvHoteles.Size = new Size(293, 365);
             dgvHoteles.TabIndex = 8;
             dgvHoteles.CellContentClick += dgvHoteles_CellContentClick;
             // 
-            // Hotel
-            // 
-            Hotel.HeaderText = "Hotel";
-            Hotel.MinimumWidth = 6;
-            Hotel.Name = "Hotel";
-            Hotel.Width = 250;
-            // 
-            // idHotel
-            // 
-            idHotel.HeaderText = "ID";
-            idHotel.MinimumWidth = 6;
-            idHotel.Name = "idHotel";
-            idHotel.Width = 125;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(24, 260);
             label1.Name = "label1";
-            label1.Size = new Size(174, 22);
+            label1.Size = new Size(261, 22);
             label1.TabIndex = 9;
-            label1.Text = "Hoteles disponibles:";
+            label1.Text = "Seleccione el nombre del hotel:";
             // 
             // comboHabitacion
             // 
@@ -305,7 +291,6 @@ namespace MAD
             textAnticipo.Name = "textAnticipo";
             textAnticipo.Size = new Size(139, 30);
             textAnticipo.TabIndex = 28;
-            textAnticipo.KeyPress += textAnticipo_KeyPress;
             // 
             // comboMetodoPago
             // 
@@ -339,7 +324,7 @@ namespace MAD
             groupBox1.Controls.Add(groupBox3);
             groupBox1.Location = new Point(12, 33);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1152, 665);
+            groupBox1.Size = new Size(1152, 685);
             groupBox1.TabIndex = 30;
             groupBox1.TabStop = false;
             groupBox1.Text = "Reservar";
@@ -572,12 +557,28 @@ namespace MAD
             checkBox1.Size = new Size(104, 24);
             checkBox1.TabIndex = 0;
             // 
+            // Hotel
+            // 
+            Hotel.Frozen = true;
+            Hotel.HeaderText = "Hotel";
+            Hotel.MinimumWidth = 6;
+            Hotel.Name = "Hotel";
+            Hotel.Width = 250;
+            // 
+            // idHotel
+            // 
+            idHotel.Frozen = true;
+            idHotel.HeaderText = "ID";
+            idHotel.MinimumWidth = 6;
+            idHotel.Name = "idHotel";
+            idHotel.Width = 125;
+            // 
             // Reservar
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MintCream;
-            ClientSize = new Size(1176, 710);
+            ClientSize = new Size(1176, 730);
             Controls.Add(menuStrip1);
             Controls.Add(groupBox1);
             Font = new Font("Times New Roman", 12F);
@@ -638,8 +639,6 @@ namespace MAD
         private ToolStripMenuItem agregarToolStripMenuItem;
         private ToolStripMenuItem modificarEliminarToolStripMenuItem;
         private NumericUpDown numeroPersonas;
-        private DataGridViewTextBoxColumn Hotel;
-        private DataGridViewTextBoxColumn idHotel;
         private GroupBox groupBox3;
         private GroupBox groupBox2;
         private CheckBox checkBox1;
@@ -661,5 +660,7 @@ namespace MAD
         private DataGridViewTextBoxColumn Habitación;
         private DataGridViewTextBoxColumn NumPersonas;
         private DataGridViewImageColumn Eliminar;
+        private DataGridViewTextBoxColumn Hotel;
+        private DataGridViewTextBoxColumn idHotel;
     }
 }

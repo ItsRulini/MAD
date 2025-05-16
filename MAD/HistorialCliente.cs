@@ -82,6 +82,12 @@ namespace MAD
                 return;
             }
 
+            if(radioAño.Checked && dateTimePicker1.Value > DateTime.Today)
+            {
+                MessageBox.Show("No puedes buscar un año futuro");
+                return;
+            }
+
             if (comboCliente.Text.Contains("@"))
             {
                 idComprador = personaDAO.getIdPersonaPorCorreo(comboCliente.Text);

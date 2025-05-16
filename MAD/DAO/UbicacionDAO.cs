@@ -13,7 +13,6 @@ namespace MAD.DAO
     internal class UbicacionDAO
     {
         public UbicacionDAO() { }
-
         public List<Ubicacion> getPaises()
         {
             List<Ubicacion> ubicaciones = new List<Ubicacion>();
@@ -165,5 +164,34 @@ namespace MAD.DAO
             }
             return ubicacion;
         }
+
+
+        public List<Ubicacion> getCiudadesDePais(string pais)
+        {
+            List<Ubicacion> ubicaciones = new List<Ubicacion>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetCiudadesDePais", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@pais", pais);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Ubicacion ubicacion = new Ubicacion();
+                                ubicacion.IdUbicacion = Guid.Parse(reader["idUbicacion"].ToString());
+                                ubicacion.Ciudad = reader["ciudad"].ToString();
+                                ubicaciones.Add(ubicacion);
+                            }
+                        }
+                    }
+                }
+            }
+            return ubicaciones;
+        }
+
     }
 }

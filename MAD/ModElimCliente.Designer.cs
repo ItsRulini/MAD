@@ -37,12 +37,20 @@
             btnElimCliente = new Button();
             btnModCliente = new Button();
             groupBox3 = new GroupBox();
+            textCP = new TextBox();
+            textColonia = new TextBox();
             comboBox3 = new ComboBox();
+            label16 = new Label();
             comboBox2 = new ComboBox();
+            label17 = new Label();
             comboBox1 = new ComboBox();
+            textNumero = new TextBox();
             label12 = new Label();
+            textCalle = new TextBox();
             label11 = new Label();
+            label15 = new Label();
             label10 = new Label();
+            label18 = new Label();
             textCorreo = new TextBox();
             label4 = new Label();
             groupBox2 = new GroupBox();
@@ -65,14 +73,6 @@
             textApellidoPaterno = new TextBox();
             textNumCasa = new TextBox();
             pictureBox1 = new PictureBox();
-            textCP = new TextBox();
-            textColonia = new TextBox();
-            label16 = new Label();
-            label17 = new Label();
-            textNumero = new TextBox();
-            textCalle = new TextBox();
-            label15 = new Label();
-            label18 = new Label();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -179,6 +179,21 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Datos de contacto:";
             // 
+            // textCP
+            // 
+            textCP.Location = new Point(422, 203);
+            textCP.Name = "textCP";
+            textCP.Size = new Size(114, 30);
+            textCP.TabIndex = 41;
+            textCP.KeyPress += textClaveSAT_KeyPress;
+            // 
+            // textColonia
+            // 
+            textColonia.Location = new Point(9, 203);
+            textColonia.Name = "textColonia";
+            textColonia.Size = new Size(407, 30);
+            textColonia.TabIndex = 40;
+            // 
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
@@ -186,6 +201,15 @@
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(121, 30);
             comboBox3.TabIndex = 30;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(422, 171);
+            label16.Name = "label16";
+            label16.Size = new Size(40, 22);
+            label16.TabIndex = 43;
+            label16.Text = "CP:";
             // 
             // comboBox2
             // 
@@ -196,6 +220,15 @@
             comboBox2.TabIndex = 29;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(6, 171);
+            label17.Name = "label17";
+            label17.Size = new Size(79, 22);
+            label17.TabIndex = 42;
+            label17.Text = "Colonia:";
+            // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
@@ -204,6 +237,14 @@
             comboBox1.Size = new Size(121, 30);
             comboBox1.TabIndex = 28;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // textNumero
+            // 
+            textNumero.Location = new Point(422, 130);
+            textNumero.Name = "textNumero";
+            textNumero.Size = new Size(114, 30);
+            textNumero.TabIndex = 37;
+            textNumero.KeyPress += textClaveSAT_KeyPress;
             // 
             // label12
             // 
@@ -214,6 +255,13 @@
             label12.TabIndex = 27;
             label12.Text = "Ciudad:";
             // 
+            // textCalle
+            // 
+            textCalle.Location = new Point(9, 130);
+            textCalle.Name = "textCalle";
+            textCalle.Size = new Size(407, 30);
+            textCalle.TabIndex = 36;
+            // 
             // label11
             // 
             label11.AutoSize = true;
@@ -223,6 +271,15 @@
             label11.TabIndex = 26;
             label11.Text = "Estado:";
             // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(422, 98);
+            label15.Name = "label15";
+            label15.Size = new Size(80, 22);
+            label15.TabIndex = 39;
+            label15.Text = "Número:";
+            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -231,6 +288,15 @@
             label10.Size = new Size(50, 22);
             label10.TabIndex = 25;
             label10.Text = "País:";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(6, 98);
+            label18.Name = "label18";
+            label18.Size = new Size(131, 22);
+            label18.TabIndex = 38;
+            label18.Text = "Calle/Avenida:";
             // 
             // textCorreo
             // 
@@ -390,6 +456,7 @@
             textNumCelular.Name = "textNumCelular";
             textNumCelular.Size = new Size(199, 30);
             textNumCelular.TabIndex = 27;
+            textNumCelular.KeyPress += textClaveSAT_KeyPress;
             // 
             // label7
             // 
@@ -420,6 +487,7 @@
             textNumCasa.Name = "textNumCasa";
             textNumCasa.Size = new Size(198, 30);
             textNumCasa.TabIndex = 28;
+            textNumCasa.KeyPress += textClaveSAT_KeyPress;
             // 
             // pictureBox1
             // 
@@ -431,70 +499,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 22;
             pictureBox1.TabStop = false;
-            // 
-            // textCP
-            // 
-            textCP.Location = new Point(422, 203);
-            textCP.Name = "textCP";
-            textCP.Size = new Size(114, 30);
-            textCP.TabIndex = 41;
-            // 
-            // textColonia
-            // 
-            textColonia.Location = new Point(9, 203);
-            textColonia.Name = "textColonia";
-            textColonia.Size = new Size(407, 30);
-            textColonia.TabIndex = 40;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new Point(422, 171);
-            label16.Name = "label16";
-            label16.Size = new Size(40, 22);
-            label16.TabIndex = 43;
-            label16.Text = "CP:";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(6, 171);
-            label17.Name = "label17";
-            label17.Size = new Size(79, 22);
-            label17.TabIndex = 42;
-            label17.Text = "Colonia:";
-            // 
-            // textNumero
-            // 
-            textNumero.Location = new Point(422, 130);
-            textNumero.Name = "textNumero";
-            textNumero.Size = new Size(114, 30);
-            textNumero.TabIndex = 37;
-            // 
-            // textCalle
-            // 
-            textCalle.Location = new Point(9, 130);
-            textCalle.Name = "textCalle";
-            textCalle.Size = new Size(407, 30);
-            textCalle.TabIndex = 36;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new Point(422, 98);
-            label15.Name = "label15";
-            label15.Size = new Size(80, 22);
-            label15.TabIndex = 39;
-            label15.Text = "Número:";
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new Point(6, 98);
-            label18.Name = "label18";
-            label18.Size = new Size(131, 22);
-            label18.TabIndex = 38;
-            label18.Text = "Calle/Avenida:";
             // 
             // ModElimCliente
             // 

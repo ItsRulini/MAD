@@ -313,7 +313,15 @@ namespace MAD
                 MessageBox.Show("Por favor, ingrese solo números.", "Entrada no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        private bool EsPrecioValido(string precio)
+        {
+            // Verifica que el precio contenga solo dígitos y un punto decimal
+            int countPuntos = precio.Count(c => c == '.');
+            if (countPuntos > 1) return false;
 
+            // Intenta convertir el precio a un número decimal
+            return decimal.TryParse(precio, out _);
+        }
         private void btnComprarReserva_Click(object sender, EventArgs e)
         {
             if (comboMetodoPago.SelectedIndex < 0)
@@ -337,6 +345,12 @@ namespace MAD
             if (string.IsNullOrEmpty(textAnticipo.Text))
             {
                 MessageBox.Show("El anticipo no puede estar vacío");
+                return;
+            }
+
+            if(!EsPrecioValido(textAnticipo.Text))
+            {
+                MessageBox.Show("El formato del anticipo no es válido");
                 return;
             }
 

@@ -131,6 +131,24 @@ namespace MAD
             long telefonoCasa;
             long telefonoCelular;
 
+
+            DateTime fechaNacimiento = dtpFechaNacimiento.Value;
+            DateTime fechaActual = DateTime.Today;
+
+            int edad = fechaActual.Year - fechaNacimiento.Year;
+
+            // Ajustar si no ha cumplido años todavía este año
+            if (fechaNacimiento > fechaActual.AddYears(-edad))
+            {
+                edad--;
+            }
+
+            if (edad < 18)
+            {
+                MessageBox.Show("El usuario debe tener al menos 18 años.", "Edad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             persona.Nombres = textNombre.Text;
             persona.Paterno = textApellidoPaterno.Text;
             persona.Materno = textApellidoMaterno.Text;
@@ -197,6 +215,31 @@ namespace MAD
                 return;
             }
 
+            if(persona.Correo.Contains("@") == false && persona.Correo.Contains(".com") == false)
+            {
+                MessageBox.Show("El formato del correo no es válido.");
+                return;
+            }
+
+            if(cliente.Cp.ToString().Length < 5 || cliente.Cp.ToString().Length > 7)
+            {
+                MessageBox.Show("El código postal debe de tener una longitud de 5 o 6 digitos.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(fiscal.RegimenFiscal))
+            {
+                MessageBox.Show("El régimen fiscal no puede estar vacío.");
+                return;
+            }
+
+            if(persona.TelefonoCasa.ToString().Length != 10 || persona.Celular.ToString().Length != 10)
+            {
+                MessageBox.Show("El número de teléfono debe tener 10 dígitos.");
+                return;
+            }
+
+
             // Validar que que se actualice el cliente
 
             if (clienteDao.updateCliente(cliente, fiscal, persona))
@@ -207,8 +250,25 @@ namespace MAD
             {
                 MessageBox.Show("Error al modificar el cliente");
             }
+            if (persona.TelefonoCasa.ToString().Length != 10 || persona.Celular.ToString().Length != 10)
+            {
+                MessageBox.Show("El número de teléfono debe tener 10 dígitos.");
+                return;
+            }
 
         }
+
+
+        private void textClaveSAT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite solo dígitos y teclas de control como backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla presionada
+                MessageBox.Show("Por favor, ingrese solo números.", "Entrada no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
         private void llenarEstados()
         {

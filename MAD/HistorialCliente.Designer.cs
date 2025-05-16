@@ -204,9 +204,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(22, 38);
             label1.Name = "label1";
-            label1.Size = new Size(288, 22);
+            label1.Size = new Size(245, 22);
             label1.TabIndex = 1;
-            label1.Text = "RFC/Correo/Apellidos del cliente:";
+            label1.Text = "Correo/Apellidos del cliente:";
             // 
             // dgvHistCliente
             // 

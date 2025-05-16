@@ -30,6 +30,9 @@
         {
             pictureBox1 = new PictureBox();
             groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            radioAdmin = new RadioButton();
+            radioOperativo = new RadioButton();
             btnAggUsuario = new Button();
             textNumNomina = new TextBox();
             label9 = new Label();
@@ -49,9 +52,6 @@
             textApellidoMaterno = new TextBox();
             textApellidoPaterno = new TextBox();
             textNombre = new TextBox();
-            radioOperativo = new RadioButton();
-            radioAdmin = new RadioButton();
-            groupBox2 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -97,6 +97,39 @@
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos del usuario:";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(radioAdmin);
+            groupBox2.Controls.Add(radioOperativo);
+            groupBox2.Location = new Point(448, 186);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(164, 125);
+            groupBox2.TabIndex = 20;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Tipo de usuario:";
+            // 
+            // radioAdmin
+            // 
+            radioAdmin.AutoSize = true;
+            radioAdmin.Location = new Point(7, 70);
+            radioAdmin.Name = "radioAdmin";
+            radioAdmin.Size = new Size(146, 26);
+            radioAdmin.TabIndex = 19;
+            radioAdmin.TabStop = true;
+            radioAdmin.Text = "Administrador";
+            radioAdmin.UseVisualStyleBackColor = true;
+            // 
+            // radioOperativo
+            // 
+            radioOperativo.AutoSize = true;
+            radioOperativo.Location = new Point(7, 38);
+            radioOperativo.Name = "radioOperativo";
+            radioOperativo.Size = new Size(111, 26);
+            radioOperativo.TabIndex = 18;
+            radioOperativo.TabStop = true;
+            radioOperativo.Text = "Operativo";
+            radioOperativo.UseVisualStyleBackColor = true;
             // 
             // btnAggUsuario
             // 
@@ -150,6 +183,7 @@
             textNumCasa.Name = "textNumCasa";
             textNumCasa.Size = new Size(198, 30);
             textNumCasa.TabIndex = 13;
+            textNumCasa.KeyPress += textClaveSAT_KeyPress;
             // 
             // textNumCelular
             // 
@@ -157,6 +191,7 @@
             textNumCelular.Name = "textNumCelular";
             textNumCelular.Size = new Size(199, 30);
             textNumCelular.TabIndex = 12;
+            textNumCelular.KeyPress += textClaveSAT_KeyPress;
             // 
             // label6
             // 
@@ -254,39 +289,6 @@
             textNombre.Name = "textNombre";
             textNombre.Size = new Size(199, 30);
             textNombre.TabIndex = 0;
-            // 
-            // radioOperativo
-            // 
-            radioOperativo.AutoSize = true;
-            radioOperativo.Location = new Point(7, 38);
-            radioOperativo.Name = "radioOperativo";
-            radioOperativo.Size = new Size(111, 26);
-            radioOperativo.TabIndex = 18;
-            radioOperativo.TabStop = true;
-            radioOperativo.Text = "Operativo";
-            radioOperativo.UseVisualStyleBackColor = true;
-            // 
-            // radioAdmin
-            // 
-            radioAdmin.AutoSize = true;
-            radioAdmin.Location = new Point(7, 70);
-            radioAdmin.Name = "radioAdmin";
-            radioAdmin.Size = new Size(146, 26);
-            radioAdmin.TabIndex = 19;
-            radioAdmin.TabStop = true;
-            radioAdmin.Text = "Administrador";
-            radioAdmin.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(radioAdmin);
-            groupBox2.Controls.Add(radioOperativo);
-            groupBox2.Location = new Point(448, 186);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(164, 125);
-            groupBox2.TabIndex = 20;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Tipo de usuario:";
             // 
             // AggUsuario
             // 

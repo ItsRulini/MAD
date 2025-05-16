@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            groupBox4 = new GroupBox();
+            radioAdmin = new RadioButton();
+            radioOperativo = new RadioButton();
             cambioContraseña = new CheckBox();
             btnModificar = new Button();
             textNomina = new TextBox();
@@ -57,14 +60,11 @@
             textBuscarEmpleado = new TextBox();
             label10 = new Label();
             pictureBox3 = new PictureBox();
-            groupBox4 = new GroupBox();
-            radioOperativo = new RadioButton();
-            radioAdmin = new RadioButton();
             groupBox1.SuspendLayout();
+            groupBox4.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -98,6 +98,39 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Modificar/eliminar usuario:";
             // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(radioAdmin);
+            groupBox4.Controls.Add(radioOperativo);
+            groupBox4.Location = new Point(457, 58);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(155, 109);
+            groupBox4.TabIndex = 56;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Tipo de usuario:";
+            // 
+            // radioAdmin
+            // 
+            radioAdmin.AutoSize = true;
+            radioAdmin.Location = new Point(7, 71);
+            radioAdmin.Name = "radioAdmin";
+            radioAdmin.Size = new Size(146, 26);
+            radioAdmin.TabIndex = 1;
+            radioAdmin.TabStop = true;
+            radioAdmin.Text = "Administrador";
+            radioAdmin.UseVisualStyleBackColor = true;
+            // 
+            // radioOperativo
+            // 
+            radioOperativo.AutoSize = true;
+            radioOperativo.Location = new Point(7, 36);
+            radioOperativo.Name = "radioOperativo";
+            radioOperativo.Size = new Size(111, 26);
+            radioOperativo.TabIndex = 0;
+            radioOperativo.TabStop = true;
+            radioOperativo.Text = "Operativo";
+            radioOperativo.UseVisualStyleBackColor = true;
+            // 
             // cambioContraseña
             // 
             cambioContraseña.AutoSize = true;
@@ -124,6 +157,7 @@
             textNomina.Name = "textNomina";
             textNomina.Size = new Size(199, 30);
             textNomina.TabIndex = 49;
+            textNomina.KeyPress += textClaveSAT_KeyPress;
             // 
             // label9
             // 
@@ -158,6 +192,7 @@
             textNumCasa.Name = "textNumCasa";
             textNumCasa.Size = new Size(198, 30);
             textNumCasa.TabIndex = 45;
+            textNumCasa.KeyPress += textClaveSAT_KeyPress;
             // 
             // textNumCelular
             // 
@@ -165,6 +200,7 @@
             textNumCelular.Name = "textNumCelular";
             textNumCelular.Size = new Size(199, 30);
             textNumCelular.TabIndex = 44;
+            textNumCelular.KeyPress += textClaveSAT_KeyPress;
             // 
             // label6
             // 
@@ -346,39 +382,6 @@
             pictureBox3.TabIndex = 30;
             pictureBox3.TabStop = false;
             // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(radioAdmin);
-            groupBox4.Controls.Add(radioOperativo);
-            groupBox4.Location = new Point(457, 58);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(155, 109);
-            groupBox4.TabIndex = 56;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Tipo de usuario:";
-            // 
-            // radioOperativo
-            // 
-            radioOperativo.AutoSize = true;
-            radioOperativo.Location = new Point(7, 36);
-            radioOperativo.Name = "radioOperativo";
-            radioOperativo.Size = new Size(111, 26);
-            radioOperativo.TabIndex = 0;
-            radioOperativo.TabStop = true;
-            radioOperativo.Text = "Operativo";
-            radioOperativo.UseVisualStyleBackColor = true;
-            // 
-            // radioAdmin
-            // 
-            radioAdmin.AutoSize = true;
-            radioAdmin.Location = new Point(7, 71);
-            radioAdmin.Name = "radioAdmin";
-            radioAdmin.Size = new Size(146, 26);
-            radioAdmin.TabIndex = 1;
-            radioAdmin.TabStop = true;
-            radioAdmin.Text = "Administrador";
-            radioAdmin.UseVisualStyleBackColor = true;
-            // 
             // ModElimUsuario
             // 
             AutoScaleDimensions = new SizeF(11F, 22F);
@@ -395,13 +398,13 @@
             Text = "ModElimUsuario";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
             ResumeLayout(false);
         }
 

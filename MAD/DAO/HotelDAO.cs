@@ -306,5 +306,170 @@ namespace MAD.DAO
             return null;
         }
 
+        public List<Hotel> obtenerHotelesPorCiudad (Guid idCiudad)
+        {
+            List<Hotel> hoteles = new List<Hotel>();
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (var cmd = new SqlCommand("spGetHotelesCiudad ", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idUbicacion", idCiudad);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                Hotel hotel = new Hotel();
+                                hotel.IdHotel = reader.GetGuid(reader.GetOrdinal("idHotel"));
+                                hotel.Nombre = reader.GetString(reader.GetOrdinal("nombre"));
+                                hoteles.Add(hotel);
+                            }
+                        }
+                    }
+                }
+            }
+            return hoteles;
+        }
+
+        public DataTable getReporteVentasCiudad (Guid idUbicacion, DateOnly Año)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spReporteVentasPorCiudad", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idUbicacion", idUbicacion);
+                    cmd.Parameters.AddWithValue("@año", Año);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        public DataTable getReporteVentasHotel(Guid idHotel, DateOnly Año)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spReporteVentasHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    cmd.Parameters.AddWithValue("@año", Año);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+
+
+
+        //Reportes de ocupación por ciudad
+        public DataTable getReporteOcupacionDetalladoPorCiudad(Guid idUbicacion, DateOnly Año) {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spReporteOcupacionDetalladoCiudad", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idUbicacion", idUbicacion);
+                    cmd.Parameters.AddWithValue("@año", Año);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+
+        public DataTable getReporteOcupacionResumenPorCiudad(Guid idUbicacion, DateOnly Año) {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spReporteOcupacionResumenCiudad", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idUbicacion", idUbicacion);
+                    cmd.Parameters.AddWithValue("@año", Año);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+
+
+        //Reportes por hotel
+        public DataTable getReporteOcupacionDetalladoPorHotel(Guid idHotel, DateOnly Año) {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spReporteOcupacionDetalladoHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    cmd.Parameters.AddWithValue("@año", Año);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        public DataTable getReporteOcupacionResumenPorHotel(Guid idHotel, DateOnly Año) {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = Conexion.ObtenerConexion())
+            {
+                using (SqlCommand cmd = new SqlCommand("spReporteOcupacionResumenHotel", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@idHotel", idHotel);
+                    cmd.Parameters.AddWithValue("@año", Año);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+
     }
 }

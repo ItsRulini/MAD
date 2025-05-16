@@ -276,6 +276,15 @@ namespace MAD
             }
         }
 
+        private bool EsPrecioValido(string precio)
+        {
+            // Verifica que el precio contenga solo dígitos y un punto decimal
+            int countPuntos = precio.Count(c => c == '.');
+            if (countPuntos > 1) return false;
+
+            // Intenta convertir el precio a un número decimal
+            return decimal.TryParse(precio, out _);
+        }
 
         //Gestion de servicios
 
@@ -290,6 +299,12 @@ namespace MAD
             if (string.IsNullOrEmpty(textPrecioServicio.Text))
             {
                 MessageBox.Show("Ingrese un precio");
+                return;
+            }
+
+            if (!EsPrecioValido(textPrecioServicio.Text))
+            {
+                MessageBox.Show("El precio no es válido. Asegúrese de que solo contenga dígitos y un punto decimal.");
                 return;
             }
 

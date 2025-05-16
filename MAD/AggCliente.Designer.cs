@@ -128,6 +128,7 @@
             textCP.Name = "textCP";
             textCP.Size = new Size(114, 30);
             textCP.TabIndex = 32;
+            textCP.KeyPress += textClaveSAT_KeyPress;
             // 
             // textColonia
             // 
@@ -160,6 +161,7 @@
             textNumero.Name = "textNumero";
             textNumero.Size = new Size(114, 30);
             textNumero.TabIndex = 9;
+            textNumero.KeyPress += textClaveSAT_KeyPress;
             // 
             // comboBox3
             // 
@@ -398,6 +400,7 @@
             textNumCelular.Name = "textNumCelular";
             textNumCelular.Size = new Size(199, 30);
             textNumCelular.TabIndex = 27;
+            textNumCelular.KeyPress += textClaveSAT_KeyPress;
             // 
             // label7
             // 
@@ -428,6 +431,7 @@
             textNumCasa.Name = "textNumCasa";
             textNumCasa.Size = new Size(198, 30);
             textNumCasa.TabIndex = 28;
+            textNumCasa.KeyPress += textClaveSAT_KeyPress;
             // 
             // pictureBox1
             // 
